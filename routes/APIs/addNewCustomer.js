@@ -15,8 +15,8 @@ function addCustomer(args) {
     var home_income = quo(args.home_income);
     var age = quo(args.age);
     var marriage_status = quo(args.marriage_status);
-    var company_income = args['company_income'];
-    var business_category = args['business_category'];
+    var company_income =args['company_income'];
+    var business_category = (args['business_category']==='NULL'?'NULL':quo(args['business_category']));
     var mysql = require('mysql');
     var connection = mysql.createConnection({
         host: 'localhost',
@@ -25,7 +25,7 @@ function addCustomer(args) {
         password: 'leon1993',
         database: 'system'
     });
-
+    console.log(1);
     connection.connect();
     //get next avaliable id
     var query = "select max(cus_id)  as nextID from Customer ;";
@@ -63,10 +63,9 @@ module.exports = function(app, url) {
         args.zip_code = req.body.zip_code;
         args.home_income = req.body.home_income;
         args.marriage_status = req.body.marriage_status;
-
+	args.company_income = req.body.company_income;
+	args.business_category = req.body.business_category;
         addCustomer(args);
-        res.json({
-            message: 'success'
-        });
+	res.json({s:1});
     });
 };

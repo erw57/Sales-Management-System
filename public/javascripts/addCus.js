@@ -14,7 +14,9 @@ $(document).ready(function(){
             state: 'CA',
             zip_code: 29302,
             home_income: 95062.1,
-            marriage_status :'Single'
+            marriage_status :'Single',
+	    company_income : 'NULL',
+	    business_category:'NULL'
         },
 
 
