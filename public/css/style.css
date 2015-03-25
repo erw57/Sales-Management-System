@@ -308,6 +308,23 @@ body{
     margin-bottom: 20px;
 }
 
+.optPanel form:nth-child(1){
+    /*width:50%;*/
+    float:left;
+}
+
+.optPanel form:nth-child(2){
+    /*width:50%;*/
+    float:right;
+}
+
+.optPanel form:nth-child(2) span{
+    color:#00324A;
+    margin-right: 10px;
+    font-size: 14px;
+}
+
+
 .searchBar input[type="text"]{
     border-radius: 5px;
     border:1px solid #BCBCBC;

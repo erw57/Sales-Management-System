@@ -5,6 +5,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Shopping Cart</title>
         <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css" href="bower_components/bootstrap-select/bootstrap-select.min.css">
         <link rel="stylesheet" type="text/css" href="css/style.css"/>     
     </head>
     <body>
@@ -73,9 +74,19 @@
         </div>
         <div class="Container">
             <div class="optPanel clearfix">
-                <form class="searchBar form-inline">
+                <form class="searchBar">
                     <input type="text" placeholder="Search for...(id, name)" />
                     <button><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                </form>
+                <form class="sortBar">
+                    <span>Sort By:</span>
+                        <select class="sortBy">
+                            <option>Price (Low to High)</option>
+                            <option>Price (Highw to Low)</option>
+                            <option data-divider="true"></option>
+                            <option>Location</option>
+                            <option>Category</option>
+                        </select>                
                 </form>
             </div>
             <!--card-->
@@ -272,6 +283,8 @@
         <!--End register Modal -->
         <script type="text/javascript" src = "bower_components/jquery/dist/jquery.min.js"></script>
         <script type="text/javascript" src = "bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script type="text/javascript"src="bower_components/bootstrap-select/bootstrap-select.min.js"></script>
+
         <script type="text/javascript" src = "js/script.js"></script>
     </body>
 </html>

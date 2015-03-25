@@ -13,5 +13,7 @@ $(document).ready(function(){
         var id = qtySpan.next().val();
         $.post('ModifyProduct', {qty:qty, id:id},function(){window.location.reload()});
     });
+
+    $('.sortBy').selectpicker();
 });
 
