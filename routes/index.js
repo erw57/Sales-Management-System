@@ -22,6 +22,7 @@ module.exports = function(app) {
         res.render('browsing.ejs');
     });
 
+
     //Assign Urls to JSON APIs
     getProductList(app, '/api/getProductList');
     getProductDetail(app, '/api/getProductDetail');

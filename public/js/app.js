@@ -2,24 +2,18 @@
 
 /* App Module */
 
-var phonecatApp = angular.module('phonecatApp', [
+var smApp = angular.module('smApp', [
   'ngRoute',
-  'phonecatControllers',
-  'phonecatFilters'
 ]);
 
-phonecatApp.config(['$routeProvider',
+smApp.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
-      when('/phones', {
-        templateUrl: 'partials/phone-list.html',
-        controller: 'PhoneListCtrl'
-      }).
-      when('/phones/:phoneId', {
-        templateUrl: 'partials/phone-detail.html',
-        controller: 'PhoneDetailCtrl'
+      when('/', {
+        templateUrl: 'partials/browsing-list.html',
+        // controller: 'PhoneListCtrl'
       }).
       otherwise({
-        redirectTo: '/phones'
+        redirectTo: '/'
       });
   }]);
