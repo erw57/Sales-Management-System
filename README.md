@@ -6,3 +6,5 @@ Final Project for $$$$$$ Database Management(KAIEN-JUNTAO-ER)
 * Check customer/product detail information
 * Update inventory
 * Make payment
+
+*Er test commit
