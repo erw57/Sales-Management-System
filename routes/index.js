@@ -17,7 +17,7 @@ var modifyProduct = require('./APIs/modifyProduct.js');
  */
 module.exports = function(app) {
     //Page Routing
-    app.get('/browsing', function(req, res) {
+    app.get('/', function(req, res) {
         var name = req.query.name;
         res.render('browsing.ejs');
     });

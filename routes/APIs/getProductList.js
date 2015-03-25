@@ -11,7 +11,7 @@ module.exports = function(app, url) {
         //
         var mysql = require('mysql');
         var connection = mysql.createConnection({
-            host: '127.0.0.1',
+            host: '104.131.190.46',
             port: '3306',
             user: 'root',
             password: 'leon1993',
