@@ -17,22 +17,22 @@ var modifyProduct = require('./APIs/modifyProduct.js');
  */
 module.exports = function(app) {
     //Page Routing
-    app.get('/2710/index', function(req, res) {
+    app.get('/index', function(req, res) {
         var name = req.query.name;
         res.render('about.ejs');
     });
 
     //Assign Urls to JSON APIs
-    getProductList(app, '/2710/api/getProductList');
-    getProductDetail(app, '/2710/api/getProductDetail');
-    getCustomerInfo(app, '/2710/api/getCustomerInfo');
-    addNewCustomer(app, '/2710/api/addNewCustomer');
-    getCustomerList(app, '/2710/api/getCustomerList');
-    makePayment(app, '/api/2710/makePayment');
-    addNewProduct(app, '/2710/api/addNewProduct');
-    updateInventory(app, '/2710/api/updateInventory');
-    getCustomerHistory(app, '/2710/api/getCustomerHistory');
-    modifyCustomer(app, '/2710/api/modifyCustomer');
-    modifyProduct(app, '/2710/api/modifyProduct');
-    checkInventory(app, '/2710/api/checkInventory');
+    getProductList(app, '/api/getProductList');
+    getProductDetail(app, '/api/getProductDetail');
+    getCustomerInfo(app, '/api/getCustomerInfo');
+    addNewCustomer(app, '/api/addNewCustomer');
+    getCustomerList(app, '/api/getCustomerList');
+    makePayment(app, '/api/makePayment');
+    addNewProduct(app, '/api/addNewProduct');
+    updateInventory(app, '/api/updateInventory');
+    getCustomerHistory(app, '/api/getCustomerHistory');
+    modifyCustomer(app, '/api/modifyCustomer');
+    modifyProduct(app, '/api/modifyProduct');
+    checkInventory(app, '/api/checkInventory');
 };
