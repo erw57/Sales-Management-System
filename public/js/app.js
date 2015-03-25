@@ -13,6 +13,10 @@ smApp.config(['$routeProvider',
         templateUrl: 'partials/browsing-list.html',
         // controller: 'PhoneListCtrl'
       }).
+      when('/browsing-detail', {
+        templateUrl: 'partials/browsing-detail.html',
+        // controller: 'PhoneListCtrl'
+      }).
       otherwise({
         redirectTo: '/'
       });
