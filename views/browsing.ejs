@@ -1,0 +1,277 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Shopping Cart</title>
+        <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css" href="css/style.css"/>     
+    </head>
+    <body>
+        <div class="leftNav">
+            <div class="usrLog">
+                Please 
+                <a href="#" data-toggle="modal" data-target="#login">Login</a>
+                Or
+                <a href="#" data-toggle="modal" data-target="#signup">Sign up</a>
+                Welcome, <span>User</span>
+                <a href="Signout">Sign out</a>
+            </div>
+
+            <ul class="cart">
+                <li class="title">
+                    <p>Shopping List</p>
+                </li>
+                <!--item-->
+                <li class="list">
+                    <div class="listName">Apple iPhone 6, Space Gray, 16 GB (Unlocked)</div>
+                    <div class="listInfo">
+                        <p>
+                            <span>Qty: </span>
+                            <span class="qtySpan">2</span>
+                            <input type="text" value="" class="editBox"/>
+                            <input type="hidden" value="" class="editId"/>
+                        </p> 
+                        <div>$720.00</div>
+                    </div>
+                    <div class="listOpt">
+                        <a href="javascript:void(0);" class="edit">Edit</a>
+                        <a href="#" class="delete">Delete</a>
+                    </div>
+                </li>
+                <!--end item-->   
+                <!--item-->
+                <li class="list">
+                    <div class="listName">Apple iPhone 6, Space Gray, 16 GB (Unlocked)</div>
+                    <div class="listInfo">
+                        <p>
+                            <span>Qty: </span>
+                            <span class="qtySpan">2</span>
+                            <input type="text" value="" class="editBox"/>
+                            <input type="hidden" value="" class="editId"/>
+                        </p> 
+                        <div>$720.00</div>
+                    </div>
+                    <div class="listOpt">
+                        <a href="javascript:void(0);" class="edit">Edit</a>
+                        <a href="#" class="delete">Delete</a>
+                    </div>
+                </li>
+                <!--end item-->    
+                <!--total-->
+                <li class="total">
+                    <div>Total:</div>
+                    <div>$1200.00</div>
+                </li>
+                <li class="total">
+                    <form action="PlaceOrder" method="POST">
+                        <button type="submit" class="button">Place Order</button>
+                    </form>              
+                </li>
+                <!--end total-->
+            </ul>
+        </div>
+        <div class="Container">
+            <div class="optPanel clearfix">
+                <form class="searchBar form-inline">
+                    <input type="text" placeholder="Search for...(id, name)" />
+                    <button><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                </form>
+            </div>
+            <!--card-->
+            <div class="Card clearfix">
+                <div class="left">
+                    <img src="images/1.png" />
+                </div>
+                <div class="middle">
+                    <div class="middleUp">
+                        <span class="name">Apple iPhone 6, Space Gray, 16 GB (Unlocked)</span>
+                    </div>
+                    <p class="price">
+                        $719.00
+                    </p>
+                    <p class="description">
+                        4.7-inch (diagonal) Retina HD display with 1334-by-750 resolution. 
+                        A8 chip with M8 motion coprocessor. 
+                        1080p HD video recording at 60 fps and slo-mo video recording at 240 fps. 
+                        Touch ID fingerprint sensor. 
+                        LTE¹ and 802.11ac Wi-Fi...
+                    </p>
+                </div>
+                <div class="right">
+                    <form action="AddProducts" method="POST">
+                        <span style="margin-left: 45px;">Quantity: </span>
+                        <input type="hidden" name="id" value="1"/>
+                        <input type="hidden" name="name" value="Apple iPhone 6, Space Gray, 16 GB (Unlocked)"/>
+                        <input type="hidden" name="price" value="719.00"/>
+                        <input type="text" name="qty" value="1" style="width: 35px;"/>
+                        <button class="button_color" type="submit">Add To Cart</button>
+                    </form>
+                </div>
+            </div>
+            <!--end card-->
+            <!--card-->
+            <div class="Card clearfix">
+                <div class="left">
+                    <img src="images/2.png" />
+                </div>
+                <div class="middle">
+                    <div class="middleUp">
+                        <span class="name">Amazon - Kindle Voyage - 4GB - Wi-Fi + 3G - Black</span>
+                    </div>
+                    <p class="price">
+                        $269.99
+                    </p>
+                    <p class="description">
+                       Amazon's most advanced e-reader ever
+                        All new design with beautiful flush glass front and magnesium back
+                        Thinnest Kindle ever at 7.6mm; weighs less than 6.7oz
+                        Adaptive front light
+                        Reimagined page turns with PagePress
+                    </p>
+                </div>
+                <div class="right">
+                    <form action="AddProducts" method="POST">
+                        <span style="margin-left: 45px;">Quantity: </span>
+                        <input type="hidden" name="id" value="2"/>
+                        <input type="hidden" name="name" value="Amazon - Kindle Voyage - 4GB - Wi-Fi + 3G - Black"/>
+                        <input type="hidden" name="price" value="269.99"/>
+                        <input type="text" name="qty" value="1" style="width: 35px;"/>
+                        <button class="button_color" type="submit">Add To Cart</button>
+                    </form>
+                </div>
+            </div>
+            <!--end card-->
+            <!--card-->
+            <div class="Card clearfix">
+                <div class="left">
+                    <img src="images/3.png" />
+                </div>
+                <div class="middle">
+                    <div class="middleUp">
+                        <span class="name">Microsoft - Surface Pro 3 - 12" - Intel Core i7 - 512GB - Silver</span>
+                    </div>
+                    <p class="price">
+                        $1,949.99
+                    </p>
+                    <p class="description">
+                        High pixel density and stunning detail make this screen ideal for Web browsing, studying, reading and streaming HD content.
+                        Full laptop capability in the size of a tablet. Run your existing desktop programs, download apps from the Windows Store and ...
+                    </p>
+                </div>
+                <div class="right">
+                    <form action="AddProducts" method="POST">
+                        <span style="margin-left: 45px;">Quantity: </span>
+                        <input type="hidden" name="id" value="3"/>
+                        <input type="hidden" name="name" value="Microsoft - Surface Pro 3 - 12 - Intel Core i7 - 512GB - Silver"/>
+                        <input type="hidden" name="price" value="1949.99"/>
+                        <input type="text" name="qty" value="1" style="width: 35px;"/>
+                        <button class="button_color" type="submit">Add To Cart</button>
+                    </form>
+                </div>
+            </div>
+            <!--end card-->
+            <!--card-->
+            <div class="Card clearfix">
+                <div class="left">
+                    <img src="images/4.png" />
+                </div>
+                <div class="middle">
+                    <div class="middleUp">
+                        <span class="name">Nikon - AF-S DX Micro-NIKKOR 40mm f/2.8G Macro Lens - Black</span>
+                    </div>
+                    <p class="price">
+                        $249.99
+                    </p>
+                    <p class="description">
+                        Works with any Nikon DX-format DSLR camera with an F-bayonet mount. Creates sharp, detailed images with shallow depth of field and softly blurred background. Performs best in moderate-to-bright light settings or outdoors on overcast day...
+                    </p>
+                </div>
+                <div class="right">
+                    <form action="AddProducts" method="POST">
+                        <span style="margin-left: 45px;">Quantity: </span>
+                        <input type="hidden" name="id" value="4"/>
+                        <input type="hidden" name="name" value="Nikon - AF-S DX Micro-NIKKOR 40mm f/2.8G Macro Lens - Black"/>
+                        <input type="hidden" name="price" value="249.99"/>
+                        <input type="text" name="qty" value="1" style="width: 35px;"/>
+                        <button class="button_color" type="submit">Add To Cart</button>
+                    </form>
+                </div>
+            </div>
+            <!--end card-->
+        </div> 
+        <!-- Login Modal -->
+        <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Log in</h4>
+              </div>
+                <form action="Login" method="POST">
+              <div class="modal-body">
+                  <p>
+                  <label for="uid">Username: </label>
+                  <input type="text" name="uid"/>
+                  </p>
+                  <p>
+                  <label for="uid">Password: </label>
+                  <input type="password" name="password"/>   
+                  </p>
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="button_color">Log in</button>
+              </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!--End Login Modal -->
+        <!-- register Modal -->
+        <div class="modal fade" id="signup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Sign Up</h4>
+              </div>
+                <form action="Register" method="POST">
+              <div class="modal-body">
+                  <p>
+                  <label for="uid">Username: </label>
+                  <input type="text" name="uid"/>
+                  </p>
+                  <p>
+                  <label for="uid">Password: </label>
+                  <input type="password" name="password"/>   
+                  </p>
+                  <p>
+                  <label for="fname">First Name: </label>
+                  <input type="text" name="fname"/>   
+                  </p>
+                  <p>
+                  <label for="lname">Last Name: </label>
+                  <input type="text" name="lname"/>   
+                  </p>
+                  <p>
+                  <label for="age">Age: </label>
+                  <input type="text" name="age"/>   
+                  </p>
+                  <p>
+                  <label for="email">Email: </label>
+                  <input type="email" name="email"/>   
+                  </p>
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="button_color">Register</button>
+              </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!--End register Modal -->
+        <script type="text/javascript" src = "bower_components/jquery/dist/jquery.min.js"></script>
+        <script type="text/javascript" src = "bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src = "js/script.js"></script>
+    </body>
+</html>
