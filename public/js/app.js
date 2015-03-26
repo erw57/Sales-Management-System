@@ -2,11 +2,11 @@
 
 /* App Module */
 
-var smApp = angular.module('smApp', [
+var productBrowseApp = angular.module('productBrowseApp', [
   'ngRoute',
 ]);
 
-smApp.config(['$routeProvider',
+productBrowseApp.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
       when('/', {
