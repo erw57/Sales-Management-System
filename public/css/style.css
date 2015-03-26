@@ -132,6 +132,12 @@ input{
     padding:20px;
 }
 
+.entryUsr{
+    width:200px;
+    margin:0;
+    /*float:left;*/
+}
+
 /*end entry*/
 
 /*product browsing*/
@@ -216,7 +222,8 @@ input{
 }
 
 .listOpt a{
-    color: white;
+    color: #eee;
+    text-decoration: underline;
 }
 
 .listOpt a:hover{
@@ -331,17 +338,21 @@ input{
 }
 
 .usrLog{
+    /*padding-left: 60px;*/
     font-size: 14px;
     margin-top:10px;
-    margin-left: 20px;
+    /*margin-left: 20px;*/
 }
 
 .usrLog a{
-    color: #3897C5;
-}
-
-.usrLog a:hover{
-    color: #BBE7FC;
+    text-decoration: underline;
+    font-size: 14px;
+    display: inline;
+    margin-top: 5px;
+    width:80px;
+    border-radius: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 .modal{
