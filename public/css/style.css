@@ -377,10 +377,10 @@ input{
     height: 40px;
     width: 250px;
     padding: 0 10px;
-    float:left;
 }
 
-.searchBar button{
+.searchBar span{
+    float: left;
     font-size: 30px;
     color: #3897C5;
     background:none;
@@ -391,8 +391,8 @@ input{
     margin:0;
 }
 
-.searchBar button:hover{
+/*.searchBar button:hover{
     color: #BBE7FC;
-}
+}*/
 
 /*end prodcut browsing*/
