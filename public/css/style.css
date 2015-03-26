@@ -4,7 +4,11 @@ body{
     color: #00324A;
 }
 
-//clear float element, adaptive height
+a:hover{
+    text-decoration: none;
+}
+
+/*clear float element, adaptive height*/
 .clearfix:after 
 { 
     visibility: hidden; 
@@ -90,7 +94,6 @@ input{
 }
 
 /*index*/
-/*end index*/
 .login{
     background-color: #00324A;
     color: white;
@@ -118,6 +121,19 @@ input{
 .panel table td{
     padding:10px;
 }
+/*end index*/
+
+/*entry*/
+.entryButton{
+    margin:4% auto;
+    display: block;
+    font-size: 2em;
+    width:30%;
+    padding:20px;
+}
+
+/*end entry*/
+
 /*product browsing*/
 
 .leftNav{

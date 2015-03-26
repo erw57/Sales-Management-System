@@ -21,6 +21,10 @@ module.exports = function(app) {
         // var name = req.query.name;
         res.render('index.ejs');
     });
+    app.get('/entry', function(req, res) {
+        var name = req.query.name;
+        res.render('entry.ejs');
+    });
     app.get('/browsing', function(req, res) {
         var name = req.query.name;
         res.render('browsing.ejs');

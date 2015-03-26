@@ -11,11 +11,11 @@ module.exports = function(app, url) {
         //
         var mysql = require('mysql');
         var connection = mysql.createConnection({
-            host: '104.131.190.46',
-            port: '3306',
+            host: 'localhost',
+            port: '8889',
             user: 'root',
-            password: 'leon1993',
-            database: 'system'
+            password: 'root',
+            database: 'system',
         });
         connection.connect();
         var query = 'SELECT prod_id,prod_name,price,product_kind FROM Product';
