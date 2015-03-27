@@ -60,9 +60,6 @@ a:hover{
     font-size: 18px;
     padding:10px;
     width:150px;
-    margin-left: 30px;
-    margin-right: 30px;
-    margin-top: 15px;
 }
 
 .button_color:hover{
@@ -250,7 +247,7 @@ input{
 .Container{
     float:left;
     margin-left: 270px;
-    width: 70%;
+    width: 75%;
 }
 
 .Card{
@@ -341,11 +338,24 @@ input{
     /*padding-left: 60px;*/
     font-size: 14px;
     margin-top:10px;
-    /*margin-left: 20px;*/
+    margin-left: 20px;
+}
+
+.returnBtn{
+    text-decoration: underline;
+    color: #eee;
+    font-size: 14px;
+    width:120px;
+    margin-left:10px;
+    /*margin-top: 15px;*/
+}
+
+.returnBtn:hover{
+    color:#337AB7;
 }
 
 .usrLog a{
-    text-decoration: underline;
+    /*text-decoration: underline;*/
     font-size: 14px;
     display: inline;
     margin-top: 5px;
@@ -353,6 +363,11 @@ input{
     border-radius: 5px;
     margin-left: 5px;
     margin-right: 5px;
+}
+
+.usrLog a:hover{
+    color: #3897C5;
+    /*text-decoration: underline;*/
 }
 
 .modal{
@@ -407,3 +422,72 @@ input{
 }*/
 
 /*end prodcut browsing*/
+
+/*product detail*/
+.detailLeft{
+    width: 40%;
+    margin-top: 20px;
+    margin-left: 20px;
+    float:left;
+}
+
+img.big{
+    border:1px solid #eee;
+    width:80%;
+}
+
+.thumbs{
+    margin-top: 10px;
+    margin-left: -20px;
+}
+
+.thumbs li{
+    list-style: none;
+    display: inline;
+}
+
+.thumbs img{
+    height:50px;
+    border:1px solid #eee;
+}
+
+.detailRight{
+    /*border: 1px red solid;*/
+    width:50%;
+    float:left;
+    margin-left: 0%;
+}
+
+.detailRight p{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.detailAdd{
+    margin-left: 30px;
+    margin-top: -7px;
+}
+
+.detailNotes p{
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.detailNotes p span{
+    font-weight: normal;
+    font-size: 14px;
+}
+
+.detailNotes p a{
+    font-weight: normal;
+    font-size: 12px;
+    text-decoration: underline;
+    margin-left: 10px;
+}
+
+/*end product detail*/
+
+
+
+
+

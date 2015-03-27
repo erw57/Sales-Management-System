@@ -19,3 +19,17 @@
 //       $scope.phone = data;
 //     });
 //   }]);
+
+var productBrowseControllers = angular.module('productBrowseController',[]);
+
+productBrowseControllers.controller('productListController',['$rootScope','$scope', '$http', 
+	function($scope, $rootScope, $http){
+		// $http.get('api/getProductList').success(function(res){
+		// 	$scope.products = res.data;
+		// });
+		// $rootScope.count = 0;
+
+		// $rootScope.addProduct = function(num){
+		// 	$rootScope.count++;
+		// }
+	}]);
