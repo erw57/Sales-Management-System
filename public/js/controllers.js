@@ -21,6 +21,7 @@
 //   }]);
 
 var productBrowseControllers = angular.module('productBrowseController',[]);
+var customerControllers = angular.module('customerController', []);
 
 productBrowseControllers.controller('productListController',['$rootScope','$scope', '$http', 
 	function($scope, $rootScope, $http){
@@ -33,3 +34,7 @@ productBrowseControllers.controller('productListController',['$rootScope','$scop
 		// 	$rootScope.count++;
 		// }
 	}]);
+
+customerControllers.controller('customerListController', ['$scope', '$http', function($scope, $http){
+	
+}]);

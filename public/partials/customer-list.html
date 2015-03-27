@@ -1,0 +1,51 @@
+<div class="optPanel clearfix">
+    <form class="searchBar">
+        <input type="text" placeholder="Search for...(id, name)" />
+        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+    </form>
+    <form class="sortBar">
+        <span>Sort By:</span>
+            <select class="sortBy">
+                <option>Price (Low to High)</option>
+                <option>Price (Highw to Low)</option>
+                <option data-divider="true"></option>
+                <option>Location</option>
+                <option>Category</option>
+            </select>                
+    </form>
+</div>
+<hr />
+<table class="table table-striped customerTable" align="center">
+	<tr>
+		<th>ID</th>
+		<th>First Name</th>
+		<th>Last Name</th>
+		<th>Gender</th>
+		<th>opt</th>
+	</tr>
+	<tr>
+		<td>123</td>
+		<td>Er</td>
+		<td>Wang</td>
+		<td>Male</td>
+		<td><a href="#">Modify</a></td>
+	</tr>
+	<tr>
+		<td>123</td>
+		<td>Er</td>
+		<td>Wang</td>
+		<td>Male</td>
+		<td><a href="#">Modify</a></td>
+	</tr>
+	<tr>
+		<td>123</td>
+		<td>Er</td>
+		<td>Wang</td>
+		<td>Male</td>
+		<td><a href="#">Modify</a></td>
+	</tr>
+</table>
+
+<script type="text/javascript">
+    $('.sortBy').selectpicker();
+</script>

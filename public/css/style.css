@@ -247,7 +247,7 @@ input{
 .Container{
     float:left;
     margin-left: 270px;
-    width: 75%;
+    width: 72%;
 }
 
 .Card{
@@ -279,6 +279,11 @@ input{
     float:left;
     width:25%;
     padding-top: 60px;
+}
+
+.right button{
+    margin-left: 15px;
+    margin-top: 15px;
 }
 
 .tag{
@@ -487,7 +492,21 @@ img.big{
 
 /*end product detail*/
 
+/*customer*/
+.main{
+    width:80%;
+    margin:0 auto;
+}
 
+.customerTable{
+    width:80%;
+    margin:10px auto;
+}
+
+.customerTable tr{
+    /*height:50px;*/
+}
+/*end customer*/
 
 
 

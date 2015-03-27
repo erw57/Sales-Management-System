@@ -7,6 +7,11 @@ var productBrowseApp = angular.module('productBrowseApp', [
   'productBrowseController',
 ]);
 
+var customerApp = angular.module('customerApp',[
+  'ngRoute',
+  'customerController'
+  ]);
+
 productBrowseApp.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
@@ -22,3 +27,16 @@ productBrowseApp.config(['$routeProvider',
         redirectTo: '/'
       });
   }]);
+
+customerApp.config(['$routeProvider', 
+  function($routeProvider){
+    $routeProvider.
+      when('/', {
+        templateUrl: 'partials/customer-list.html',
+        // controller: 'customerListController'
+      }).
+      otherwise({
+        redirectTo: '/'
+      });
+  }
+  ]);
