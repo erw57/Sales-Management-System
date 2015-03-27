@@ -4,10 +4,12 @@
  * @param app
  * @param url
  */
+ var quo = require('../util/quotation');
 module.exports = function(app, url) {
     app.get(url, function(req, res) {
-        var list = new Object();
+        var list = {};
         list.data = [];
+        var store_name = req.query.store_name;
         //
         var mysql = require('mysql');
         var connection = mysql.createConnection({
@@ -17,17 +19,32 @@ module.exports = function(app, url) {
             password: 'root',
             database: 'system',
         });
+        var productList = [];
         connection.connect();
-        var query = 'SELECT prod_id,prod_name,price,product_kind FROM Product';
+        var query = 'SELECT prod_id FROM Inventory WHERE store_name='+quo(store_name);
+        connection.query(query,function(err,rows){
+            if(!err){
+                for(var i = 0; i<rows.length;i++){
+                      productList.push(rows[i].prod_id);
+                }
+                console.log(productList);
+            }
+        });
+        query = 'SELECT prod_id,prod_name,price,product_kind FROM Product';
         connection.query(query, function(err, rows) {
             if (!err) {
-                console.log(rows);
+                //console.log(rows);
+                var q = 0
                 for (var i = 0; i < rows.length; i++) {
-                    list.data[i] = new Object();
-                    list.data[i].name = rows[i]['prod_name'];
-                    list.data[i].id = rows[i]['prod_id'];
-                    list.data[i].price = rows[i].price;
-                    list.data[i].kind = rows[i]['prod_kind'];
+                    if(productList.indexOf(rows[i]['prod_id'])>=0){
+                        list.data[q] = new Object();
+                        list.data[q].name = rows[i]['prod_name'];
+                        list.data[q].id = rows[i]['prod_id'];
+                        list.data[q].price = rows[i].price;
+                        list.data[q].kind = rows[i]['prod_kind'];
+                        q++;
+                    }
+
                 }
                 res.json(list);
             } else {
