@@ -12,9 +12,9 @@ module.exports = function(app, url) {
         var mysql = require('mysql');
         var connection = mysql.createConnection({
             host: 'localhost',
-            port: '3306',
+            port: '8889',
             user: 'root',
-            password: 'leon1993',
+            password: 'root',
             database: 'system'
         });
         connection.connect();
@@ -22,13 +22,14 @@ module.exports = function(app, url) {
         // step - 2 construct query and send it to database
         var id = quo(req.query.id);
 
-        var query = 'SELECT name,age,street,city,state,kind,business_category,company_income,marriage_status,gender,zip_code,home_income FROM Customer WHERE cus_id = ' + id + ';';
-        console.log(quo((parseInt('23') + 1).toString()));
+        var query = 'SELECT * FROM Customer WHERE cus_id = ' + id + ';';
+        console.log(query);
         connection.query(query, function(err, rows) {
             if (!err) {
                 // if query are processed correctly, send the info as JSON to browser.
 
-                var info = new Object();
+                var info = {};
+                info.id = rows[0].cus_id;
                 info.name = rows[0].name;
                 info.age = rows[0].age;
                 info.street = rows[0].street;

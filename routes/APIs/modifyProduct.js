@@ -11,17 +11,17 @@ module.exports = function(app, url) {
         var mysql = require('mysql');
         var connection = mysql.createConnection({
             host: '127.0.0.1',
-            port: '3306',
+            port: '8889',
             user: 'root',
-            password: 'leon1993',
+            password: 'root',
             database: 'system'
         });
         connection.connect();
         var query;
-        query = 'UPDATE Customer SET' +
+        query = 'UPDATE Product SET' +
             ' prod_name=' + quo(args['name']) +
-            ' price=' + args['price'] +
-            ' product_kind=' + args['product_kind'] +
+            ' ,price=' + args['price'] +
+            ' ,product_kind=' + quo(args['kind']) +
             ' WHERE prod_id =' + args.id;
 
         console.log('Qurry:\n', query);

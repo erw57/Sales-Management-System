@@ -17,14 +17,14 @@ module.exports = function(app, url) {
         var query;
         query = 'UPDATE Customer SET' +
             ' name=' + quo(args.name) +
-            ' age=' + args.age +
-            ' gender=' + args.gender +
-            ' street=' + quo(args.street) +
-            ' kind=' + quo(args.kind) +
-            ' business_category=' + quo(args.business_category) +
-            ' company_income=' + args.company_income +
-            ' home_income=' + args.home_income +
-            'marriage_status=' + args['marriage_status'] +
+            ' ,age=' + args.age +
+            ' ,gender=' + args.gender +
+            ' ,street=' + quo(args.street) +
+            ' ,kind=' + quo(args.kind) +
+            ' ,business_category=' + quo(args.business_category) +
+            ' ,company_income=' + args.company_income +
+            ' ,home_income=' + args.home_income +
+            ' ,marriage_status=' + args['marriage_status'] +
             ' WHERE cus_id=' + args[id];
         console.log('Qurry:\n', query);
         connection.query(query, function(err, rows) {

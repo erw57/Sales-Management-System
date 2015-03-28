@@ -17,7 +17,7 @@ module.exports = function(app, url) {
             port: '8889',
             user: 'root',
             password: 'root',
-            database: 'system',
+            database: 'system'
         });
         var productList = [];
         connection.connect();
@@ -30,7 +30,7 @@ module.exports = function(app, url) {
                 console.log(productList);
             }
         });
-        query = 'SELECT prod_id,prod_name,price,product_kind FROM Product';
+        query = 'SELECT * FROM Product';
         connection.query(query, function(err, rows) {
             if (!err) {
                 //console.log(rows);
@@ -42,6 +42,7 @@ module.exports = function(app, url) {
                         list.data[q].id = rows[i]['prod_id'];
                         list.data[q].price = rows[i].price;
                         list.data[q].kind = rows[i]['prod_kind'];
+                        list.data[q].image_path = rows[i].image_path;
                         q++;
                     }
 

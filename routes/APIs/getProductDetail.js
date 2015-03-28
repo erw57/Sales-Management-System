@@ -13,15 +13,31 @@ module.exports = function(app, url) {
             database: 'system'
         });
         connection.connect();
+        var result = {};
         var query = 'SELECT * FROM Product WHERE prod_id=' + id;
         connection.query(query, function(err, rows) {
             if (!err) {
-                res.json(rows[0]);
+                result = rows[0];
             } else {
                 console.log('ERROR: Retrieval Product Info');
             }
-            connection.end();
         });
+        query = 'SELECT * FROM Inventory WHERE '+'prod_id= '+ id;
+
+        connection.query(query,function(err,rows){
+            if(!err){
+                result.amount = [];
+                for(var i=0;i<rows.length;i++){
+                    result.amount[i].store = rows[i].store_name;
+                    result.amount[i].amount = rows[i].amount;
+                }
+                res.json(result);
+            }
+            else{
+                console.log('fail to get inventory informaiton');
+            }
+
+                });
 
     });
 };

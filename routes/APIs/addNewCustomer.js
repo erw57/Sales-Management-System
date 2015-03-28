@@ -11,29 +11,26 @@ function addCustomer(args) {
     var street = quo(args.street);
     var city = quo(args.city);
     var state = quo(args.state);
-    var zip_code = quo(args.zip_code);
-    var home_income = quo(args.home_income);
-    var age = quo(args.age);
+    var zip_code = args.zip_code;
+    var home_income = args.home_income;
+    var age = args.age;
     var marriage_status = quo(args.marriage_status);
     var company_income =args['company_income'];
     var business_category = (args['business_category']==='NULL'?'NULL':quo(args['business_category']));
     var mysql = require('mysql');
     var connection = mysql.createConnection({
         host: 'localhost',
-        port: '3306',
+        port: '8889',
         user: 'root',
-        password: 'leon1993',
+        password: 'root',
         database: 'system'
     });
-    console.log(1);
     connection.connect();
     //get next avaliable id
     var query = "select max(cus_id)  as nextID from Customer ;";
     connection.query(query, function(err, rows) {
         if (!err) {
             var id = quo((parseInt(rows[0].nextID) + 1).toString());
-            console.log(id);
-            //update that value;
             query = 'INSERT INTO Customer VALUES(' + id + ',' + name + ',' + street + ',' + city + ',' + state + ',' + zip_code + ',' + kind + ',' + business_category + ',' + company_income + ',' + marriage_status + ',' + age + ',' + gender + ',' + home_income + ');';
             console.log(query);
             connection.query(query, function(err) {
