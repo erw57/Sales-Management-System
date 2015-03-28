@@ -21,7 +21,13 @@ module.exports = function(app, url) {
         });
         var productList = [];
         connection.connect();
+        if(store_name === 'all'){
+        var query = 'SELECT prod_id FROM Inventory ;';
+    }
+    else{
         var query = 'SELECT prod_id FROM Inventory WHERE store_name='+quo(store_name);
+    }
+
         connection.query(query,function(err,rows){
             if(!err){
                 for(var i = 0; i<rows.length;i++){
