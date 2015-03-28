@@ -44,7 +44,7 @@ module.exports = function(app, url) {
                     quo(args.id) + ',' +
                     quo(args.name) + ',' +
                     args.price + ',' + quo(args.kind) +
-                    ','+quo(path)+');';
+                    ','+quo(path)+','+quo(args.description)+');';
                 console.log(query);
                 connection.query(query, function(err) {
                     if (!err) {

@@ -9,9 +9,9 @@ module.exports = function(app, url) {
         var mysql = require('mysql');
         var connection = mysql.createConnection({
             host: '127.0.0.1',
-            port: '3306',
+            port: '8889',
             user: 'root',
-            password: 'leon1993',
+            password: 'root',
             database: 'system'
         });
         connection.connect();

@@ -22,6 +22,7 @@ module.exports = function(app, url) {
             ' prod_name=' + quo(args['name']) +
             ' ,price=' + args['price'] +
             ' ,product_kind=' + quo(args['kind']) +
+            ',description='+quo(args.description)+
             ' WHERE prod_id =' + args.id;
 
         console.log('Qurry:\n', query);
