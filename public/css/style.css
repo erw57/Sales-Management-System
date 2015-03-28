@@ -401,6 +401,18 @@ input{
     font-size: 14px;
 }
 
+.sortBar{
+    float: right;
+}
+
+.sortBy{
+    width: 100px;
+}
+
+.locationBar{
+    margin-left: 5%;
+    float: left;
+}
 
 .searchBar input[type="text"]{
     border-radius: 5px;
@@ -504,7 +516,40 @@ img.big{
 }
 
 .customerTable tr{
-    /*height:50px;*/
+    height:40px;
+}
+
+.custBtn{
+    width:80%;
+    margin:10px auto;
+}
+
+.custBtn button{
+    width:200px;
+    border-radius: 10px;
+}
+
+.tableTitle{
+    text-align: right;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/*.stripedTr{
+    background-color: #00324A;
+    color:#fff;
+}
+
+.stripedTr a{
+    color:#fff;
+}*/
+
+.tableText{
+    text-align: center;
+}
+.tableText input{
+    width:40%;
+    height:30px;
 }
 /*end customer*/
 

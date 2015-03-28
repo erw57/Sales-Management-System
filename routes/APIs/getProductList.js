@@ -49,6 +49,8 @@ module.exports = function(app, url) {
                         list.data[q].price = rows[i].price;
                         list.data[q].kind = rows[i]['prod_kind'];
                         list.data[q].image_path = rows[i].image_path;
+                        list.data[q].description = rows[i].description;
+                        list.data[q].product_kind = rows[i].product_kind;
                         q++;
                     }
 

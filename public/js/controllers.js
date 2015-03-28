@@ -22,19 +22,23 @@
 
 var productBrowseControllers = angular.module('productBrowseController',[]);
 var customerControllers = angular.module('customerController', []);
+var inventoryController = angular.module('inventoryController', []);
 
 productBrowseControllers.controller('productListController',['$rootScope','$scope', '$http', 
 	function($scope, $rootScope, $http){
-		// $http.get('api/getProductList').success(function(res){
-		// 	$scope.products = res.data;
-		// });
-		// $rootScope.count = 0;
-
-		// $rootScope.addProduct = function(num){
-		// 	$rootScope.count++;
-		// }
+		$http.get('api/getProductList?store_name=all').success(function(res){
+			$scope.products = res.data;
+		});
 	}]);
 
+productBrowseControllers.controller('cartController', ['$scope', function($scope){
+
+}]);
+
 customerControllers.controller('customerListController', ['$scope', '$http', function($scope, $http){
+	
+}]);
+
+inventoryController.controller('inventoryListController', ['$scope', '$http', function($scope, $http){
 	
 }]);

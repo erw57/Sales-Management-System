@@ -13,25 +13,32 @@
                 <option>Category</option>
             </select>                
     </form>
+    <form class='locationBar'>
+        <span>Location: </span>
+        <select class="location" data-live-search="true">
+            <option>All Store</option>
+            <option>Pittsburgh</option>
+            <option>New York</option>
+            <option>Washington DC</option>
+            <option>Orlando</option>
+        </select>                
+    </form>
 </div>
 <!--card-->
 <div class="Card clearfix" ng-repeat="product in products">
     <div class="left">
-        <img src="images/1.png" />
+        <img ng-src="{{product.image_path}}" />
     </div>
     <div class="middle">
         <div class="middleUp">
-            <span class="name">Apple iPhone 6, Space Gray, 16 GB (Unlocked)</span>
+            <span class="name">{{product.name}}</span>
         </div>
-        <p class="price">
-            $719.00
+        <p>
+            <span class="price">{{product.price | currency}}</span>
+            <span>Category: </span><span>{{product.product_kind}}</span>
         </p>
         <p class="description">
-            4.7-inch (diagonal) Retina HD display with 1334-by-750 resolution. 
-            A8 chip with M8 motion coprocessor. 
-            1080p HD video recording at 60 fps and slo-mo video recording at 240 fps. 
-            Touch ID fingerprint sensor. 
-            LTE¹ and 802.11ac Wi-Fi...
+            {{product.description}}
         </p>
     </div>
     <div class="right">
@@ -46,96 +53,7 @@
     </div>
 </div>
 <!--end card-->
-<!--card-->
-<div class="Card clearfix">
-    <div class="left">
-        <img src="images/2.png" />
-    </div>
-    <div class="middle">
-        <div class="middleUp">
-            <span class="name">Amazon - Kindle Voyage - 4GB - Wi-Fi + 3G - Black</span>
-        </div>
-        <p class="price">
-            $269.99
-        </p>
-        <p class="description">
-           Amazon's most advanced e-reader ever
-            All new design with beautiful flush glass front and magnesium back
-            Thinnest Kindle ever at 7.6mm; weighs less than 6.7oz
-            Adaptive front light
-            Reimagined page turns with PagePress
-        </p>
-    </div>
-    <div class="right">
-        <form action="AddProducts" method="POST">
-            <span style="margin-left: 45px;">Quantity: </span>
-            <input type="hidden" name="id" value="2"/>
-            <input type="hidden" name="name" value="Amazon - Kindle Voyage - 4GB - Wi-Fi + 3G - Black"/>
-            <input type="hidden" name="price" value="269.99"/>
-            <input type="text" name="qty" value="1" style="width: 35px;"/>
-            <button class="button_color" type="submit">Add To Cart</button>
-        </form>
-    </div>
-</div>
-<!--end card-->
-<!--card-->
-<div class="Card clearfix">
-    <div class="left">
-        <img src="images/3.png" />
-    </div>
-    <div class="middle">
-        <div class="middleUp">
-            <span class="name">Microsoft - Surface Pro 3 - 12" - Intel Core i7 - 512GB - Silver</span>
-        </div>
-        <p class="price">
-            $1,949.99
-        </p>
-        <p class="description">
-            High pixel density and stunning detail make this screen ideal for Web browsing, studying, reading and streaming HD content.
-            Full laptop capability in the size of a tablet. Run your existing desktop programs, download apps from the Windows Store and ...
-        </p>
-    </div>
-    <div class="right">
-        <form action="AddProducts" method="POST">
-            <span style="margin-left: 45px;">Quantity: </span>
-            <input type="hidden" name="id" value="3"/>
-            <input type="hidden" name="name" value="Microsoft - Surface Pro 3 - 12 - Intel Core i7 - 512GB - Silver"/>
-            <input type="hidden" name="price" value="1949.99"/>
-            <input type="text" name="qty" value="1" style="width: 35px;"/>
-            <button class="button_color" type="submit">Add To Cart</button>
-        </form>
-    </div>
-</div>
-<!--end card-->
-<!--card-->
-<div class="Card clearfix">
-    <div class="left">
-        <img src="images/4.png" />
-    </div>
-    <div class="middle">
-        <div class="middleUp">
-            <span class="name">Nikon - AF-S DX Micro-NIKKOR 40mm f/2.8G Macro Lens - Black</span>
-        </div>
-        <p class="price">
-            $249.99
-        </p>
-        <p class="description">
-            Works with any Nikon DX-format DSLR camera with an F-bayonet mount. Creates sharp, detailed images with shallow depth of field and softly blurred background. Performs best in moderate-to-bright light settings or outdoors on overcast day...
-        </p>
-    </div>
-    <div class="right">
-        <form action="AddProducts" method="POST">
-            <span style="margin-left: 45px;">Quantity: </span>
-            <input type="hidden" name="id" value="4"/>
-            <input type="hidden" name="name" value="Nikon - AF-S DX Micro-NIKKOR 40mm f/2.8G Macro Lens - Black"/>
-            <input type="hidden" name="price" value="249.99"/>
-            <input type="text" name="qty" value="1" style="width: 35px;"/>
-            <button class="button_color" type="submit">Add To Cart</button>
-        </form>
-    </div>
-</div>
-<!--end card-->
-
 <script type="text/javascript">
     $('.sortBy').selectpicker();
+    $('.location').selectpicker();
 </script>

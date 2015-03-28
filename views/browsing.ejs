@@ -8,7 +8,7 @@
         <link rel="stylesheet" type="text/css" href="bower_components/bootstrap-select/bootstrap-select.min.css">
         <link rel="stylesheet" type="text/css" href="css/style.css"/>     
     </head>
-    <body>
+    <body ng-controller="cartController">
         <div class="leftNav">
             <div>
               <a href="entry" class="returnBtn">&lt;&lt; Main Entry</a>
@@ -23,7 +23,7 @@
                     <p>Shopping List</p>
                 </li>
                 <!--item-->
-                <li class="list">
+                <li class="list" ng-repeat="product in products">
                     <div class="listName">Apple iPhone 6, Space Gray, 16 GB (Unlocked)</div>
                     <div class="listInfo">
                         <p>
