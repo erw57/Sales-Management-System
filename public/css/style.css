@@ -206,10 +206,21 @@ input{
     margin-bottom: 5px;
 }
 
-.listInfo div{
+.listInfo a{
+    font-size: 14px;
+    color: white;
+    margin:0;
+    /*text-decoration: underline;*/
+}
+
+.listInfo a:hover{
+    color: #3897C5;
+}
+
+.listInfo div:nth-child(4){
     font-weight: bold;
     color: #3897C5;
-    //font-size: 12px
+    /*font-size: 12px*/
 }
 
 .listOpt{
@@ -302,6 +313,10 @@ input{
     margin-right: 50px;
 }
 
+.id{
+    font-size: 14px;
+}
+
 .middleUp{
     width:100%;
     border-bottom: 1px #dddddd solid;
@@ -316,6 +331,11 @@ input{
     font-weight: bold;
     color:#3897C5;
     font-size: 20px;
+}
+
+.subInfo{
+    color:#999;
+    margin-left: 10px;
 }
 
 .description{

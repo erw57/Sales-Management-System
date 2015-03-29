@@ -31,25 +31,22 @@
     </div>
     <div class="middle">
         <div class="middleUp">
-            <span class="name">{{product.name}}</span>
+            <a href="#/browsing-detail/{{product.id}}" class="name">{{product.name}}</a>
+            <p class="id">ID: {{product.id}}</p>
         </div>
         <p>
             <span class="price">{{product.price | currency}}</span>
-            <span>Category: </span><span>{{product.product_kind}}</span>
+            <span class="subInfo">Category: </span><span>{{product.product_kind}}</span>
         </p>
         <p class="description">
             {{product.description}}
         </p>
     </div>
     <div class="right">
-        <form action="AddProducts" method="POST">
             <span style="margin-left: 45px;">Quantity: </span>
-            <input type="hidden" name="id" value="1"/>
-            <input type="hidden" name="name" value="Apple iPhone 6, Space Gray, 16 GB (Unlocked)"/>
-            <input type="hidden" name="price" value="719.00"/>
-            <input type="text" name="qty" value="1" style="width: 35px;"/>
-            <button class="button_color" type="submit">Add To Cart</button>
-        </form>
+            <input type="text" value="1" ng-model="qty" ng-init="qty=1" style="width: 35px;"/>
+            <button class="button_color" ng-click="buy($event);" item-qty="{{qty}}" 
+            item-name="{{product.name}}" item-price="{{product.price}}" item-id="{{product.id}}">Add To Cart</button>
     </div>
 </div>
 <!--end card-->

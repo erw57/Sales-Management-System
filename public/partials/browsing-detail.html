@@ -20,17 +20,18 @@
 </div>
 
 <div class="detailRight">
-	<h3>Apple iPhone 6, Space Gray, 16 GB (Unlocked)</h3>
+	<h3>{{product.prod_name}}</h3>
+	<p class="id">ID: {{product.prod_id}}</p>
 	<hr />
 	<p class="price">
-            $719.00
-        </p>
+            {{product.price | currency}}
+    </p>
+    <div class="detailNotes">
+		<p>Category: <span>{{product.product_kind}}</span></p>
+		<p>Inventory: <span>250</span></p>
+	</div>
 	<p>
-		4.7-inch (diagonal) Retina HD display with 1334-by-750 resolution. 
-            A8 chip with M8 motion coprocessor. 
-            1080p HD video recording at 60 fps and slo-mo video recording at 240 fps. 
-            Touch ID fingerprint sensor. 
-            LTE¹ and 802.11ac Wi-Fi...
+		{{product.description}}
 	</p>
 	<hr />
 	<div class="detailNotes">
@@ -41,10 +42,11 @@
       	<span class="input-group-btn">
         	<button class="btn btn-default" type="button">-</button>
       	</span>
-      	<input type="text" class="form-control" placeholder="Qty">
+      	<input type="text" class="form-control" placeholder="Qty" ng-model="qty" ng-init="qty=1" />
       	<span class="input-group-btn">
         	<button class="btn btn-default" type="button">+</button>
       	</span>
     </div><!-- /input-group -->
-	<button class="button_color detailAdd">Add to Cart</button>
+	<button class="button_color detailAdd" ng-click="buy($event);" item-qty="{{qty}}" 
+            item-name="{{product.prod_name}}" item-price="{{product.price}}" item-id="{{product.prod_id}}">Add to Cart</button>
 </div>

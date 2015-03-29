@@ -24,9 +24,9 @@ productBrowseApp.config(['$routeProvider',
         templateUrl: 'partials/browsing-list.html',
          controller: 'productListController'
       }).
-      when('/browsing-detail', {
+      when('/browsing-detail/:productId', {
         templateUrl: 'partials/browsing-detail.html',
-        // controller: 'PhoneListCtrl'
+        controller: 'productDetailController'
       }).
       otherwise({
         redirectTo: '/'

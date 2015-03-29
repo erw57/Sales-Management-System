@@ -23,16 +23,20 @@
                     <p>Shopping List</p>
                 </li>
                 <!--item-->
-                <li class="list" ng-repeat="product in products">
-                    <div class="listName">Apple iPhone 6, Space Gray, 16 GB (Unlocked)</div>
+                <li class="list" ng-repeat="item in cart">
+                    <div class="listName">{{item.name}}</div>
                     <div class="listInfo">
-                        <p>
+                        <div>
                             <span>Qty: </span>
-                            <span class="qtySpan">2</span>
+                            <span class="qtySpan">{{item.num}}</span>
+
                             <input type="text" value="" class="editBox"/>
                             <input type="hidden" value="" class="editId"/>
-                        </p> 
-                        <div>$720.00</div>
+                        </div> 
+                        <a href="javascript:void(0);" ng-click="add(item.id)">+</a>
+                            /
+                            <a href="javascript:void(0);" ng-click="minus(item.id)">-</a>
+                        <div>{{item.price * item.num | currency}}</div>
                     </div>
                     <div class="listOpt">
                         <a href="javascript:void(0);" class="edit">Edit</a>
