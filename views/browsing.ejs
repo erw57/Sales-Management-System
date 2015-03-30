@@ -39,8 +39,7 @@
                         <div>{{item.price * item.num | currency}}</div>
                     </div>
                     <div class="listOpt">
-                        <a href="javascript:void(0);" class="edit">Edit</a>
-                        <a href="#" class="delete">Delete</a>
+                        <a href="javascript:void(0);" class="delete" ng-click="delete(item.id)">Delete</a>
                     </div>
                 </li>
                 <!--end item-->     
@@ -50,9 +49,7 @@
                     <div>$1200.00</div>
                 </li>
                 <li class="total">
-                    <form action="PlaceOrder" method="POST">
-                        <button type="submit" class="button">Place Order</button>
-                    </form>              
+                        <button class="button" ng-click="placeOrder()">Place Order</button>          
                 </li>
                 <!--end total-->
             </ul>
@@ -60,6 +57,19 @@
         <div class="Container" ng-view>
             
         </div> 
+
+        <modal title="Make Payment" visible="pay">
+            <form class="pop">
+                <div>
+                    <label for="cid">Customer ID:</label>
+                    <input type="text" id="cid" placeholder="Enter Customer ID" />
+                </div>
+                <button class="button_color" ng-click="makePayment()">Submit</button>
+            </form>
+        </modal>
+        
+
+
     
         <script type="text/javascript" src = "bower_components/jquery/dist/jquery.min.js"></script>
         <script type="text/javascript" src = "bower_components/bootstrap/dist/js/bootstrap.min.js"></script>

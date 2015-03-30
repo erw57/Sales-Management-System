@@ -28,25 +28,39 @@
     </p>
     <div class="detailNotes">
 		<p>Category: <span>{{product.product_kind}}</span></p>
-		<p>Inventory: <span>250</span></p>
 	</div>
 	<p>
 		{{product.description}}
 	</p>
 	<hr />
 	<div class="detailNotes">
-		<p>Store: <span>Pittsburgh Store</span> <a href="javascript:void(0);">Change Store</a></p>
-		<p>Inventory: <span>250</span></p>
+		<p>Store: <span>{{storeName}}</span> <a href="javascript:void(0);" ng-click="changeStore()">Change Store</a></p>
+		<p>Inventory: <span>{{inventory}}</span></p>
 	</div>
 	<div class="input-group pull-left" style="width:30%;">
       	<span class="input-group-btn">
-        	<button class="btn btn-default" type="button">-</button>
+        	<button class="btn btn-default" type="button" ng-click="decrease()">-</button>
       	</span>
       	<input type="text" class="form-control" placeholder="Qty" ng-model="qty" ng-init="qty=1" />
       	<span class="input-group-btn">
-        	<button class="btn btn-default" type="button">+</button>
+        	<button class="btn btn-default" type="button" ng-click="increase()">+</button>
       	</span>
     </div><!-- /input-group -->
 	<button class="button_color detailAdd" ng-click="buy($event);" item-qty="{{qty}}" 
             item-name="{{product.prod_name}}" item-price="{{product.price}}" item-id="{{product.prod_id}}">Add to Cart</button>
 </div>
+<modal title="Change Store" visible="store">
+    <form>
+        <div>
+            <label>Store:</label>
+            <select class="location" data-live-search="true" ng-model="location">
+                <option>All Store</option>
+                <option>Pittsburgh</option>
+                <option>New York</option>
+                <option>Washington DC</option>
+                <option>Orlando</option>
+            </select>
+        </div>
+        <button class="button_color" ng-click="selectStore(location)">Submit</button>
+    </form>
+</modal>

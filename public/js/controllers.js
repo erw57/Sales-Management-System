@@ -24,8 +24,9 @@ var productBrowseControllers = angular.module('productBrowseController',[]);
 var customerControllers = angular.module('customerController', []);
 var inventoryController = angular.module('inventoryController', []);
 
-productBrowseControllers.controller('cartController', ['$scope', '$rootScope', function($scope, $rootScope){
+productBrowseControllers.controller('cartController', ['$scope', '$http',  function($scope, $http){
 	$scope.cart = {};
+	$scope.singleProductId = 0;
 	$scope.buy = function($event){
 		var el = $event.target;
 		var qty = parseInt(el.getAttribute('item-qty')); 
@@ -47,16 +48,32 @@ productBrowseControllers.controller('cartController', ['$scope', '$rootScope', f
 			delete $scope.cart[id];
 		}
 	}
-	$scope.add = function(){
+	$scope.add = function(id){
 		$scope.cart[id].num++;
 	}
+
+	$scope.delete = function(id){
+		delete $scope.cart[id];
+	}
+
+	$scope.pay = false;
+    $scope.placeOrder = function(){
+        $scope.pay = !$scope.pay;
+    };
+
+    $scope.makePayment = function(){
+    	$scope.pay = !$scope.pay;
+    }
+
+    
 }]);
+
+
 
 productBrowseControllers.controller('productListController',['$rootScope','$scope', '$http', 
 	function($scope, $rootScope, $http){
 		$http.get('api/getProductList?store_name=all').success(function(res){
 			$scope.products = res.data;
-			$scope.$emit("toCart", $scope.products);
 		});
 		//console.log($rootScope.cart);
 	}]);
@@ -65,8 +82,33 @@ productBrowseControllers.controller('productDetailController', ['$scope', '$rout
 	function($scope, $routeParams, $http){
 		$http.get('api/getProductDetail?id='+$routeParams.productId).success(function(data){
 			$scope.product = data;
-			console.log($scope.product);
+			$scope.singleProductId = $routeParams.productId;
+			$scope.$emit("singleProduct", $scope.singleProductId);
 		});
+
+		$scope.increase = function(){
+			$scope.qty++;
+		}
+
+		$scope.decrease = function(){
+			if($scope.qty > 0){
+				$scope.qty--;
+			}		
+		}
+
+		$scope.store = false;
+	    $scope.changeStore = function(){
+	        $scope.store = !$scope.store;
+	    };
+
+	    $scope.selectStore = function(location){
+	    	$scope.store = !$scope.store;
+	    	$http.get('api/checkInventory?id='+$scope.singleProductId+'&&store=Center Store').success(function(res){
+	    		console.log(res[0].amount);
+	    		$scope.inventory = res[0].amount;
+	    		$scope.storeName = res[0].store_name;
+	    	});
+	    }
 }]);
 
 customerControllers.controller('customerListController', ['$scope', '$http', function($scope, $http){

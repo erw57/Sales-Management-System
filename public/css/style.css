@@ -243,6 +243,10 @@ input{
     border-top: 1px white solid;
 }
 
+.total button{
+    margin-left: 52px;
+}
+
 .total div{
     text-align: right;
     margin-top: 10px;
@@ -454,10 +458,14 @@ input{
     margin:0;
 }
 
-/*.searchBar button:hover{
-    color: #BBE7FC;
-}*/
+form.pop button{
+    margin-top: 20px;
+}
 
+form.pop input{
+    width:50%;
+    margin-left: 15px;
+}
 /*end prodcut browsing*/
 
 /*product detail*/
