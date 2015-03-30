@@ -25,11 +25,11 @@ module.exports = function(app, url) {
             ' ,company_income=' + args.company_income +
             ' ,home_income=' + args.home_income +
             ' ,marriage_status=' + args['marriage_status'] +
-            ' WHERE cus_id=' + args[id];
+            ' WHERE cus_id=' + args.id;
         console.log('Qurry:\n', query);
         connection.query(query, function(err, rows) {
             if (!err) {
-                res.json(args);
+                res.json({'message':'Successful update customer\'s profile'});
             }
         });
         connection.end();
