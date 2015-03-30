@@ -21,7 +21,7 @@
 		<td class="tableText">{{customer.age}}</td>
 	</tr>
 	<tr>
-		<td class="tableTitle">Kind:</td>
+		<td class="tableTitle">Customer Type:</td>
 		<td class="tableText">{{customer.kind}}</td>
 	</tr>
 	<tr>
@@ -45,7 +45,7 @@
 		<td class="tableText">{{customer.marriage_status}}</td>
 	</tr>
 	<tr>
-		<td class="tableTitle">Home Income/Company Income:</td>
+		<td class="tableTitle">{{customer.home_income?'Home Income':'Company Income'}}</td>
 		<td class="tableText">{{customer.home_income == null?customer.company_income:customer.home_income}}</td>
 	</tr>
 	<tr ng-show="customer.business_catogery">
@@ -55,7 +55,7 @@
 	<tr>
 		<td colspan="2" class="text-center">
 			<div class="custBtn">
-				<button class="button_color">Update Information</button>
+				<a class="button_color" href="#/customer-detail/{{customer.id}}/update">Update Information</a>
 			</div>
 		</td>
 	</tr>
@@ -65,27 +65,71 @@
 
 <table class="customerTable" align="center" ng-show="opt == 'update'">
 	<tr>
-		<td width="20%" class="tableTitle">Name:</td>
-		<td width="80%" class="tableText">Er Wang</td>
+		<td width="20%" class="tableTitle">Customer ID:</td>
+		<td width="80%" class="tableText">{{customer.id}}</td>
 	</tr>
 	<tr>
+		<td class="tableTitle">Name:</td>
+		<td class="tableText"><input type="text" ng-model="customer.name" /></td>
+	</tr>
+	<tr>
+		<td class="tableTitle">Gender:</td>
+		<td class="tableText">
+			<select class="selectPicker" ng-model="customer.gender">
+				<option value="M">Male</option>
+				<option value="F">Female</option>
+			</select>
+		</td>
+	</tr>
+		<tr>
 		<td class="tableTitle">Age:</td>
-		<td class="tableText"><input type="text" /></td>
+		<td class="tableText"><input type="text" ng-model="customer.age" /></td>
+	</tr>
+		<tr>
+		<td class="tableTitle">Customer Type:</td>
+		<td class="tableText">
+		<select class="selectPicker" ng-model="customer.kind">
+				<option value="home">Home</option>
+				<option value="business">Business</option>
+			</select>
+		</td>
 	</tr>
 	<tr>
-		<td class="tableTitle">Age:</td>
-		<td class="tableText"><input type="text" /></td>
+		<td class="tableTitle">Street:</td>
+		<td class="tableText"><input type="text" ng-model="customer.street" /></td>
 	</tr>
 	<tr>
-		<td width="20%" class="tableTitle">Name:</td>
-		<td width="80%" class="tableText">Er Wang</td>
+		<td class="tableTitle">Ciyt:</td>
+		<td class="tableText"><input type="text" ng-model="customer.city" /></td>
+	</tr>
+	<tr>
+		<td class="tableTitle">State:</td>
+		<td class="tableText"><input type="text" ng-model="customer.state" /></td>
+	</tr>
+	<tr>
+		<td class="tableTitle">Marriage Status:</td>
+		<td class="tableText"><input type="text" ng-model="customer.marriage_status" /></td>
+	</tr>
+	<tr ng-show="customer.home_income">
+		<td class="tableTitle">Home Income:</td>
+		<td class="tableText"><input type="text" ng-model="customer.home_income"/></td>
+	</tr>
+	<tr ng-show="customer.company_income">
+		<td class="tableTitle">Company Income:</td>
+		<td class="tableText"><input type="text" ng-model="customer.company_income"/></td>
+	</tr>
+	<tr ng-show="customer.business_category">
+		<td class="tableTitle">Business Category:</td>
+		<td class="tableText"><input type="text" ng-model="customer.business_category"/></td>
 	</tr>
 	<tr>
 		<td colspan="2" class="text-center">
 			<div class="custBtn">
-				<button class="button_color">Update Information</button>
+				<a class="button_color" href="">Confirm</a>
 			</div>
 		</td>
 	</tr>
 </table>
-
+// <script type="text/javascript">
+//     $('.selectPicker').selectpicker();
+// </script>

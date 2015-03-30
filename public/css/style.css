@@ -557,7 +557,7 @@ img.big{
     margin:40px auto;
 }
 
-.custBtn button{
+.custBtn a, .custBtn button{
     width:200px;
     border-radius: 10px;
 }
@@ -580,10 +580,11 @@ img.big{
 .tableText{
     text-align: center;
 }
-.tableText input{
+.tableText input, .tableText select{
     width:40%;
     height:30px;
 }
+
 /*end customer*/
 
 
