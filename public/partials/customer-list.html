@@ -1,17 +1,14 @@
 <h1 class="text-center">Customer List</h1>
 <div class="optPanel clearfix">
     <form class="searchBar">
-        <input type="text" placeholder="Search for...(id, name)" />
+        <input type="text" placeholder="Search for..." ng-model="query"/>
         <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
     </form>
     <form class="sortBar">
         <span>Sort By:</span>
-            <select class="sortBy">
-                <option>Price (Low to High)</option>
-                <option>Price (Highw to Low)</option>
-                <option data-divider="true"></option>
-                <option>Location</option>
-                <option>Category</option>
+            <select class="sortBy" ng-model="orderProp">
+                <option value="name">Alphabetical</option>
+                <option value="age">Age</option>
             </select>                
     </form>
 </div>
@@ -23,31 +20,17 @@
 <table class="table table-striped customerTable" align="center">
 	<tr class="stripedTr">
 		<th>ID</th>
-		<th>First Name</th>
-		<th>Last Name</th>
+		<th>Name</th>
+		<th>Age</th>
 		<th>Gender</th>
 		<th>Option</th>
 	</tr>
-	<tr>
-		<td>123</td>
-		<td>Er</td>
-		<td>Wang</td>
-		<td>Male</td>
+	<tr ng-repeat="c in customers | filter:query | orderBy: orderProp">
+		<td>{{c.id}}</td>
+		<td>{{c.name}}</td>
+		<td>{{c.age}}</td>
+		<td>{{c.gender == 'M'?'Male':"Female"}}</td>
 		<td><a href="#/customer-detail">Detail</a> | <a href="#">Update</a></td>
-	</tr>
-	<tr class="stripedTr">
-		<td>123</td>
-		<td>Er</td>
-		<td>Wang</td>
-		<td>Male</td>
-		<td><a href="#/customer-detail">Detail</a> | <a href="#">Update</a></td>
-	</tr>
-	<tr>
-		<td>123</td>
-		<td>Er</td>
-		<td>Wang</td>
-		<td>Male</td>
-		<td><a href="#">Modify</a></td>
 	</tr>
 </table>
 

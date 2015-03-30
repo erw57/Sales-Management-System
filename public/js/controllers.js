@@ -118,7 +118,10 @@ productBrowseControllers.controller('productDetailController', ['$scope', '$rout
 }]);
 
 customerControllers.controller('customerListController', ['$scope', '$http', function($scope, $http){
-	
+	$http.get('api/getCustomerList').success(function(res){
+		$scope.customers = res.data;
+		$scope.orderProp = 'name';
+	});
 }]);
 
 inventoryController.controller('inventoryListController', ['$scope', '$http', function($scope, $http){

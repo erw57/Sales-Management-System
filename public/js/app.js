@@ -80,7 +80,7 @@ customerApp.config(['$routeProvider',
     $routeProvider.
       when('/', {
         templateUrl: 'partials/customer-list.html',
-        // controller: 'customerListController'
+         controller: 'customerListController'
       }).
       when('/customer-detail', {
         templateUrl: 'partials/customer-detail.html',
