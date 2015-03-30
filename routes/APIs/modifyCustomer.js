@@ -10,7 +10,7 @@ module.exports = function(app, url) {
             host: '127.0.0.1',
             port: '3306',
             user: 'root',
-            password: 'leon1993',
+            password: 'root',
             database: 'system'
         });
         connection.connect();

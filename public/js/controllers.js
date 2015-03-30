@@ -130,8 +130,15 @@ customerControllers.controller('customerDetailController', ['$scope', '$http', '
 		$scope.customer = res;
 		$scope.opt = $routeParams.opt;
 	});
+
+	$scope.modifyCustomer = function(){
+		console.log($scope.customer.kind);
+		$http.post('api/modifyCustomer', $scope.customer).success(function(){
+			console.log('customer updated');
+		});
+	}
 }]);
 
 inventoryController.controller('inventoryListController', ['$scope', '$http', function($scope, $http){
-	$http.get('')
+	
 }]);
