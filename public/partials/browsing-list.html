@@ -1,13 +1,14 @@
 <div class="optPanel clearfix">
     <form class="searchBar">
-        <input type="text" placeholder="Search for...(id, name)" />
+        <input type="text" placeholder="Search for...(id, name)" ng-model="query" />
         <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
     </form>
     <form class="sortBar">
         <span>Sort By:</span>
-            <select class="sortBy">
-                <option>Price (Low to High)</option>
-                <option>Price (Highw to Low)</option>
+            <select class="sortBy" ng-model="orderProp">
+                <option> None</option>
+                <option value="price">Price (Low to High)</option>
+                <option value="-price">Price (Highw to Low)</option>
                 <option data-divider="true"></option>
                 <option>Location</option>
                 <option>Category</option>
@@ -25,7 +26,7 @@
     </form>
 </div>
 <!--card-->
-<div class="Card clearfix" ng-repeat="product in products">
+<div class="Card clearfix" ng-repeat="product in products | filter:query | orderBy: orderProp">
     <div class="left">
         <img ng-src="{{product.image_path}}" />
     </div>

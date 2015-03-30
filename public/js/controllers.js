@@ -76,6 +76,7 @@ productBrowseControllers.controller('productListController',['$rootScope','$scop
 			$scope.products = res.data;
 		});
 		//console.log($rootScope.cart);
+		$scope.orderProp = '';
 	}]);
 
 productBrowseControllers.controller('productDetailController', ['$scope', '$routeParams', '$http', 
