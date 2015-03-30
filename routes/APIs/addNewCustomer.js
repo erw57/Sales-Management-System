@@ -16,7 +16,7 @@ function addCustomer(args) {
     var age = args.age;
     var marriage_status = quo(args.marriage_status);
     var company_income =args['company_income'];
-    var business_category = (args['business_category']==='NULL'?'NULL':quo(args['business_category']));
+    var business_category = (args['business_category']=== null?'NULL':quo(args['business_category']));
     var mysql = require('mysql');
     var connection = mysql.createConnection({
         host: 'localhost',

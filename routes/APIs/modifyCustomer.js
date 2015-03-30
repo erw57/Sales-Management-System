@@ -8,7 +8,7 @@ module.exports = function(app, url) {
         var mysql = require('mysql');
         var connection = mysql.createConnection({
             host: '127.0.0.1',
-            port: '3306',
+            port: '8889',
             user: 'root',
             password: 'root',
             database: 'system'
@@ -18,18 +18,22 @@ module.exports = function(app, url) {
         query = 'UPDATE Customer SET' +
             ' name=' + quo(args.name) +
             ' ,age=' + args.age +
-            ' ,gender=' + args.gender +
+            ' ,gender=' + quo(args.gender) +
             ' ,street=' + quo(args.street) +
             ' ,kind=' + quo(args.kind) +
-            ' ,business_category=' + quo(args.business_category) +
+            ' ,business_category=' + (args['business_category']===null?'NULL':quo(args['business_category'])) +
             ' ,company_income=' + args.company_income +
             ' ,home_income=' + args.home_income +
-            ' ,marriage_status=' + args['marriage_status'] +
-            ' WHERE cus_id=' + args.id;
-        console.log('Qurry:\n', query);
+            ' ,marriage_status=' + quo(args['marriage_status']) +
+            ' WHERE cus_id=' + args.id+';';
+        console.log('Qurry:\n',query);
         connection.query(query, function(err, rows) {
             if (!err) {
+                console.log('success');
                 res.json({'message':'Successful update customer\'s profile'});
+            }
+            else{
+                console.log('error : update profile');
             }
         });
         connection.end();
