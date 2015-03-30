@@ -545,11 +545,16 @@ img.big{
 
 .customerTable tr{
     height:40px;
+    border-top: 1px #eee solid;
+}
+
+.customerDetailTable{
+    width:50%;
 }
 
 .custBtn{
     width:80%;
-    margin:10px auto;
+    margin:40px auto;
 }
 
 .custBtn button{

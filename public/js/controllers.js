@@ -124,6 +124,14 @@ customerControllers.controller('customerListController', ['$scope', '$http', fun
 	});
 }]);
 
+customerControllers.controller('customerDetailController', ['$scope', '$http', '$routeParams', function($scope, $http, $routeParams){
+	$http.get('api/getCustomerInfo?id='+$routeParams.customerId).success(function(res){
+		console.log(res);
+		$scope.customer = res;
+		$scope.opt = $routeParams.opt;
+	});
+}]);
+
 inventoryController.controller('inventoryListController', ['$scope', '$http', function($scope, $http){
-	
+	$http.get('')
 }]);

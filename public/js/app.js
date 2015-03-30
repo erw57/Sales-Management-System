@@ -82,9 +82,9 @@ customerApp.config(['$routeProvider',
         templateUrl: 'partials/customer-list.html',
          controller: 'customerListController'
       }).
-      when('/customer-detail', {
+      when('/customer-detail/:customerId/:opt', {
         templateUrl: 'partials/customer-detail.html',
-        // controller: ''
+         controller: 'customerDetailController'
       }).
       otherwise({
         redirectTo: '/'
