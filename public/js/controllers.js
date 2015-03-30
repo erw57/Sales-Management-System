@@ -27,12 +27,14 @@ var inventoryController = angular.module('inventoryController', []);
 productBrowseControllers.controller('cartController', ['$scope', '$http',  function($scope, $http){
 	$scope.cart = {};
 	$scope.singleProductId = 0;
+	$scope.total = 0;
 	$scope.buy = function($event){
 		var el = $event.target;
 		var qty = parseInt(el.getAttribute('item-qty')); 
 		var id = el.getAttribute('item-id');
 		if($scope.cart[id]){
-            $scope.cart[id].num += qty;                     
+            $scope.cart[id].num += qty;
+            $scope.total += qty * $scope.cart[id].price;                   
          }else{
             var arr = [];
             arr.name = el.getAttribute('item-name');
@@ -40,19 +42,23 @@ productBrowseControllers.controller('cartController', ['$scope', '$http',  funct
             arr.num = qty;   
             arr.id = el.getAttribute('item-id');              
             $scope.cart[id] = arr;
+            $scope.total += arr.num * arr.price;
         }
 	}
 	$scope.minus = function(id){
 		var num = --$scope.cart[id].num;
+		$scope.total -= $scope.cart[id].price;
 		if(num == 0){
 			delete $scope.cart[id];
 		}
 	}
 	$scope.add = function(id){
 		$scope.cart[id].num++;
+		$scope.total += $scope.cart[id].price;
 	}
 
 	$scope.delete = function(id){
+		$scope.total -= $scope.cart[id].price * $scope.cart[id].num;
 		delete $scope.cart[id];
 	}
 
@@ -64,7 +70,6 @@ productBrowseControllers.controller('cartController', ['$scope', '$http',  funct
     $scope.makePayment = function(){
     	$scope.pay = !$scope.pay;
     }
-
     
 }]);
 
@@ -76,7 +81,7 @@ productBrowseControllers.controller('productListController',['$rootScope','$scop
 			$scope.products = res.data;
 		});
 		//console.log($rootScope.cart);
-		$scope.orderProp = '';
+		$scope.orderProp = 'name';
 	}]);
 
 productBrowseControllers.controller('productDetailController', ['$scope', '$routeParams', '$http', 

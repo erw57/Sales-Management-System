@@ -6,12 +6,10 @@
     <form class="sortBar">
         <span>Sort By:</span>
             <select class="sortBy" ng-model="orderProp">
-                <option> None</option>
+                <option value="name">Alphabetical</option>
                 <option value="price">Price (Low to High)</option>
                 <option value="-price">Price (Highw to Low)</option>
-                <option data-divider="true"></option>
-                <option>Location</option>
-                <option>Category</option>
+                <!-- <option data-divider="true"></option> -->
             </select>                
     </form>
     <form class='locationBar'>
