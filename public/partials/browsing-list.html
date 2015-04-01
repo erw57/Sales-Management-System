@@ -12,16 +12,6 @@
                 <!-- <option data-divider="true"></option> -->
             </select>                
     </form>
-    <form class='locationBar'>
-        <span>Location: </span>
-        <select class="location" data-live-search="true">
-            <option>All Store</option>
-            <option>Pittsburgh</option>
-            <option>New York</option>
-            <option>Washington DC</option>
-            <option>Orlando</option>
-        </select>                
-    </form>
 </div>
 <!--card-->
 <div class="Card clearfix" ng-repeat="product in products | filter:query | orderBy: orderProp">
@@ -51,5 +41,4 @@
 <!--end card-->
 <script type="text/javascript">
     $('.sortBy').selectpicker();
-    $('.location').selectpicker();
 </script>

@@ -1,0 +1,21 @@
+<h1 class="text-center">Select Location</h1>
+<div class="selectStore text-center">
+        <span>Store: </span>
+        <select class="location" data-live-search="true" ng-model="store">
+            <option>all</option>
+            <option>New York</option>
+            <option>Washington DC</option>
+            <option>Orlando</option>
+        </select>  
+        <div>
+            <button class="button_color" ng-click="goToList()">Enter Store</button>  
+        </div>                 
+</div>
+
+<script type="text/javascript">
+     $('.location').selectpicker({
+      style: 'button_color',
+      size: 100
+    });
+    $('.location').addClass('storePicker').selectpicker('setStyle')
+</script>

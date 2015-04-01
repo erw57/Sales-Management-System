@@ -1,28 +1,8 @@
 'use strict';
 
-/* Controllers */
-
-// var phonecatControllers = angular.module('phonecatControllers', []);
-
-// phonecatControllers.controller('PhoneListCtrl', ['$scope', '$http',
-//   function($scope, $http) {
-//     $http.get('phones/phones.json').success(function(data) {
-//       $scope.phones = data;
-//     });
-
-//     $scope.orderProp = 'age';
-//   }]);
-
-// phonecatControllers.controller('PhoneDetailCtrl', ['$scope', '$routeParams', '$http',
-//   function($scope, $routeParams, $http) {
-//     $http.get('phones/' + $routeParams.phoneId + '.json').success(function(data) {
-//       $scope.phone = data;
-//     });
-//   }]);
-
 var productBrowseControllers = angular.module('productBrowseController',[]);
 var customerControllers = angular.module('customerController', []);
-var inventoryController = angular.module('inventoryController', []);
+var inventoryControllers = angular.module('inventoryController', []);
 
 productBrowseControllers.controller('cartController', ['$scope', '$http',  function($scope, $http){
 	$scope.cart = {};
@@ -36,13 +16,13 @@ productBrowseControllers.controller('cartController', ['$scope', '$http',  funct
             $scope.cart[id].num += qty;
             $scope.total += qty * $scope.cart[id].price;                   
          }else{
-            var arr = [];
-            arr.name = el.getAttribute('item-name');
-            arr.price = el.getAttribute('item-price');
-            arr.num = qty;   
-            arr.id = el.getAttribute('item-id');              
-            $scope.cart[id] = arr;
-            $scope.total += arr.num * arr.price;
+            var item = {};
+            item.name = el.getAttribute('item-name');
+            item.price = el.getAttribute('item-price');
+            item.num = qty;   
+            item.id = el.getAttribute('item-id');              
+            $scope.cart[id] = item;
+            $scope.total += item.num * item.price;
         }
 	}
 	$scope.minus = function(id){
@@ -69,20 +49,42 @@ productBrowseControllers.controller('cartController', ['$scope', '$http',  funct
 
     $scope.makePayment = function(){
     	$scope.pay = !$scope.pay;
-    }
-    
+    	var data = {};
+    	var payCart = [];
+    	data.customer_id = '920130';
+    	data.salesperson = 'Er';
+    	data.location = 'Center Store';
+    	for(var item in $scope.cart){
+    		var o = {};
+    		o.id = $scope.cart[item].id;
+    		o.quantity = $scope.cart[item].num;
+    		o.name = $scope.cart[item].name;
+    		payCart.push(o);
+    	}
+    	data.cart = payCart;
+    	console.log(data);
+
+    } 
+}]);
+
+productBrowseControllers.controller('storeSelectController',['$rootScope','$scope', function($rootScope,$scope){
+	$rootScope.store = 'all';
+	$scope.goToList = function(){
+		window.location.href='#/browsing-list/'+$scope.store
+	}
 }]);
 
 
-
-productBrowseControllers.controller('productListController',['$rootScope','$scope', '$http', 
-	function($scope, $rootScope, $http){
-		$http.get('api/getProductList?store_name=all').success(function(res){
+productBrowseControllers.controller('productListController',['$rootScope','$scope','$routeParams','$http', 
+	function($rootScope, $scope, $routeParams, $http){
+		$rootScope.store = $routeParams.store;
+		$http.get('api/getProductList?store_name='+$routeParams.store).success(function(res){
 			$scope.products = res.data;
 		});
-		//console.log($rootScope.cart);
+
 		$scope.orderProp = 'name';
-	}]);
+		
+}]);
 
 productBrowseControllers.controller('productDetailController', ['$scope', '$routeParams', '$http', 
 	function($scope, $routeParams, $http){
@@ -133,12 +135,49 @@ customerControllers.controller('customerDetailController', ['$scope', '$http', '
 
 	$scope.modifyCustomer = function(){
 		console.log($scope.customer.kind);
-		$http.post('api/modifyCustomer', $scope.customer).success(function(){
-			console.log('customer updated');
+		$http.post('api/modifyCustomer', $scope.customer).success(function(data){
+			alert(data.message);
+			window.location.href='#/customer-detail/'+$routeParams.customerId+'/view';
 		});
 	}
 }]);
 
-inventoryController.controller('inventoryListController', ['$scope', '$http', function($scope, $http){
-	
+inventoryControllers.controller('storeSelectController',['$scope', function($scope){
+	$scope.store = 'all';
+	$scope.goToList = function(){
+		window.location.href='#/inventory-list/'+$scope.store
+	}
 }]);
+
+inventoryControllers.controller('inventoryListController',['$scope','$routeParams','$http', 
+	function($scope, $routeParams, $http){
+		$scope.store = $routeParams.store;
+		$http.get('api/getProductList?store_name='+$routeParams.store).success(function(res){
+			$scope.products = res.data;
+		});
+
+		$scope.orderProp = 'name';
+
+		$scope.changeStore = function(){
+			console.log($scope.store); //change Store ，make request !!!!!!!
+		}
+
+		$scope.stock = false;
+		$scope.inStock = function(){
+			$scope.stock = !$scope.stock;
+		}
+
+		$scope.destock = false;
+		$scope.outStock = function(){
+			$scope.destock = !$scope.destock;
+		}
+
+		$scope.goToNew = function(){
+			window.location.href='#/inventory-new';
+		}
+}]);
+
+inventoryControllers.controller('inventoryNewController',['$scope',function($scope){
+	console.log('inventory new');
+}])
+

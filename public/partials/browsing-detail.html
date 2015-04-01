@@ -34,7 +34,8 @@
 	</p>
 	<hr />
 	<div class="detailNotes">
-		<p>Store: <span>{{storeName}}</span> <a href="javascript:void(0);" ng-click="changeStore()">Change Store</a></p>
+		<p>Store: <span>{{storeName}}</span>
+		</p>
 		<p>Inventory: <span>{{inventory}}</span></p>
 	</div>
 	<div class="input-group pull-left" style="width:30%;">
@@ -49,7 +50,7 @@
 	<button class="button_color detailAdd" ng-click="buy($event);" item-qty="{{qty}}" 
             item-name="{{product.prod_name}}" item-price="{{product.price}}" item-id="{{product.prod_id}}">Add to Cart</button>
 </div>
-<modal title="Change Store" visible="store">
+<!-- <modal title="Change Store" visible="store">
     <form>
         <div>
             <label>Store:</label>
@@ -64,3 +65,4 @@
         <button class="button_color" ng-click="selectStore(location)">Submit</button>
     </form>
 </modal>
+ -->

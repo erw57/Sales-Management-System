@@ -137,6 +137,23 @@ input{
 
 /*end entry*/
 
+.selectStore{
+    margin-top: 10%;
+}
+
+.selectStore span{
+    font-size: 16px;
+}
+
+.selectStore button{
+    width:180px;
+    margin-top: 10px;
+}
+
+.storePicker{
+    width:300px !important;
+}
+
 /*product browsing*/
 
 .leftNav{
@@ -466,6 +483,15 @@ form.pop input{
     width:50%;
     margin-left: 15px;
 }
+
+form.pop table{
+    width:80%;
+    margin:10px auto;
+}
+
+form.pop table td{
+    height:50px;
+}
 /*end prodcut browsing*/
 
 /*product detail*/
@@ -541,11 +567,16 @@ img.big{
 .customerTable{
     width:80%;
     margin:10px auto;
+
 }
 
 .customerTable tr{
     height:40px;
     border-top: 1px #eee solid;
+}
+
+.customerTable img{
+    width:100px;
 }
 
 .customerDetailTable{

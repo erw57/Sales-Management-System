@@ -1,13 +1,13 @@
 <h1 class="text-center">Inventory</h1>
 <div class="optPanel clearfix">
     <form class="searchBar">
-        <input type="text" placeholder="Search for...(id, name)" />
+        <input type="text" placeholder="Search for...(id, name)" ng-model="query"/>
         <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
     </form>
     <form>
         <span>Location: </span>
-            <select class="location" data-live-search="true">
-                <option>Pittsburgh</option>
+            <select class="location" data-live-search="true" ng-model="store" ng-change="changeStore()">
+                <option>all</option>
                 <option>New York</option>
                 <option>Washington DC</option>
                 <option>Orlando</option>
@@ -16,49 +16,80 @@
 </div>
 <hr />
 <div class="custBtn">
-	<button class="button_color">+ New Product</button>
-	<form class="sortBar" >
+	<button class="button_color" ng-click="goToNew()">+ New Product</button>
+	<form class="sortBar">
         <span>Sort By:</span>
-        <select class="sortBy">
-            <option>Price (Low to High)</option>
-            <option>Price (Highw to Low)</option>
-            <option data-divider="true"></option>
-            <option>Location</option>
-            <option>Category</option>
+        <select class="sortBy" ng-model="orderProp">
+            <option value="name">Alphabetical</option>
+            <option value="price">Price (Low to High)</option>
+            <option value="-price">Price (Highw to Low)</option>
+            <!-- <option data-divider="true"></option> -->
         </select>                
     </form>
 </div>
 
 <table class="table table-striped customerTable" align="center">
-	<tr class="stripedTr">
+	<tr>
+		<th>Image</th>
 		<th>ID</th>
-		<th>First Name</th>
-		<th>Last Name</th>
-		<th>Gender</th>
+		<th>Product Name</th>
+		<th>Inventory</th>
 		<th>Option</th>
 	</tr>
-	<tr>
-		<td>123</td>
-		<td>Er</td>
-		<td>Wang</td>
-		<td>Male</td>
-		<td><a href="#/customer-detail">Detail</a> | <a href="#">Update</a></td>
-	</tr>
-	<tr class="stripedTr">
-		<td>123</td>
-		<td>Er</td>
-		<td>Wang</td>
-		<td>Male</td>
-		<td><a href="#/customer-detail">Detail</a> | <a href="#">Update</a></td>
-	</tr>
-	<tr>
-		<td>123</td>
-		<td>Er</td>
-		<td>Wang</td>
-		<td>Male</td>
-		<td><a href="#">Modify</a></td>
+	<tr ng-repeat="product in products | filter:query | orderBy: orderProp">
+		<td>
+			<img src="images/1.png" alt="Product Img" />
+		</td>
+		<td>{{product.id}}</td>
+		<td>{{product.name}}</td>
+		<td>{{product.num}}</td>
+		<td><a href="javascript:void(0);" ng-click="inStock()">Stock</a>
+		|
+		 <a href="javascript:void(0);" ng-click="outStock()">Destock</a></td>
 	</tr>
 </table>
+
+<modal title="In stock" visible="stock">
+    <form class="pop">
+        <div>
+            <label for="cid">Enter Quantity:</label>
+            <input type="text" placeholder="How many " />
+        </div>
+        <button class="button_color" ng-click="confirmInStock()">Confirm</button>
+    </form>
+</modal>
+
+<modal title="Destock" visible="destock">
+    <form class="pop">
+    <div>
+    	<table>
+    		<tr>
+    			<td><label for="cid">Move</label></td>
+    			<td><input type="text" id="cid" placeholder="Enter Quantity" /></td>
+    		</tr>
+    		<tr>
+    			<td><label for="cid">From</label></td>
+    			<td>{{store}}</td>
+    		</tr>
+    		<tr>
+    			<td><label for="cid">To</label></td>
+    			<td>
+    			<select>
+		                <option>all</option>
+		                <option>New York</option>
+		                <option>Washington DC</option>
+		                <option>Orlando</option>
+		            </select>    
+    			</td>
+    		</tr>
+    	</table>
+        
+            
+            
+        </div>
+        <button class="button_color" ng-click="confirmOutStock()">Confirm</button>
+    </form>
+</modal>
 
 <script type="text/javascript">
     $('.sortBy').selectpicker();
