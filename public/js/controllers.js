@@ -78,7 +78,7 @@ productBrowseControllers.controller('storeSelectController',['$rootScope','$scop
 productBrowseControllers.controller('productListController',['$rootScope','$scope','$routeParams','$http', 
 	function($rootScope, $scope, $routeParams, $http){
 		$rootScope.store = $routeParams.store;
-		$http.get('api/getProductList?store_name='+$routeParams.store).success(function(res){
+		$http.get('api/getProductList?store_id='+$routeParams.store).success(function(res){
 			$scope.products = res.data;
 		});
 

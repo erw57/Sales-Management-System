@@ -6,27 +6,27 @@
 
 
 
-<table class="customerTable" align="center" ng-show="opt == 'update'">
+<table class="customerTable" align="center">
 	<tr>
-		<td width="20%" class="tableTitle">Customer ID:</td>
-		<td width="80%" class="tableText">{{customer.id}}</td>
+		<td width="20%" class="tableTitle">Product Name:</td>
+		<td width="80%" class="tableText"><input type="text" ng-model="newProdcut.name" /></td>
 	</tr>
 	<tr>
-		<td class="tableTitle">Name:</td>
-		<td class="tableText"><input type="text" ng-model="customer.name" /></td>
+		<td class="tableTitle">Price:</td>
+		<td class="tableText"><input type="text" ng-model="newProdcut.price" /></td>
 	</tr>
 	<tr>
-		<td class="tableTitle">Gender:</td>
+		<td class="tableTitle">Category:</td>
 		<td class="tableText">
-			<select ng-model="customer.gender">
-				<option value="M">Male</option>
-				<option value="F">Female</option>
+			<select ng-model="newProduct.category">
+				<option value="Beverage">Beverage</option>
+				<option value="Snack">Snack</option>
 			</select>
 		</td>
 	</tr>
 		<tr>
-		<td class="tableTitle">Age:</td>
-		<td class="tableText"><input type="text" ng-model="customer.age" /></td>
+		<td class="tableTitle">Description:</td>
+		<td class="tableText"><input type="text" ng-model="newProduct.description" /></td>
 	</tr>
 		<tr>
 		<td class="tableTitle">Customer Type:</td>
@@ -37,34 +37,7 @@
 			</select>
 		</td>
 	</tr>
-	<tr>
-		<td class="tableTitle">Street:</td>
-		<td class="tableText"><input type="text" ng-model="customer.street" /></td>
-	</tr>
-	<tr>
-		<td class="tableTitle">Ciyt:</td>
-		<td class="tableText"><input type="text" ng-model="customer.city" /></td>
-	</tr>
-	<tr>
-		<td class="tableTitle">State:</td>
-		<td class="tableText"><input type="text" ng-model="customer.state" /></td>
-	</tr>
-	<tr>
-		<td class="tableTitle">Marriage Status:</td>
-		<td class="tableText"><input type="text" ng-model="customer.marriage_status" /></td>
-	</tr>
-	<tr ng-show="customer.home_income">
-		<td class="tableTitle">Home Income:</td>
-		<td class="tableText"><input type="text" ng-model="customer.home_income"/></td>
-	</tr>
-	<tr ng-show="customer.company_income">
-		<td class="tableTitle">Company Income:</td>
-		<td class="tableText"><input type="text" ng-model="customer.company_income"/></td>
-	</tr>
-	<tr ng-show="customer.business_category">
-		<td class="tableTitle">Business Category:</td>
-		<td class="tableText"><input type="text" ng-model="customer.business_category"/></td>
-	</tr>
+	
 	<tr>
 		<td colspan="2" class="text-center">
 			<div class="custBtn">

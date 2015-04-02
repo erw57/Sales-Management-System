@@ -33,7 +33,7 @@ module.exports = function(app, url) {
             port: '8889',
             user: 'root',
             password: 'root',
-            database: 'system'
+            database: 'test'
         });
         connection.connect();
         var query = 'SELECT MAX(prod_id) AS nextID FROM Transaction';
