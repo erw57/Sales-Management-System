@@ -4,62 +4,69 @@
  * @param app
  * @param url
  */
- var quo = require('../util/quotation');
+var quo = require('../util/quotation');
 module.exports = function(app, url) {
     app.get(url, function(req, res) {
         var list = {};
         list.data = [];
-        var store_name = req.query.store_name;
-        //
+        var args = req.query;
         var mysql = require('mysql');
         var connection = mysql.createConnection({
             host: 'localhost',
             port: '8889',
             user: 'root',
             password: 'root',
-            database: 'system'
+            database: 'test'
         });
-        var productList = [];
         connection.connect();
-        if(store_name === 'all'){
-        var query = 'SELECT prod_id FROM Inventory ;';
-    }
-    else{
-        var query = 'SELECT prod_id FROM Inventory WHERE store_name='+quo(store_name);
-    }
+        var query;
+        if (args.store_id === 'all') {
+            query = 'SELECT * FROM Inventory ;';
+        } else {
+            query = 'SELECT * FROM Inventory WHERE store_id=' + quo(args.store_id);
+        }
 
-        connection.query(query,function(err,rows){
-            if(!err){
-                for(var i = 0; i<rows.length;i++){
-                      productList.push(rows[i].prod_id);
-                }
-                console.log(productList);
-            }
-        });
-        query = 'SELECT * FROM Product';
+        //console.log(query);
         connection.query(query, function(err, rows) {
             if (!err) {
                 //console.log(rows);
-                var q = 0
                 for (var i = 0; i < rows.length; i++) {
-                    if(productList.indexOf(rows[i]['prod_id'])>=0){
-                        list.data[q] = new Object();
-                        list.data[q].name = rows[i]['prod_name'];
-                        list.data[q].id = rows[i]['prod_id'];
-                        list.data[q].price = rows[i].price;
-                        list.data[q].kind = rows[i]['prod_kind'];
-                        list.data[q].image_path = rows[i].image_path;
-                        list.data[q].description = rows[i].description;
-                        list.data[q].product_kind = rows[i].product_kind;
-                        q++;
-                    }
-
+                    var temp = {};
+                    temp.id = rows[i].product_id;
+                    temp.quantity = rows[i].quantity;
+                    list.data.push(temp);
                 }
-                res.json(list);
-            } else {
-                console.log('Error:', err, rows);
+                var it= {};
+
+
+                for (var i = 0; i < list.data.length; i++) {
+                    var num = list.data[i].id;
+                    it[num]  = i;
+                    console.log(it);
+                    query = 'SELECT * FROM Product WHERE id =' + list.data[i].id+";";
+                    console.log(query);
+                    connection.query(query, function(err, rows) {
+                        if(!err){
+                            console.log(rows);
+                            var id = rows[0].id;
+                            console.log(it[id]);
+
+                            list.data[it[id]].name = rows[0].name;
+                            list.data[it[id]].price = rows[0].price;
+                            list.data[it[id]].kind = rows[0].kind;
+                            list.data[it[id]].image_path = rows[0].image_path;
+                            console.log(list);
+                            if (it[id] === list.data.length-1){
+                                connection.end();
+                                res.json(list);
+                            }
+                        }
+                        else{
+                            console.log('Error: Product');
+                        }
+                    });
+                }
             }
         });
-        connection.end();
     });
-}
+};

@@ -15,7 +15,7 @@ module.exports = function(app, url) {
             database: 'system'
         });
         connection.connect();
-        var query = 'SELECT * FROM Inventory WHERE prod_id=' + args.id + ' AND store_name=' + quo(args['store_name']);
+        var query = 'SELECT * FROM Inventory WHERE product_id=' + args.id + ' AND store_name=' + quo(args['store_name']);
         console.log(query);
         connection.query(query, function(err, rows) {
             if (!err) {
@@ -36,8 +36,8 @@ module.exports = function(app, url) {
                 } else {
                     query = 'INSERT INTO Inventory VALUE(' +
                         quo(args['id']) + ', ' +
-                        quo(args['store_name']) + ' ,' +
-                        args['amount'].substring(1) + ');';
+                        quo(args['store_id']) + ' ,' +
+                        args['quantity'].substring(1) + ');';
                     console.log('query: ', query)
                     connection.query(query, function(err, rows) {
                         if (!err) {

@@ -3,7 +3,7 @@
  */
 module.exports = function(app, url) {
     app.get(url, function(req, res) {
-        var id = req.query.id;
+        var args = req.query;
         var mysql = require('mysql');
         var connection = mysql.createConnection({
             host: 'localhost',
@@ -14,8 +14,8 @@ module.exports = function(app, url) {
         });
         connection.connect();
         var result = {};
-        var query = 'SELECT * FROM Product WHERE prod_id=' + id;
-          console.log(query);
+        var query = 'SELECT * FROM Product WHERE id=' + args.id;
+        console.log(query);
         connection.query(query, function(err, rows) {
             if (!err) {
                 result = rows[0];
@@ -23,24 +23,17 @@ module.exports = function(app, url) {
                 console.log('ERROR: Retrieval Product Info');
             }
         });
-        query = 'SELECT * FROM Inventory WHERE '+'prod_id= '+ id;
+        query = 'SELECT * FROM Inventory WHERE ' + 'id= ' + args.id + ' AND ' + 'store=' + args.store;
         console.log(result);
 
-        connection.query(query,function(err,rows){
-            if(!err){
-                result.amount = [];
-                for(var i=0;i<rows.length;i++){
-                    result.amount[i] = {};
-                    result.amount[i].store = rows[i].store_name;
-                    result.amount[i].amount = rows[i].amount;
-                }
+        connection.query(query, function(err, rows) {
+            if (!err) {
+                result.amount = rows[0].quantity;
                 res.json(result);
-            }
-            else{
+            } else {
                 console.log('fail to get inventory informaiton');
             }
-
-                });
-
+        });
+        connection.end();
     });
 };

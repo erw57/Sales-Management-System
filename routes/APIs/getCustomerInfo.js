@@ -10,41 +10,148 @@ module.exports = function(app, url) {
         // when receive a GET HTTP request, send query to database.
         //step - 1 connect to mysql
         var mysql = require('mysql');
+        var info = {};
         var connection = mysql.createConnection({
             host: 'localhost',
             port: '8889',
             user: 'root',
             password: 'root',
-            database: 'system'
+            database: 'test'
         });
         connection.connect();
 
         // step - 2 construct query and send it to database
-        var id = quo(req.query.id);
-
-        var query = 'SELECT * FROM Customer WHERE cus_id = ' + id + ';';
-        console.log(query);
-        connection.query(query, function(err, rows) {
+        var id = req.query.id;
+        var query = {};
+        query.getBasicInfo = 'SELECT * FROM Customer WHERE id = ' + id + ';';
+        console.log(query.getBasicInfo);
+        connection.query(query.getBasicInfo, function(err, rows) {
             if (!err) {
+                if(rows.length > 0){
                 // if query are processed correctly, send the info as JSON to browser.
-
-                var info = {};
-                info.id = rows[0].cus_id;
-                info.name = rows[0].name;
-                info.age = rows[0].age;
+                info.id = rows[0].id;
                 info.street = rows[0].street;
                 info.city = rows[0].city;
                 info.state = rows[0].state;
+                info.zip_code = rows[0].zip_code;
                 info.kind = rows[0].kind;
-                info.marriage_status = rows[0].marriage_status;
-                info.gender = rows[0].gender;
-                info.zipcode = rows[0].zip_code;
-                info.home_income = rows[0].home_income;
-                info.company_income = rows[0].company_income;
-                info.business_category = rows[0].business_category;
-                res.json(info);
-            } else
+                info.history = [];
+                if (info.kind === 'home') {
+                    query.getDetailInfo = 'select * from HCustomer where customer_id=' + id;
+                    console.log(query.getDetailInfo);
+                    connection = mysql.createConnection({
+                        host: 'localhost',
+                        port: '8889',
+                        user: 'root',
+                        password: 'root',
+                        database: 'test'
+                    });
+                    connection.connect();
+
+                    connection.query(query.getDetailInfo, function (err, rows) {
+                        if (!err) {
+                            info.marriage_status = rows[0].marriage_status;
+                            info.gender = rows[0].gender;
+                            info.age = rows[0].age;
+                            info.income = rows[0].home_income;
+                            query.getTransaction = 'select id from `Transaction` where customer_id=' + id;
+                            connection.query(query.getTransaction, function (err, rows) {
+                                if (!err) {
+                                    if (rows.length > 0) {
+                                        query.getOrder = 'select * from `Order` where transaction_id in(';
+                                        for (var i = 0; i < rows.length; i++) {
+                                            query.getOrder += rows[i].id + ','
+                                        }
+                                        query.getOrder = query.getOrder.slice(0, query.getOrder.length - 1);
+                                        query.getOrder += ');';
+                                        connection.query(query.getOrder, function (err, rows) {
+                                            if (!err) {
+                                                info.history = rows;
+                                                res.json(info);
+                                            }
+                                            else {
+                                                res.json(info);
+                                            }
+                                        });
+                                    }
+                                    else {
+                                        res.json(info);
+                                    }
+
+                                }
+                                else {
+                                    console.log(err);
+                                    res.json({message: "error"});
+                                }
+                            })
+
+                        }
+                        else {
+                            console.log(err);
+                            res.json({message: "error"});
+                        }
+                    });
+                }
+                else {
+                    query.getDetailInfo = 'select * from BCustomer where customer_id=' + id;
+                    console.log(query.getDetailInfo);
+                    connection = mysql.createConnection({
+                        host: 'localhost',
+                        port: '8889',
+                        user: 'root',
+                        password: 'root',
+                        database: 'test'
+                    });
+                    connection.connect();
+                    connection.query(query.getDetailInfo, function (err, rows) {
+                        if (!err) {
+                            info.category = rows[0].business_category;
+                            info.income = rows[0].company_income;
+                            query.getTransaction = 'select id from `Transaction` where customer_id=' + id;
+                            connection.query(query.getTransaction, function (err, rows) {
+                                if (!err) {
+                                    if (rows.length > 0) {
+                                        query.getOrder = 'select * from `Order` where transaction_id in(';
+                                        for (var i = 0; i < rows.length; i++) {
+                                            query.getOrder += rows[i].id + ','
+                                        }
+                                        query.getOrder = query.getOrder.slice(0, query.getOrder.length - 1);
+                                        query.getOrder += ');';
+                                        connection.query(query.getOrder, function (err, rows) {
+                                            if (!err) {
+                                                info.history = rows;
+                                                res.json(info);
+                                            }
+                                            else {
+                                                res.json(info);
+                                            }
+                                        });
+                                    }
+                                    else {
+                                        res.json(info);
+                                    }
+
+                                }
+                                else {
+                                    console.log(err);
+                                    res.json({message: "error"});
+                                }
+                            })
+
+                        }
+                        else {
+                            console.log(err);
+                            res.json({message: "error"});
+                        }
+                    });
+                }
+                }
+                else{res.json({message:"error"})}
+            }
+            else{
                 console.log('Error while performing Query.');
+                res.json({message:'fail'});
+            }
         });
         connection.end();
     });

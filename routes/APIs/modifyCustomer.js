@@ -7,33 +7,78 @@ module.exports = function(app, url) {
         var args = req.body;
         var mysql = require('mysql');
         var connection = mysql.createConnection({
-            host: '127.0.0.1',
+            host: 'localhost',
             port: '8889',
             user: 'root',
             password: 'root',
-            database: 'system'
+            database: 'test'
         });
         connection.connect();
-        var query;
-        query = 'UPDATE Customer SET' +
+        var query = {};
+        query.customer = 'UPDATE Customer SET' +
             ' name=' + quo(args.name) +
-            ' ,age=' + args.age +
-            ' ,gender=' + quo(args.gender) +
             ' ,street=' + quo(args.street) +
+        ' ,city=' + quo(args.city) +
+        ' ,state=' + quo(args.state) +
+        ' ,zip_code=' + quo(args.zip_code) +
             ' ,kind=' + quo(args.kind) +
-            ' ,business_category=' + (args['business_category']===null?'NULL':quo(args['business_category'])) +
-            ' ,company_income=' + args.company_income +
-            ' ,home_income=' + args.home_income +
-            ' ,marriage_status=' + quo(args['marriage_status']) +
-            ' WHERE cus_id=' + args.id+';';
-        console.log('Qurry:\n',query);
-        connection.query(query, function(err, rows) {
+            ' WHERE id=' + args.id+';';
+        connection.query(query.customer, function(err,rows) {
             if (!err) {
-                console.log('success');
-                res.json({'message':'Successful update customer\'s profile'});
+                if(args.kind === 'home'){
+                    connection = mysql.createConnection({
+                        host: 'localhost',
+                        port: '8889',
+                        user: 'root',
+                        password: 'root',
+                        database: 'test'
+                    });
+                    query.home = 'update HCustomer set '+
+                        'marriage_status='+quo(args.marriage_status)+
+                        ',gender='+quo(args.gender)+
+                        ',age='+args.age+
+                        ',home_income='+args.income+' where customer_id='+
+                    args.id;
+
+                    connection.query(query.home,function(err){
+                        if(!err){
+                            res.json({'message':'Successful update customer\'s profile'});
+                        }
+                        else{
+                            console.log(err);
+                            res.json({'message':'fail to update HCustomer info'});
+                        }
+                    });
+                }
+                else{
+                    connection = mysql.createConnection({
+                        host: 'localhost',
+                        port: '8889',
+                        user: 'root',
+                        password: 'root',
+                        database: 'test'
+                    });
+                    connection.connect();
+                    query.business = 'update BCustomer set '+
+                    'business_category='+quo(args.category)+
+                    ',company_income='+args.income+' where customer_id='+
+                    args.id;
+                    console.log(query.business);
+                    connection.query(query.business,function(err){
+                        if(!err){
+                            res.json({'message':'Successful update customer\'s profile'});
+                            //connection.end();
+                        }
+                        else{
+                            console.log(err);
+                            res.json({'message':'fail to update BCustomer info'});
+                        }
+                    });
+
+                }
             }
             else{
-                console.log('error : update profile');
+                console.log('error : update customer');
             }
         });
         connection.end();
