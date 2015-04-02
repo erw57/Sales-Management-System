@@ -1,57 +1,75 @@
 <h1 class="text-center">Add New Product</h1>
 <div class="optPanel clearfix">
-    <form class="searchBar">
-        <input type="text" placeholder="Search for...(id, name)" />
-        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-    </form>
-
-    <form class="sortBar">
-        <span>Sort By:</span>
-            <select class="sortBy">
-                <option>Price (Low to High)</option>
-                <option>Price (Highw to Low)</option>
-                <option data-divider="true"></option>
-                <option>Location</option>
-                <option>Category</option>
-            </select>                
-    </form>
+    <a href="#/">&lt;&lt;Return To List Page</a>
 </div>
 <hr />
-<div class="custBtn">
-	<button class="button_color">+ New Customer</button>
-</div>
 
-<table class="table table-striped customerTable" align="center">
-	<tr class="stripedTr">
-		<th>ID</th>
-		<th>First Name</th>
-		<th>Last Name</th>
-		<th>Gender</th>
-		<th>Option</th>
+
+
+<table class="customerTable" align="center" ng-show="opt == 'update'">
+	<tr>
+		<td width="20%" class="tableTitle">Customer ID:</td>
+		<td width="80%" class="tableText">{{customer.id}}</td>
 	</tr>
 	<tr>
-		<td>123</td>
-		<td>Er</td>
-		<td>Wang</td>
-		<td>Male</td>
-		<td><a href="#/customer-detail">Detail</a> | <a href="#">Update</a></td>
-	</tr>
-	<tr class="stripedTr">
-		<td>123</td>
-		<td>Er</td>
-		<td>Wang</td>
-		<td>Male</td>
-		<td><a href="#/customer-detail">Detail</a> | <a href="#">Update</a></td>
+		<td class="tableTitle">Name:</td>
+		<td class="tableText"><input type="text" ng-model="customer.name" /></td>
 	</tr>
 	<tr>
-		<td>123</td>
-		<td>Er</td>
-		<td>Wang</td>
-		<td>Male</td>
-		<td><a href="#">Modify</a></td>
+		<td class="tableTitle">Gender:</td>
+		<td class="tableText">
+			<select ng-model="customer.gender">
+				<option value="M">Male</option>
+				<option value="F">Female</option>
+			</select>
+		</td>
+	</tr>
+		<tr>
+		<td class="tableTitle">Age:</td>
+		<td class="tableText"><input type="text" ng-model="customer.age" /></td>
+	</tr>
+		<tr>
+		<td class="tableTitle">Customer Type:</td>
+		<td class="tableText">
+		<select ng-model="customer.kind">
+				<option value="home">Home</option>
+				<option value="business">Business</option>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td class="tableTitle">Street:</td>
+		<td class="tableText"><input type="text" ng-model="customer.street" /></td>
+	</tr>
+	<tr>
+		<td class="tableTitle">Ciyt:</td>
+		<td class="tableText"><input type="text" ng-model="customer.city" /></td>
+	</tr>
+	<tr>
+		<td class="tableTitle">State:</td>
+		<td class="tableText"><input type="text" ng-model="customer.state" /></td>
+	</tr>
+	<tr>
+		<td class="tableTitle">Marriage Status:</td>
+		<td class="tableText"><input type="text" ng-model="customer.marriage_status" /></td>
+	</tr>
+	<tr ng-show="customer.home_income">
+		<td class="tableTitle">Home Income:</td>
+		<td class="tableText"><input type="text" ng-model="customer.home_income"/></td>
+	</tr>
+	<tr ng-show="customer.company_income">
+		<td class="tableTitle">Company Income:</td>
+		<td class="tableText"><input type="text" ng-model="customer.company_income"/></td>
+	</tr>
+	<tr ng-show="customer.business_category">
+		<td class="tableTitle">Business Category:</td>
+		<td class="tableText"><input type="text" ng-model="customer.business_category"/></td>
+	</tr>
+	<tr>
+		<td colspan="2" class="text-center">
+			<div class="custBtn">
+				<button class="button_color" ng-click="modifyCustomer()">Confirm</button>
+			</div>
+		</td>
 	</tr>
 </table>
-
-<script type="text/javascript">
-    $('.sortBy').selectpicker();
-</script>
