@@ -29,6 +29,7 @@ module.exports = function(app, url) {
             if (!err) {
                 if(rows.length > 0){
                 // if query are processed correctly, send the info as JSON to browser.
+                info.name = rows[0].name;
                 info.id = rows[0].id;
                 info.street = rows[0].street;
                 info.city = rows[0].city;
