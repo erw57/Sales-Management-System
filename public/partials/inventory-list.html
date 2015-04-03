@@ -1,18 +1,26 @@
-<h1 class="text-center">Inventory</h1>
+<h1 class="text-center">Inventory Management</h1>
 <div class="optPanel clearfix">
     <form class="searchBar">
         <input type="text" placeholder="Search for...(id, name)" ng-model="query"/>
         <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
     </form>
-    <form>
-        <span>Location: </span>
-            <select class="location" data-live-search="true" ng-model="store" ng-change="changeStore()">
+    <div>
+
+        <span class="text-center">{{store.name}} Store |</span>
+
+        <a href="#/">Change Store</a>
+        <!-- <span>Location: </span>
+            <select class="location" data-live-search="true" selectpicker ng-model="store" ng-change="changeStore()">
                 <option>all</option>
                 <option>New York</option>
                 <option>Washington DC</option>
                 <option>Orlando</option>
-            </select>                
-    </form>
+            </select>         
+            <select class="storePicker" selectpicker="{style: 'button_color'}" ng-model="store" data-live-search="true" ng-options="location as location.name for location in storeList" toggle-dropdown>
+            <option value="">Select Store</option>
+        </select>   -->  
+  
+    </div>
 </div>
 <hr />
 <div class="custBtn">
@@ -30,11 +38,11 @@
 
 <table class="table table-striped customerTable" align="center">
 	<tr>
-		<th>Image</th>
+		<th width="20%">Image</th>
 		<th width="10%">ID</th>
-		<th>Product Name</th>
-		<th>Inventory</th>
-		<th>Option</th>
+		<th width="40%">Product Name</th>
+		<th width="10%">Inventory</th>
+		<th width="20%">Option</th>
 	</tr>
 	<tr ng-repeat="product in products | filter:query | orderBy: orderProp">
 		<td>
@@ -82,16 +90,13 @@
 		            </select>    
     			</td>
     		</tr>
-    	</table>
-        
-            
-            
+    	</table>          
         </div>
         <button class="button_color" ng-click="confirmOutStock()">Confirm</button>
     </form>
 </modal>
 
 <script type="text/javascript">
-    $('.sortBy').selectpicker();
-    $('.location').selectpicker();
+     $('.sortBy').selectpicker();
+    // $('.location').selectpicker();
 </script>

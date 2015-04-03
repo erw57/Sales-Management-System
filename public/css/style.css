@@ -432,15 +432,20 @@ input{
     float:left;
 }
 
-.optPanel form:nth-child(2){
+.optPanel div{
     /*width:50%;*/
     float:right;
 }
 
-.optPanel form:nth-child(2) span{
+.optPanel div a:hover{
+    text-decoration: underline;
+}
+
+.optPanel div span{
     color:#00324A;
     margin-right: 10px;
-    font-size: 14px;
+    font-size: 22px;
+    /*font-weight: bold;*/
 }
 
 .sortBar{

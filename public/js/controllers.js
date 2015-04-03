@@ -67,15 +67,16 @@ productBrowseControllers.controller('cartController', ['$scope', '$http',  funct
     } 
 }]);
 
-productBrowseControllers.controller('storeSelectController',['$scope','$http',
-	function($scope,$http){
+productBrowseControllers.controller('storeSelectController',['$rootScope','$scope','$http',
+	function($rootScope,$scope,$http){
 		$scope.storeList = [];
 		$http.get('api/getStoreList').success(function(res){
 			$scope.storeList = res.data;
-			$scope.store = '';
+			$scope.store = 'Dabjam';
 		});
 		$scope.goToList = function(){
-			$scope.store == '' ? alert('Please select a store!') : window.location.href='#/browsing-list/'+$scope.store;
+			//console.log($rootScope.store.name);
+			$scope.store == '' ? alert('Please select a store!') : window.location.href='#/browsing-list/'+$scope.store.id;
 		}
 }]);
 
@@ -147,23 +148,26 @@ customerControllers.controller('customerDetailController', ['$scope', '$http', '
 	}
 }]);
 
-inventoryControllers.controller('storeSelectController',['$scope','$http',
-	function($scope,$http){
+inventoryControllers.controller('storeSelectController',['$rootScope','$scope','$http',
+	function($rootScope,$scope,$http){
 		$scope.storeList = [];
 		$http.get('api/getStoreList').success(function(res){
 			$scope.storeList = res.data;
-			$scope.store = '';
+			$rootScope.store = '';
 		});
 		$scope.goToList = function(){
-			$scope.store == '' ? alert('Please select a store!') : window.location.href='#/inventory-list/'+$scope.store;
+			//console.log($rootScope.store.name);
+			$rootScope.store == '' ? alert('Please select a store!') : window.location.href='#/inventory-list/'+$rootScope.store.id;
 		}
 }]);
 
-inventoryControllers.controller('inventoryListController',['$scope','$routeParams','$http', 
-	function($scope, $routeParams, $http){
-		$scope.store = $routeParams.store;
+inventoryControllers.controller('inventoryListController',['$rootScope','$scope','$routeParams','$http', 
+	function($rootScope,$scope, $routeParams, $http){
 		$http.get('api/getProductList?store_id='+$routeParams.store).success(function(res){
 			$scope.products = res.data;
+		});
+		$http.get('api/getStoreList').success(function(res){
+			$scope.storeList = res.data;
 		});
 
 		$scope.orderProp = 'name';

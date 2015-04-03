@@ -1,7 +1,7 @@
 <h1 class="text-center">Select Location</h1>
 <div class="selectStore text-center">
         <span>Store: </span>
-        <select class="storePicker" selectpicker="{style: 'button_color'}" ng-model="store" data-live-search="true" ng-options="location.id as location.name for location in storeList" toggle-dropdown>
+        <select class="storePicker" selectpicker="{style: 'button_color'}" ng-model="store" data-live-search="true" ng-options="location as location.name for location in storeList" toggle-dropdown>
             <option value="">Select Store</option>
         </select>  
         <div>
