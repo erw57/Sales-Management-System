@@ -4,7 +4,13 @@
 var quo = require('../util/quotation');
 module.exports = function(app, url) {
     app.post(url, function (req, res) {
-        var args = req.body;
+        var args = {
+            customer_id : req.body.customer_id,
+            store_id :req.body.store_id,
+            cart : req.body.cart
+        };
+
+        args.sales_id = '42';
         console.log( "args:",args);
         var mysql = require('mysql');
         var connection = mysql.createConnection({
@@ -16,7 +22,7 @@ module.exports = function(app, url) {
         });
         var transaction_id;
         connection.connect();
-        connection.query('SELECT MAX(id) AS nextID FROM Transaction', function (err, rows) {
+        connection.query('SELECT MAX(id) AS nextID FROM TTransaction', function (err, rows) {
             if (!err) {
                 transaction_id = (parseInt(rows[0].nextID) + 1).toString();
                 var time = new Date();
@@ -26,15 +32,19 @@ module.exports = function(app, url) {
                     month = 0 + month.toString();
                 }
                 var date = time.getDate();
-                time = year + '-' + month + '-' + date;
-                var transQuery = 'INSERT INTO Transaction VALUES(' +
+                var hour = time.getHours();
+                var minute = time.getMinutes();
+                var second  = time.getSeconds();
+                time = year + '-' + month + '-' + date+' '+hour+':'+minute+':'+second;
+
+                var transQuery = 'INSERT INTO TTransaction VALUES(' +
                     transaction_id + ',' + quo(time) + ',' + args.customer_id + ',' +
                     args.sales_id + ',' + args.store_id + ");";
                 console.log(transQuery);
                 connection.query(transQuery, function (err) {
                     if (!err) {
                         var it = {time:0};
-                        connection.query('SELECT MAX(id) AS nextID FROM `Order`', function (err, rows) {
+                        connection.query('SELECT MAX(id) AS nextID FROM `TOrder`', function (err, rows) {
                                 if (!err) {
                                     it.id = (parseInt(rows[0].nextID) + 1).toString();
                                     for (var i = 0; i < args.cart.length; i++) {
@@ -47,7 +57,7 @@ module.exports = function(app, url) {
                                         orderArgs.price = args.cart[it.time].price;
                                         it.time++;
                                         it.id ++;
-                                        var orderQuery = 'INSERT INTO `Order` VALUES(' +
+                                        var orderQuery = 'INSERT INTO `TOrder` VALUES(' +
                                             orderArgs.id + ',' +
                                             orderArgs.transaction_id + ',' +
                                             orderArgs.product_id + ',' +
@@ -59,23 +69,29 @@ module.exports = function(app, url) {
                                                 console.log('Success: Update Order');
                                             }
                                             else {
+                                                res.json({message:'error'});
                                                 console.log('Error:', err);
                                             }
                                         });
                                     }
+                                    res.json({message:'success'});
+                                    connection.end();
 
                                 } else {
+                                    res.json({message:'error'});
                                     console.log('Failure');
                                 }// end update order;
                             });
 
                     } //end update transaction
                     else {
+                        res.json({message:'error'});
                         console.log('Error: Update Transaction');
                     }
                 });
             }
             else{
+                res.json({message:'error'});
                 console.log("error: connect to database");
             }
         });
