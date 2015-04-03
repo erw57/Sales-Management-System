@@ -19,21 +19,30 @@ module.exports = function(app, url) {
         connection.query(query, function(err, rows) {
             if (!err) {
                 result = rows[0];
+                connection = mysql.createConnection({
+                    host: 'localhost',
+                    port: '8889',
+                    user: 'root',
+                    password: 'root',
+                    database: 'test'
+                });
+                connection.connect();
+                query = 'SELECT * FROM Inventory WHERE ' + 'product_id= ' + args.id + ' AND ' + 'store_id=' + args.store;
+                console.log(query);
+
+                connection.query(query, function(err, rows) {
+                    if (!err) {
+                        result.amount = rows[0].quantity;
+                        res.json(result);
+                    } else {
+                        console.log('fail to get inventory informaiton',err);
+                    }
+                });
             } else {
                 console.log('ERROR: Retrieval Product Info');
             }
         });
-        query = 'SELECT * FROM Inventory WHERE ' + 'id= ' + args.id + ' AND ' + 'store=' + args.store;
-        console.log(result);
 
-        connection.query(query, function(err, rows) {
-            if (!err) {
-                result.amount = rows[0].quantity;
-                res.json(result);
-            } else {
-                console.log('fail to get inventory informaiton');
-            }
-        });
         connection.end();
     });
 };

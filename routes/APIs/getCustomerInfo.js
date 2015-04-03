@@ -54,16 +54,18 @@ module.exports = function(app, url) {
                             info.gender = rows[0].gender;
                             info.age = rows[0].age;
                             info.income = rows[0].home_income;
-                            query.getTransaction = 'select id from `Transaction` where customer_id=' + id;
+                            query.getTransaction = 'select id from `TTransaction` where customer_id=' + id;
+                            console.log(query.getTransaction);
                             connection.query(query.getTransaction, function (err, rows) {
                                 if (!err) {
                                     if (rows.length > 0) {
-                                        query.getOrder = 'select * from `Order` where transaction_id in(';
+                                        query.getOrder = 'select * from `TOrder` where transaction_id in(';
                                         for (var i = 0; i < rows.length; i++) {
                                             query.getOrder += rows[i].id + ','
                                         }
                                         query.getOrder = query.getOrder.slice(0, query.getOrder.length - 1);
                                         query.getOrder += ');';
+                                        console.log(query.getOrder);
                                         connection.query(query.getOrder, function (err, rows) {
                                             if (!err) {
                                                 info.history = rows;
@@ -81,14 +83,14 @@ module.exports = function(app, url) {
                                 }
                                 else {
                                     console.log(err);
-                                    res.json({message: "error"});
+                                    res.json({message: "error:1"});
                                 }
                             })
 
                         }
                         else {
                             console.log(err);
-                            res.json({message: "error"});
+                            res.json({message: "error:2"});
                         }
                     });
                 }
@@ -107,11 +109,11 @@ module.exports = function(app, url) {
                         if (!err) {
                             info.category = rows[0].business_category;
                             info.income = rows[0].company_income;
-                            query.getTransaction = 'select id from `Transaction` where customer_id=' + id;
+                            query.getTransaction = 'select id from `TTransaction` where customer_id=' + id;
                             connection.query(query.getTransaction, function (err, rows) {
                                 if (!err) {
                                     if (rows.length > 0) {
-                                        query.getOrder = 'select * from `Order` where transaction_id in(';
+                                        query.getOrder = 'select * from `TOrder` where transaction_id in(';
                                         for (var i = 0; i < rows.length; i++) {
                                             query.getOrder += rows[i].id + ','
                                         }
@@ -146,7 +148,7 @@ module.exports = function(app, url) {
                     });
                 }
                 }
-                else{res.json({message:"error"})}
+                else{res.json({message:"error:3"})}
             }
             else{
                 console.log('Error while performing Query.');
