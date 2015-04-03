@@ -285,9 +285,10 @@ input{
 .Card{
     border:1px #00324A solid;
     width:100%;
-    //height:220px;
+    /*height:220px;*/
     margin-left: 40px;
     margin-top: 15px;
+    margin-bottom: 10px;
 }
 
 .left{
@@ -365,7 +366,7 @@ input{
 
 .Card p{
     margin-top: 5px;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
 /*.detailUp{  

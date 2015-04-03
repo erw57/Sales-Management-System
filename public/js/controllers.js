@@ -67,11 +67,16 @@ productBrowseControllers.controller('cartController', ['$scope', '$http',  funct
     } 
 }]);
 
-productBrowseControllers.controller('storeSelectController',['$rootScope','$scope', function($rootScope,$scope){
-	$rootScope.store = 'all';
-	$scope.goToList = function(){
-		window.location.href='#/browsing-list/'+$scope.store
-	}
+productBrowseControllers.controller('storeSelectController',['$scope','$http',
+	function($scope,$http){
+		$scope.storeList = [];
+		$http.get('api/getStoreList').success(function(res){
+			$scope.storeList = res.data;
+			$scope.store = '';
+		});
+		$scope.goToList = function(){
+			$scope.store == '' ? alert('Please select a store!') : window.location.href='#/browsing-list/'+$scope.store;
+		}
 }]);
 
 
@@ -142,17 +147,22 @@ customerControllers.controller('customerDetailController', ['$scope', '$http', '
 	}
 }]);
 
-inventoryControllers.controller('storeSelectController',['$scope', function($scope){
-	$scope.store = 'all';
-	$scope.goToList = function(){
-		window.location.href='#/inventory-list/'+$scope.store
-	}
+inventoryControllers.controller('storeSelectController',['$scope','$http',
+	function($scope,$http){
+		$scope.storeList = [];
+		$http.get('api/getStoreList').success(function(res){
+			$scope.storeList = res.data;
+			$scope.store = '';
+		});
+		$scope.goToList = function(){
+			$scope.store == '' ? alert('Please select a store!') : window.location.href='#/inventory-list/'+$scope.store;
+		}
 }]);
 
 inventoryControllers.controller('inventoryListController',['$scope','$routeParams','$http', 
 	function($scope, $routeParams, $http){
 		$scope.store = $routeParams.store;
-		$http.get('api/getProductList?store_name='+$routeParams.store).success(function(res){
+		$http.get('api/getProductList?store_id='+$routeParams.store).success(function(res){
 			$scope.products = res.data;
 		});
 

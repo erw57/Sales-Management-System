@@ -1,11 +1,8 @@
 <h1 class="text-center">Select Location</h1>
 <div class="selectStore text-center">
         <span>Store: </span>
-        <select class="location" data-live-search="true" ng-model="store">
-            <option>all</option>
-            <option>New York</option>
-            <option>Washington DC</option>
-            <option>Orlando</option>
+        <select class="storePicker" selectpicker="{style: 'button_color'}" ng-model="store" data-live-search="true" ng-options="location.id as location.name for location in storeList" toggle-dropdown>
+            <option value="">Select Store</option>
         </select>  
         <div>
             <button class="button_color" ng-click="goToList()">Enter Store</button>  
@@ -13,9 +10,10 @@
 </div>
 
 <script type="text/javascript">
-     $('.location').selectpicker({
-      style: 'button_color',
-      size: 100
-    });
-    $('.location').addClass('storePicker').selectpicker('setStyle')
+    //  $('.location').selectpicker({
+    //   style: 'button_color',
+    //   size: 100,
+     //    data-live-search: 'true'
+    // });
+    // $('.location').addClass('storePicker').selectpicker('setStyle')
 </script>

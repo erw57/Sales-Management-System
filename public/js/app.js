@@ -5,6 +5,7 @@
 var productBrowseApp = angular.module('productBrowseApp', [
   'ngRoute',
   'productBrowseController',
+  'angular-bootstrap-select',
 ]);
 
 var customerApp = angular.module('customerApp',[
@@ -14,7 +15,8 @@ var customerApp = angular.module('customerApp',[
 
 var inventoryApp = angular.module('inventoryApp', [
   'ngRoute',
-  'inventoryController'
+  'inventoryController',
+  'angular-bootstrap-select'
 ]);
 
 productBrowseApp.directive('modal', function () {
@@ -158,3 +160,32 @@ inventoryApp.config(['$routeProvider',
       });
   }
 ]);
+
+
+
+//Bootstrap select
+angular.module('angular-bootstrap-select', [])
+  .directive('selectpicker', ['$parse', function ($parse) {
+    return {
+      restrict: 'A',
+      link: function (scope, element, attrs) {
+        element.selectpicker($parse(attrs.selectpicker)());
+        element.addClass(attrs.class).selectpicker('setStyle')
+        element.selectpicker('refresh');
+        scope.$watch(attrs.ngModel, function (newVal, oldVal) {
+          scope.$parent[attrs.ngModel] = newVal;
+          scope.$evalAsync(function () {
+            if (!attrs.ngOptions || /track by/.test(attrs.ngOptions)) element.val(newVal);
+            element.selectpicker('refresh');
+          });
+        });
+        
+        scope.$on('$destroy', function () {
+          scope.$evalAsync(function () {
+            element.selectpicker('destroy');
+          });
+        });
+      }
+    };
+  }]);
+//})();

@@ -31,14 +31,14 @@
 <table class="table table-striped customerTable" align="center">
 	<tr>
 		<th>Image</th>
-		<th>ID</th>
+		<th width="10%">ID</th>
 		<th>Product Name</th>
 		<th>Inventory</th>
 		<th>Option</th>
 	</tr>
 	<tr ng-repeat="product in products | filter:query | orderBy: orderProp">
 		<td>
-			<img src="images/1.png" alt="Product Img" />
+			<img ng-src="{{product.image_path}}" alt="Product Img" />
 		</td>
 		<td>{{product.id}}</td>
 		<td>{{product.name}}</td>

@@ -8,7 +8,7 @@
         <span>Sort By:</span>
             <select class="sortBy" ng-model="orderProp">
                 <option value="name">Alphabetical</option>
-                <option value="age">Age</option>
+                <option value="kind">Type</option>
             </select>                
     </form>
 </div>
@@ -21,15 +21,13 @@
 	<tr class="stripedTr">
 		<th>ID</th>
 		<th>Name</th>
-		<th>Age</th>
-		<th>Gender</th>
+		<th>Type</th>
 		<th>Option</th>
 	</tr>
 	<tr ng-repeat="c in customers | filter:query | orderBy: orderProp">
 		<td>{{c.id}}</td>
 		<td>{{c.name}}</td>
-		<td>{{c.age}}</td>
-		<td>{{c.gender == 'M'?'Male':"Female"}}</td>
+		<td>{{c.kind}}</td>
 		<td><a href="#/customer-detail/{{c.id}}/view">Detail</a> | <a href="#/customer-detail/{{c.id}}/update">Update</a></td>
 	</tr>
 </table>
