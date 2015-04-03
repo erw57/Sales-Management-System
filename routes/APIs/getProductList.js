@@ -55,6 +55,7 @@ module.exports = function(app, url) {
                             list.data[it[id]].price = rows[0].price;
                             list.data[it[id]].kind = rows[0].kind;
                             list.data[it[id]].image_path = rows[0].image_path;
+                            list.data[it[id]].description = rows[0].description;
                             console.log(list);
                             if (it[id] === list.data.length-1){
                                 connection.end();
