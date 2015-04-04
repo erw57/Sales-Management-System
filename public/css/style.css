@@ -592,6 +592,7 @@ img.big{
 .custBtn{
     width:80%;
     margin:40px auto;
+    margin-bottom: 15px;
 }
 
 .custBtn a, .custBtn button{

@@ -122,6 +122,11 @@ customerControllers.controller('customerDetailController', ['$scope', '$http', '
 		$scope.opt = $routeParams.opt;
 	});
 
+	$scope.historyShow = false;
+	$scope.showHistory = function(){
+		$scope.historyShow = !$scope.historyShow;
+	}
+
 	$scope.modifyCustomer = function(){
 		console.log($scope.customer.kind);
 		$http.post('api/modifyCustomer', $scope.customer).success(function(data){

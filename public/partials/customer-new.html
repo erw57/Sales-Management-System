@@ -1,0 +1,48 @@
+<h1 class="text-center">Add New Product</h1>
+<div class="optPanel clearfix">
+    <a href="#/inventory-list/{{store.id}}">&lt;&lt;Return To List Page</a>
+</div>
+<hr />
+
+
+
+<table class="customerTable" align="center">
+	<tr>
+		<td width="20%" class="tableTitle">Product Name:</td>
+		<td width="80%" class="tableText"><input type="text" ng-model="newProdcut.name" /></td>
+	</tr>
+	<tr>
+		<td class="tableTitle">Price:</td>
+		<td class="tableText"><input type="text" ng-model="newProdcut.price" /></td>
+	</tr>
+	<tr>
+		<td class="tableTitle">Category:</td>
+		<td class="tableText">
+			<select ng-model="newProduct.category">
+				<option value="Beverage">Beverage</option>
+				<option value="Snack">Snack</option>
+			</select>
+		</td>
+	</tr>
+		<tr>
+		<td class="tableTitle">Description:</td>
+		<td class="tableText"><input type="text" ng-model="newProduct.description" /></td>
+	</tr>
+		<tr>
+		<td class="tableTitle">Customer Type:</td>
+		<td class="tableText">
+		<select ng-model="customer.kind">
+				<option value="home">Home</option>
+				<option value="business">Business</option>
+			</select>
+		</td>
+	</tr>
+	
+	<tr>
+		<td colspan="2" class="text-center">
+			<div class="custBtn">
+				<button class="button_color" ng-click="modifyCustomer()">Confirm</button>
+			</div>
+		</td>
+	</tr>
+</table>
