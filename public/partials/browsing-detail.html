@@ -1,5 +1,5 @@
 <div class="detailLeft">
-	<img class="big" src="images/1.png" />
+	<img class="big" ng-src="{{product.image_path}}" />
 	<ul class="thumbs">
 		<li>
 			<img src="images/2.png">
@@ -20,23 +20,23 @@
 </div>
 
 <div class="detailRight">
-	<h3>{{product.prod_name}}</h3>
-	<p class="id">ID: {{product.prod_id}}</p>
+	<h3>{{product.name}}</h3>
+	<p class="id">Product ID: {{product.id}}</p>
 	<hr />
 	<p class="price">
             {{product.price | currency}}
     </p>
     <div class="detailNotes">
-		<p>Category: <span>{{product.product_kind}}</span></p>
+		<p>Category: <span>{{product.kind}}</span></p>
 	</div>
 	<p>
 		{{product.description}}
 	</p>
 	<hr />
 	<div class="detailNotes">
-		<p>Store: <span>{{storeName}}</span>
+		<p>Store: <span>{{store.name}}</span>
 		</p>
-		<p>Inventory: <span>{{inventory}}</span></p>
+		<p>Inventory: <span>{{product.amount}}</span></p>
 	</div>
 	<div class="input-group pull-left" style="width:30%;">
       	<span class="input-group-btn">
@@ -48,7 +48,7 @@
       	</span>
     </div><!-- /input-group -->
 	<button class="button_color detailAdd" ng-click="buy($event);" item-qty="{{qty}}" 
-            item-name="{{product.prod_name}}" item-price="{{product.price}}" item-id="{{product.prod_id}}">Add to Cart</button>
+            item-name="{{product.name}}" item-price="{{product.price}}" item-id="{{product.id}}">Add to Cart</button>
 </div>
 <!-- <modal title="Change Store" visible="store">
     <form>

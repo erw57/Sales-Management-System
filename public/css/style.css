@@ -432,16 +432,16 @@ input{
     float:left;
 }
 
-.optPanel div{
+.inventoryListStorePanel{
     /*width:50%;*/
     float:right;
 }
 
-.optPanel div a:hover{
+.inventoryListStorePanel a:hover{
     text-decoration: underline;
 }
 
-.optPanel div span{
+.inventoryListStorePanel span{
     color:#00324A;
     margin-right: 10px;
     font-size: 22px;

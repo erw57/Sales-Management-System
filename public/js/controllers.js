@@ -52,27 +52,25 @@ productBrowseControllers.controller('cartController', ['$scope', '$http',  funct
     	var data = {};
     	var payCart = [];
     	data.customer_id = '920130';
-    	data.salesperson = 'Er';
-    	data.location = 'Center Store';
+    	data.location = $scope.store.id;
     	for(var item in $scope.cart){
     		var o = {};
-    		o.id = $scope.cart[item].id;
+    		o.product_id = $scope.cart[item].id;
     		o.quantity = $scope.cart[item].num;
-    		o.name = $scope.cart[item].name;
+    		o.price = $scope.cart[item].price;
     		payCart.push(o);
     	}
     	data.cart = payCart;
     	console.log(data);
-
     } 
 }]);
 
-productBrowseControllers.controller('storeSelectController',['$rootScope','$scope','$http',
-	function($rootScope,$scope,$http){
+productBrowseControllers.controller('storeSelectController',['$scope','$http',
+	function($scope,$http){
 		$scope.storeList = [];
 		$http.get('api/getStoreList').success(function(res){
 			$scope.storeList = res.data;
-			$scope.store = 'Dabjam';
+			$scope.store = '';
 		});
 		$scope.goToList = function(){
 			//console.log($rootScope.store.name);
@@ -94,10 +92,8 @@ productBrowseControllers.controller('productListController',['$rootScope','$scop
 
 productBrowseControllers.controller('productDetailController', ['$scope', '$routeParams', '$http', 
 	function($scope, $routeParams, $http){
-		$http.get('api/getProductDetail?id='+$routeParams.productId).success(function(data){
+		$http.get('api/getProductDetail?id='+$routeParams.productId+'&&store='+$scope.store.id).success(function(data){
 			$scope.product = data;
-			$scope.singleProductId = $routeParams.productId;
-			$scope.$emit("singleProduct", $scope.singleProductId);
 		});
 
 		$scope.increase = function(){
@@ -109,20 +105,6 @@ productBrowseControllers.controller('productDetailController', ['$scope', '$rout
 				$scope.qty--;
 			}		
 		}
-
-		$scope.store = false;
-	    $scope.changeStore = function(){
-	        $scope.store = !$scope.store;
-	    };
-
-	    $scope.selectStore = function(location){
-	    	$scope.store = !$scope.store;
-	    	$http.get('api/checkInventory?id='+$scope.singleProductId+'&&store=Center Store').success(function(res){
-	    		console.log(res[0].amount);
-	    		$scope.inventory = res[0].amount;
-	    		$scope.storeName = res[0].store_name;
-	    	});
-	    }
 }]);
 
 customerControllers.controller('customerListController', ['$scope', '$http', function($scope, $http){
