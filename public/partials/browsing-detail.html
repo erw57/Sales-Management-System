@@ -1,3 +1,4 @@
+
 <div class="detailLeft">
 	<img class="big" ng-src="{{product.image_path}}" />
 	<ul class="thumbs">
@@ -49,6 +50,9 @@
     </div><!-- /input-group -->
 	<button class="button_color detailAdd" ng-click="buy($event);" item-qty="{{qty}}" 
             item-name="{{product.name}}" item-price="{{product.price}}" item-id="{{product.id}}">Add to Cart</button>
+    <p>
+    	<a href="#/browsing-list/{{store.id}}"><< Return To List Page</a> 
+    </p>
 </div>
 <!-- <modal title="Change Store" visible="store">
     <form>

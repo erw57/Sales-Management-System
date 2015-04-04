@@ -34,6 +34,7 @@ productBrowseControllers.controller('cartController', ['$scope', '$http',  funct
 	}
 	$scope.add = function(id){
 		$scope.cart[id].num++;
+		//$scope.products[id-1].quantity --;
 		$scope.total += $scope.cart[id].price;
 	}
 

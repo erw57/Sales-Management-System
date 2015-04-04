@@ -1,4 +1,4 @@
-<h1 class="text-center">{{store.name}}</h1>
+<h1 class="text-center">{{store.name}} store</h1>
 <div class="optPanel clearfix">
     <form class="searchBar">
         <input type="text" placeholder="Search for...(id, name)" ng-model="query" />
@@ -27,6 +27,7 @@
         <p>
             <span class="price">{{product.price | currency}}</span>
             <span class="subInfo">Category: </span><span>{{product.kind}}</span>
+            <span class="subInfo">Inventory: </span><span>{{product.quantity}}</span>
         </p>
         <p class="description">
             {{product.description}}
