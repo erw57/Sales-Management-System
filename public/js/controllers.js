@@ -159,6 +159,19 @@ inventoryControllers.controller('inventoryListController',['$scope','$routeParam
 			$scope.stock = !$scope.stock;
 			$scope.inStockId = $event.target.getAttribute('product-id');
 		}
+		$scope.confirmInStock = function(qty){
+			var data = {};
+			data.store_id = $scope.store.id;
+			data.product_id = $scope.inStockId;
+			data.quantity = '+' + qty;
+			$http.post('/api/updateInventory',data).success(function(res){
+				$scope.stock = !$scope.stock;
+				if(res.message == 'success'){
+					$scope.products[data.product_id-1].quantity += parseInt(data.quantity);
+				}
+				alert(res.message);
+			});
+		}
 
 		$scope.destock = false;
 		$scope.outStock = function($event){
@@ -170,10 +183,16 @@ inventoryControllers.controller('inventoryListController',['$scope','$routeParam
 			data.from = $scope.store.id;
 			data.to = outStockTo;
 			data.quantity = outStockQty;
-			data.product_id = $scope.outStockId;
+			data.id = $scope.outStockId;
 			console.log(data);
 			$http.post('/api/stockTransport', data).success(function(res){
 				console.log(res);
+				//stock transport successfully!!!!!!!!
+				$scope.destock = !$scope.destock;
+				if(res.message == 'success'){
+					$scope.products[data.id-1].quantity -= data.quantity;
+				}
+				alert(res.message);
 			});
 		}
 

@@ -61,9 +61,9 @@
     <form class="pop">
         <div>
             <label for="cid">Enter Quantity:</label>
-            <input type="text" placeholder="How many " />
+            <input type="text" placeholder="How many " ng-model="inStockQty" />
         </div>
-        <button class="button_color" ng-click="confirmInStock()">Confirm</button>
+        <button class="button_color" ng-click="confirmInStock(inStockQty)">Confirm</button>
     </form>
 </modal>
 
