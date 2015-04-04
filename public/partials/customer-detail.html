@@ -68,16 +68,20 @@
 <!--History-->
 <table class="table table-striped customerTable" align="center" ng-show="historyShow">
 	<tr class="stripedTr">
-		<th>ID</th>
-		<th>Name</th>
-		<th>Type</th>
-		<th>Option</th>
+		<th>Order ID</th>
+		<th>Transaction ID</th>
+		<th>Product ID</th>
+		<th>Qty</th>
+		<th>Price</th>
+		<th>Opt</th>
 	</tr>
-	<tr ng-repeat="c in customers | filter:query | orderBy: orderProp">
-		<td>{{c.id}}</td>
-		<td>{{c.name}}</td>
-		<td>{{c.kind}}</td>
-		<td><a href="#/customer-detail/{{c.id}}/view">Detail</a> | <a href="#/customer-detail/{{c.id}}/update">Update</a></td>
+	<tr ng-repeat="h in customer.history | orderBy: id">
+		<td>{{h.id}}</td>
+		<td>{{h.transaction_id}}</td>
+		<td>{{h.product_id}}</td>
+		<td>{{h.quantity}}</td>
+		<td>{{h.price | currency}}</td>
+		<td><a href="#">View Order</a></td>
 	</tr>
 </table>
 <!--End History-->
@@ -140,7 +144,7 @@
 	</tr>
 	<tr>
 		<td class="tableTitle">ZIP Code:</td>
-		<td class="tableText"><input type="text" ng-model="customer.zip_code"/></td>
+		<td class="tableText"><input type="text" ng-model="customer.zip_code" maxlength="5" /></td>
 	</tr>
 	<tr>
 		<td class="tableTitle">{{customer.kind == 'home'?'Home Income:':'Company Income:'}}($/year)</td>
