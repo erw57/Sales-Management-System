@@ -143,29 +143,38 @@ inventoryControllers.controller('storeSelectController',['$rootScope','$scope','
 		}
 }]);
 
-inventoryControllers.controller('inventoryListController',['$rootScope','$scope','$routeParams','$http', 
-	function($rootScope,$scope, $routeParams, $http){
+inventoryControllers.controller('inventoryListController',['$scope','$routeParams','$http', 
+	function($scope, $routeParams, $http){
 		$http.get('api/getProductList?store_id='+$routeParams.store).success(function(res){
 			$scope.products = res.data;
 		});
-		$http.get('api/getStoreList').success(function(res){
+		$http.get('/api/getStoreList').success(function(res){
 			$scope.storeList = res.data;
 		});
 
 		$scope.orderProp = 'name';
 
-		$scope.changeStore = function(){
-			console.log($scope.store); //change Store ，make request !!!!!!!
-		}
-
 		$scope.stock = false;
-		$scope.inStock = function(){
+		$scope.inStock = function($event){
 			$scope.stock = !$scope.stock;
+			$scope.inStockId = $event.target.getAttribute('product-id');
 		}
 
 		$scope.destock = false;
-		$scope.outStock = function(){
+		$scope.outStock = function($event){
 			$scope.destock = !$scope.destock;
+			$scope.outStockId = $event.target.getAttribute('product-id');
+		}
+		$scope.confirmOutStock = function(outStockTo,outStockQty){
+			var data = {};
+			data.from = $scope.store.id;
+			data.to = outStockTo;
+			data.quantity = outStockQty;
+			data.product_id = $scope.outStockId;
+			console.log(data);
+			$http.post('/api/stockTransport', data).success(function(res){
+				console.log(res);
+			});
 		}
 
 		$scope.goToNew = function(){

@@ -50,10 +50,10 @@
 		</td>
 		<td>{{product.id}}</td>
 		<td>{{product.name}}</td>
-		<td>{{product.num}}</td>
-		<td><a href="javascript:void(0);" ng-click="inStock()">Stock</a>
+		<td>{{product.quantity}}</td>
+		<td><a href="javascript:void(0);" product-id="{{product.id}}" ng-click="inStock($event)">Stock</a>
 		|
-		 <a href="javascript:void(0);" ng-click="outStock()">Destock</a></td>
+		 <a href="javascript:void(0);" product-id="{{product.id}}" ng-click="outStock($event)">Destock</a></td>
 	</tr>
 </table>
 
@@ -73,26 +73,23 @@
     	<table>
     		<tr>
     			<td><label for="cid">Move</label></td>
-    			<td><input type="text" id="cid" placeholder="Enter Quantity" /></td>
+    			<td><input type="text" id="cid" ng-model="outStockQty" placeholder="Enter Quantity" /></td>
     		</tr>
     		<tr>
     			<td><label for="cid">From</label></td>
-    			<td>{{store}}</td>
+    			<td>{{store.name}}</td>
     		</tr>
     		<tr>
     			<td><label for="cid">To</label></td>
     			<td>
-    			<select>
-		                <option>all</option>
-		                <option>New York</option>
-		                <option>Washington DC</option>
-		                <option>Orlando</option>
-		            </select>    
+    			<select ng-options="location as location.name for location in storeList" ng-model="outStockTo">
+                    
+                </select>    
     			</td>
     		</tr>
     	</table>          
         </div>
-        <button class="button_color" ng-click="confirmOutStock()">Confirm</button>
+        <button class="button_color" ng-click="confirmOutStock(outStockTo.id,outStockQty)">Confirm</button>
     </form>
 </modal>
 
