@@ -119,6 +119,10 @@ customerControllers.controller('customerListController', ['$scope', '$http', fun
 		$scope.customers = res.data;
 		$scope.orderProp = 'name';
 	});
+
+	$scope.goToNew = function(){
+		window.location.href="#/customer-new";
+	}
 }]);
 
 customerControllers.controller('customerDetailController', ['$scope', '$http', '$routeParams', function($scope, $http, $routeParams){
@@ -138,6 +142,21 @@ customerControllers.controller('customerDetailController', ['$scope', '$http', '
 		$http.post('api/modifyCustomer', $scope.customer).success(function(data){
 			alert(data.message);
 			window.location.href='#/customer-detail/'+$routeParams.customerId+'/view';
+		});
+	}
+}]);
+
+customerControllers.controller('customerNewController', ['$scope','$http',function($scope,$http){
+	$scope.customer = {};
+	$scope.customer.kind = 'home';
+	$scope.customer.category = 'Medicare'
+	$scope.addCustomer = function(){
+		console.log($scope.customer);
+		$http.post('/api/addNewCustomer', $scope.customer).success(function(res){
+			alert(res.message);
+			if(res.message == 'success'){
+				window.location.href='#/'
+;			}
 		});
 	}
 }]);

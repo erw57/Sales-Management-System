@@ -81,7 +81,7 @@ a:hover{
     margin-right: 30px;
 }
 
-input{
+input[type="text"]{
     border-radius: 5px;
     border:1px solid #BCBCBC;
     height: 40px;
@@ -618,9 +618,19 @@ img.big{
 .tableText{
     text-align: center;
 }
-.tableText input, .tableText select{
+.tableText input[type="text"], .tableText select{
     width:40%;
     height:30px;
+}
+
+.tableText input[type="radio"]{
+    width:30px;
+    height:20px;
+    margin-right: 5px;
+}
+
+.tableText label{
+    width:25%;
 }
 
 /*end customer*/

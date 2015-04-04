@@ -1,4 +1,4 @@
-<h1 class="text-center">Add New Product</h1>
+<h1 class="text-center">Add New Customer</h1>
 <div class="optPanel clearfix">
     <a href="#/inventory-list/{{store.id}}">&lt;&lt;Return To List Page</a>
 </div>
@@ -8,40 +8,70 @@
 
 <table class="customerTable" align="center">
 	<tr>
-		<td width="20%" class="tableTitle">Product Name:</td>
-		<td width="80%" class="tableText"><input type="text" ng-model="newProdcut.name" /></td>
-	</tr>
-	<tr>
-		<td class="tableTitle">Price:</td>
-		<td class="tableText"><input type="text" ng-model="newProdcut.price" /></td>
-	</tr>
-	<tr>
-		<td class="tableTitle">Category:</td>
-		<td class="tableText">
-			<select ng-model="newProduct.category">
-				<option value="Beverage">Beverage</option>
-				<option value="Snack">Snack</option>
-			</select>
+		<td width="40%" class="tableTitle">Customer Type:</td>
+		<td width="60%" class="tableText">
+			<label><input type="radio" name="kind" ng-model="customer.kind" value="home" />Home</label>
+			<label><input type="radio" name="kind" ng-model="customer.kind" value="business"/>Business</label>
 		</td>
 	</tr>
-		<tr>
-		<td class="tableTitle">Description:</td>
-		<td class="tableText"><input type="text" ng-model="newProduct.description" /></td>
+	<tr>
+		<td class="tableTitle">Name:</td>
+		<td class="tableText"><input type="text" ng-model="customer.name" /></td>
 	</tr>
-		<tr>
-		<td class="tableTitle">Customer Type:</td>
+	<tr ng-show="customer.kind == 'home'">
+		<td class="tableTitle">Gender:</td>
 		<td class="tableText">
-		<select ng-model="customer.kind">
-				<option value="home">Home</option>
-				<option value="business">Business</option>
-			</select>
+			<label><input type="radio" name="gender" value="M" ng-model="customer.gender" />Male</label>
+			<label><input type="radio" name="gender" value="F" ng-model="customer.gender" />Female</label>
 		</td>
 	</tr>
-	
+	<tr ng-show="customer.kind == 'home'">
+		<td class="tableTitle">Age:</td>
+		<td class="tableText"><input type="text" ng-model="customer.age"/></td>
+	</tr>
+	<tr ng-show="customer.kind == 'business'">
+		<td class="tableTitle">Business Category:</td>
+		<td class="tableText">
+		<select ng-model="customer.category">
+			<option value="Medicare">Medicare</option>
+			<option value="Pharmaceutical">Pharmaceutical</option>
+			<option value="Manufacturing">Manufacturing</option>
+			<option value="Food">Food</option>
+			<option value="IT">IT</option>
+		</select>
+		</td>
+	</tr>
+	<tr ng-show="customer.kind == 'home'">
+		<td class="tableTitle">Marriage Status:</td>
+		<td class="tableText">
+			<label><input type="radio" name="marriage_status" value="single" ng-model="customer.marriage_status" />Single</label>
+			<label><input type="radio" name="marriage_status" value="married" ng-model="customer.marriage_status" />Married</label>
+		</td>
+	</tr>
+	<tr>
+		<td class="tableTitle">Street:</td>
+		<td class="tableText"><input type="text" ng-model="customer.street"/></td>
+	</tr>
+	<tr>
+		<td class="tableTitle">City:</td>
+		<td class="tableText"><input type="text" ng-model="customer.city"/></td>
+	</tr>
+	<tr>
+		<td class="tableTitle">State:</td>
+		<td class="tableText"><input type="text" ng-model="customer.state"/></td>
+	</tr>
+	<tr>
+		<td class="tableTitle">ZIP Code:</td>
+		<td class="tableText"><input type="text" ng-model="customer.zip_code" maxlength="5"/></td>
+	</tr>
+	<tr>
+		<td class="tableTitle">{{customer.kind == 'home'?'Home Income:':'Company Income:'}}($/year)</td>
+		<td class="tableText"><input type="text" ng-model="customer.income"/></td>
+	</tr>
 	<tr>
 		<td colspan="2" class="text-center">
 			<div class="custBtn">
-				<button class="button_color" ng-click="modifyCustomer()">Confirm</button>
+				<button class="button_color" ng-click="addCustomer()">Confirm</button>
 			</div>
 		</td>
 	</tr>

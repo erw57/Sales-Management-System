@@ -95,10 +95,8 @@
 	<tr ng-show="customer.gender">
 		<td class="tableTitle">Gender:</td>
 		<td class="tableText">
-			<select ng-model="customer.gender">
-				<option value="M">Male</option>
-				<option value="F">Female</option>
-			</select>
+			<label><input type="radio" name="gender" value="M" ng-model="customer.gender" />Male</label>
+			<label><input type="radio" name="gender" value="F" ng-model="customer.gender" />Female</label>
 		</td>
 	</tr>
 	<tr ng-show="customer.age">
@@ -115,7 +113,7 @@
 		<select ng-model="customer.category">
 			<option value="Medicare">Medicare</option>
 			<option value="Pharmaceutical">Pharmaceutical</option>
-			<option value="'Manufacturing'">'Manufacturing'</option>
+			<option value="Manufacturing">Manufacturing</option>
 			<option value="Food">Food</option>
 			<option value="IT">IT</option>
 		</select>
@@ -124,10 +122,8 @@
 	<tr ng-show="customer.marriage_status">
 		<td class="tableTitle">Marriage Status:</td>
 		<td class="tableText">
-			<select ng-model="customer.marriage_status">
-				<option value="single">Single</option>
-				<option value="married">Married</option>
-			</select>
+			<label><input type="radio" name="marriage_status" value="single" ng-model="customer.marriage_status" />Single</label>
+			<label><input type="radio" name="marriage_status" value="married" ng-model="customer.marriage_status" />Married</label>
 		</td>
 	</tr>
 	<tr>
