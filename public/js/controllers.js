@@ -48,12 +48,12 @@ productBrowseControllers.controller('cartController', ['$scope', '$http',  funct
         $scope.pay = !$scope.pay;
     };
 
-    $scope.makePayment = function(){
-    	$scope.pay = !$scope.pay;
+    $scope.makePayment = function(customerId){
+    	$scope.pay = true;
     	var data = {};
     	var payCart = [];
-    	data.customer_id = '920130';
-    	data.location = $scope.store.id;
+    	data.customer_id = customerId;
+    	data.store_id = $scope.store.id;
     	for(var item in $scope.cart){
     		var o = {};
     		o.product_id = $scope.cart[item].id;
@@ -62,7 +62,13 @@ productBrowseControllers.controller('cartController', ['$scope', '$http',  funct
     		payCart.push(o);
     	}
     	data.cart = payCart;
-    	console.log(data);
+    	//console.log(data);
+    	$http.post('/api/makePayment',data).success(function(res){
+    		$scope.pay = false;
+    		alert(res.message);
+    		$scope.cart = {};
+    		$scope.total = 0;
+    	});
     } 
 }]);
 
@@ -80,9 +86,9 @@ productBrowseControllers.controller('storeSelectController',['$scope','$http',
 }]);
 
 
-productBrowseControllers.controller('productListController',['$rootScope','$scope','$routeParams','$http', 
-	function($rootScope, $scope, $routeParams, $http){
-		$rootScope.store = $routeParams.store;
+productBrowseControllers.controller('productListController',['$scope','$routeParams','$http', 
+	function($scope, $routeParams, $http){
+		//$rootScope.store = $routeParams.store;
 		$http.get('api/getProductList?store_id='+$routeParams.store).success(function(res){
 			$scope.products = res.data;
 		});
@@ -136,16 +142,16 @@ customerControllers.controller('customerDetailController', ['$scope', '$http', '
 	}
 }]);
 
-inventoryControllers.controller('storeSelectController',['$rootScope','$scope','$http',
-	function($rootScope,$scope,$http){
+inventoryControllers.controller('storeSelectController',['$scope','$http',
+	function($scope,$http){
 		$scope.storeList = [];
 		$http.get('api/getStoreList').success(function(res){
 			$scope.storeList = res.data;
-			$rootScope.store = '';
+			$scope.store = '';
 		});
 		$scope.goToList = function(){
 			//console.log($rootScope.store.name);
-			$rootScope.store == '' ? alert('Please select a store!') : window.location.href='#/inventory-list/'+$rootScope.store.id;
+			$scope.store == '' ? alert('Please select a store!') : window.location.href='#/inventory-list/'+$scope.store.id;
 		}
 }]);
 

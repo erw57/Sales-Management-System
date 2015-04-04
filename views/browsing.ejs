@@ -62,9 +62,9 @@
             <form class="pop">
                 <div>
                     <label for="cid">Customer ID:</label>
-                    <input type="text" id="cid" placeholder="Enter Customer ID" />
+                    <input type="text" id="cid" ng-model="customerId" placeholder="Enter Customer ID" />
                 </div>
-                <button class="button_color" ng-click="makePayment()">Submit</button>
+                <button class="button_color" ng-click="makePayment(customerId)">Submit</button>
             </form>
         </modal>
     
