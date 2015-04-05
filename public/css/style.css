@@ -138,7 +138,8 @@ input[type="text"]{
 /*end entry*/
 
 .selectStore{
-    margin-top: 10%;
+    margin-top: 5%;
+    margin-bottom: 5%;
 }
 
 .selectStore span{
@@ -152,6 +153,10 @@ input[type="text"]{
 
 .storePicker{
     width:300px !important;
+}
+
+.selectStoreBtn{
+    width:250px;
 }
 
 /*product browsing*/
@@ -561,8 +566,19 @@ img.big{
     text-decoration: underline;
     margin-left: 10px;
 }
-
 /*end product detail*/
+
+/*inventory*/
+
+.btn-xs{
+    font-size: 12px;
+    width: 80px;
+    height: 30px;
+    padding: 0px;
+    border-radius: 10px;
+}
+/*end inventory*/
+
 
 /*customer*/
 .main{
@@ -629,6 +645,15 @@ img.big{
     margin-right: 5px;
 }
 
+.tableText textarea{
+    border-radius: 5px;
+    border:1px solid #BCBCBC;
+    padding: 0 10px;
+    color:#00324A;
+    width:40%;
+    margin:5px;
+}
+
 .tableText label{
     width:25%;
 }
@@ -636,4 +661,22 @@ img.big{
 /*end customer*/
 
 
+/*from angular-file-upload*/
+.my-drop-zone { border: dotted 3px lightgray; }
+.nv-file-over { border: dotted 3px red; } /* Default class applied to drop zones on over */
+.another-file-over-class { border: dotted 3px green; }
+
+html, body { height: 100%; }
+
+canvas {
+    background-color: #f3f3f3;
+    -webkit-box-shadow: 3px 3px 3px 0 #e3e3e3;
+    -moz-box-shadow: 3px 3px 3px 0 #e3e3e3;
+    box-shadow: 3px 3px 3px 0 #e3e3e3;
+    border: 1px solid #c3c3c3;
+    height: 100px;
+    margin: 6px 0 0 6px;
+}
+
+/*end angular-file-upload*/
 
