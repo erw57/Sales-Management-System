@@ -17,18 +17,18 @@ var getStoreList = require('./APIs/getStoreList.js');
  *  then use it every time when the query we send
  *  to database contains employee's id.
  */
-module.exports = function(app) {
+module.exports = function(app,$dir) {
     //Page Routing
     app.get('/', function(req, res) {
         // var name = req.query.name;
+        //set session.id = [url?id=]
+        req.session.id = '';
         res.render('index.ejs');
     });
     app.get('/entry', function(req, res) {
-        var name = req.query.name;
         res.render('entry.ejs');
     });
     app.get('/browsing', function(req, res) {
-        var name = req.query.name;
         res.render('browsing.ejs');
     });
     app.get('/customer', function(req, res) {
@@ -47,7 +47,7 @@ module.exports = function(app) {
     addNewCustomer(app, '/api/addNewCustomer');
     getCustomerList(app, '/api/getCustomerList');
     makePayment(app, '/api/makePayment');
-    addNewProduct(app, '/api/addNewProduct');
+    addNewProduct(app, '/api/addNewProduct',$dir);
     updateInventory(app, '/api/updateInventory');
     getCustomerHistory(app, '/api/getCustomerHistory');
     modifyCustomer(app, '/api/modifyCustomer');

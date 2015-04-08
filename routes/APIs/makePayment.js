@@ -7,11 +7,12 @@ module.exports = function(app, url) {
         var args = {
             customer_id : req.body.customer_id,
             store_id :req.body.store_id,
-            cart : req.body.cart
+            cart : req.body.cart,
+            sales_id :(req.session.id?req.session.id:42)
         };
 
-        args.sales_id = '42';
-        console.log( "args:",args);
+
+        //console.log( "args:",args);
         var mysql = require('mysql');
         var connection = mysql.createConnection({
             host: 'localhost',
@@ -94,6 +95,6 @@ module.exports = function(app, url) {
                 res.json({message:'error'});
                 console.log("error: connect to database");
             }
-        });
+        });// End order insert
     })
 };

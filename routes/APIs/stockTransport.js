@@ -8,7 +8,8 @@ module.exports = function(app,url){
             from:req.body.from,
             to:req.body.to,
             id:req.body.id,
-            quantity:req.body.quantity
+            quantity:req.body.quantity,
+            absQuantity: req.body.quantity.substr(1),
         };
 
         var mysql = require('mysql');
