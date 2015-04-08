@@ -270,7 +270,7 @@ inventoryControllers.controller('inventoryNewController', ['$scope', 'FileUpload
         //     console.info('onAfterAddingAll', addedFileItems);
         // };
         uploader.onBeforeUploadItem = function(item) {
-        	item.formData.push({newProduct: $scope.newProduct});
+        	item.formData.push({name: $scope.newProduct.name, price:$scope.newProduct.price, kind: $scope.newProduct.category, description:$scope.newProduct.description});
         };
         // uploader.onProgressItem = function(fileItem, progress) {
         //     console.info('onProgressItem', fileItem, progress);
