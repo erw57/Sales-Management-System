@@ -236,7 +236,7 @@ inventoryControllers.controller('inventoryListController',['$scope','$routeParam
 
 inventoryControllers.controller('inventoryNewController', ['$scope', 'FileUploader', function($scope, FileUploader) {
         var uploader = $scope.uploader = new FileUploader({
-	            url: 'upload.php',
+	            url: '/api/addNewProduct',
 	            formData: [],
 	            //formData: {newProduct:$scope.newProduct},
 	        });
