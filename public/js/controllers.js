@@ -50,7 +50,7 @@ productBrowseControllers.controller('cartController', ['$scope', '$http',  funct
 
     $scope.makePayment = function(customerId){
     	$scope.pay = true;
-    	var data = {};
+		var data = {};
     	var payCart = [];
     	data.customer_id = customerId;
     	data.store_id = $scope.store.id;
@@ -62,13 +62,17 @@ productBrowseControllers.controller('cartController', ['$scope', '$http',  funct
     		payCart.push(o);
     	}
     	data.cart = payCart;
-    	//console.log(data);
-    	$http.post('/api/makePayment',data).success(function(res){
-    		$scope.pay = false;
-    		alert(res.message);
-    		$scope.cart = {};
-    		$scope.total = 0;
-    	});
+    	if(payCart.length == 0){
+    		alert('Nothing is in cart!');
+    	}
+    	else{
+    		$http.post('/api/makePayment',data).success(function(res){
+	    		$scope.pay = false;
+	    		alert(res.message);
+	    		$scope.cart = {};
+	    		$scope.total = 0;
+	    	});
+    	}
     } 
 }]);
 
