@@ -275,6 +275,8 @@ inventoryControllers.controller('inventoryNewController', ['$scope', 'FileUpload
         // };
         uploader.onBeforeUploadItem = function(item) {
         	item.formData.push({name: $scope.newProduct.name, price:$scope.newProduct.price, kind: $scope.newProduct.category, description:$scope.newProduct.description});
+        	alert('success!');
+            window.location.href='#/inventory-list';
         };
         // uploader.onProgressItem = function(fileItem, progress) {
         //     console.info('onProgressItem', fileItem, progress);
@@ -282,9 +284,9 @@ inventoryControllers.controller('inventoryNewController', ['$scope', 'FileUpload
         // uploader.onProgressAll = function(progress) {
         //     console.info('onProgressAll', progress);
         // };
-        // uploader.onSuccessItem = function(fileItem, response, status, headers) {
-        //     console.info('onSuccessItem', fileItem, response, status, headers);
-        // };
+         // uploader.onSuccessItem = function(fileItem, response, status, headers) {
+         //     console.info('onSuccessItem', fileItem, response, status, headers);
+         // };
         // uploader.onErrorItem = function(fileItem, response, status, headers) {
         //     console.info('onErrorItem', fileItem, response, status, headers);
         // };
@@ -294,9 +296,9 @@ inventoryControllers.controller('inventoryNewController', ['$scope', 'FileUpload
         // uploader.onCompleteItem = function(fileItem, response, status, headers) {
         //     console.info('onCompleteItem', fileItem, response, status, headers);
         // };
-        // uploader.onCompleteAll = function() {
-        //     console.info('onCompleteAll');
-        // };
+        uploader.onCompleteAll = function() {
+        	console.log('onCompleteAll');
+        };
 
         // console.info('uploader', uploader);
     }]);
