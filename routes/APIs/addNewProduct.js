@@ -38,15 +38,52 @@ module.exports = function(app, url,$dir) {
                         ','+quo(args.path)+','+quo(args.description)+');';
                         connection.query(query, function(err) {
                             if (!err) {
-                                connection.end();
+                                var query = 'SELECT MAX(id) AS nextID FROM Inventory';
+                                connection.query(query,function(err,rows){
+                                    if(!err){
+                                        var startId = rows[0].nextID + 1;
+                                        query = 'select id from Store';
+                                        connection.query(query,function(err,rows){
+                                            if(!err){
+                                                var set = [];
+                                                for (var i = 0;i<rows.length;i++){
+                                                    set.push(rows[i].id);
+                                                }
+                                                query = '';
+                                                for(var i = 0;i<set.length;i++){
+                                                    query = 'insert into Inventory values(';
+                                                    console.log(query);
+                                                    query += startId+','+set[i]+','+args.id+','+0+');';
+                                                    console.log(query);
+                                                    startId ++;
 
+                                                    connection.query(query,function(err){
+                                                        if(!err){
+                                                            console.log('suc');
+                                                        }
+                                                        else{
+
+                                                            console.log(err);
+                                                        }
+                                                    });
+                                                }
+                                                connection.end();
+                                            }
+                                            else{
+                                                console.log(err);
+                                            }
+                                        });
+                                    }
+
+                                });
                             }else {
+                                console.log(err);
                                 connection.end();
                             }
                         });
 
                     } else {
-                        console.log('ERROR2');
+                        console.log(err);
                     }
                 });// end SQL insert
             }

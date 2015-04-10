@@ -19,6 +19,9 @@ module.exports = function(app, url) {
         connection.query(query, function(err, rows) {
             if (!err) {
                 result = rows[0];
+                var imagePath = rows[0].image_path;
+                imagePath = imagePath.slice(0,imagePath.length-1);
+                result.image_path = imagePath.split(',');
                 connection = mysql.createConnection({
                     host: 'localhost',
                     port: '8889',
