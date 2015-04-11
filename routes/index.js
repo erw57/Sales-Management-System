@@ -12,6 +12,8 @@ var modifyCustomer = require('./APIs/modifyCustomer.js');
 var modifyProduct = require('./APIs/modifyProduct.js');
 var stockTransport = require('./APIs/stockTransport.js');
 var getStoreList = require('./APIs/getStoreList.js');
+var getOrderDetail = require('./APIs/getOrderDetail.js');
+var analysis = require('./APIs/analysis.js');
 /**
  *  set req.session.id = 'req.body.id'
  *  then use it every time when the query we send
@@ -58,4 +60,8 @@ module.exports = function(app,$dir) {
     checkInventory(app, '/api/checkInventory');
     stockTransport(app, '/api/stockTransport');
     getStoreList(app, '/api/getStoreList');
+    getOrderDetail(app,'/api/getOrderDetail');
+    analysis.topProduct(app,'/api/topProduct');
+    analysis.getSalesData(app,'/api/getSalesData');
+    analysis.topCategory(app,'/api/topCategory');
 };
