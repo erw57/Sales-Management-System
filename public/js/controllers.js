@@ -106,6 +106,7 @@ productBrowseControllers.controller('productDetailController', ['$scope', '$rout
 	function($scope, $routeParams, $http){
 		$http.get('api/getProductDetail?id='+$routeParams.productId+'&&store='+$scope.store.id).success(function(data){
 			$scope.product = data;
+			$scope.mainImg = $scope.product.image_path[0]
 		});
 
 		$scope.increase = function(){
@@ -116,6 +117,10 @@ productBrowseControllers.controller('productDetailController', ['$scope', '$rout
 			if($scope.qty > 0){
 				$scope.qty--;
 			}		
+		}
+
+		$scope.setImg = function(img){
+			$scope.mainImg = img;
 		}
 }]);
 

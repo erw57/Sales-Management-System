@@ -1,21 +1,9 @@
 
 <div class="detailLeft">
-	<img class="big" ng-src="{{product.image_path}}" />
+	<img class="big" ng-src="{{mainImg}}" />
 	<ul class="thumbs">
-		<li>
-			<img src="images/2.png">
-		</li>
-		<li>
-			<img src="images/2.png">
-		</li>
-		<li>
-			<img src="images/2.png">
-		</li>
-		<li>
-			<img src="images/2.png">
-		</li>
-		<li>
-			<img src="images/2.png">
+		<li ng-repeat="img in product.image_path" ng-click="setImg(img)">
+			<img ng-src="{{img}}">
 		</li>
 	</ul>
 </div>
