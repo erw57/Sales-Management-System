@@ -3,6 +3,7 @@
 var productBrowseControllers = angular.module('productBrowseController',[]);
 var customerControllers = angular.module('customerController', []);
 var inventoryControllers = angular.module('inventoryController', []);
+var analysisControllers = angular.module('analysisController', []);
 
 productBrowseControllers.controller('cartController', ['$scope', '$http',  function($scope, $http){
 	$scope.cart = {};
@@ -307,3 +308,54 @@ inventoryControllers.controller('inventoryNewController', ['$scope', 'FileUpload
 
         // console.info('uploader', uploader);
     }]);
+
+
+analysisControllers.controller('analysisContrl',['$scope','$http',function($scope,$http){
+	var chart1 = {};
+    chart1.type = "ColumnChart";
+    chart1.cssStyle = "height:400px; width:400px;";
+    chart1.data = {"cols": [
+        {id: "month", label: "Month", type: "string"},
+        {id: "cost-id", label: "Shipping", type: "number"}
+    ], "rows": [
+        {c: [
+            {v: "January"},
+            {v: 39, f: "42 items"},
+            {v: 12, f: "Ony 12 items"},
+            {v: 7, f: "7 servers"},
+            {v: 4}
+        ]},
+        {c: [
+            {v: "February"},
+            {v: 13},
+            {v: 1, f: "1 unit (Out of stock this month)"},
+            {v: 12},
+            {v: 2}
+        ]},
+        {c: [
+            {v: "March"},
+            {v: 24},
+            {v: 0},
+            {v: 11},
+            {v: 6}
+
+        ]}
+    ]};
+
+    chart1.options = {
+        "title": "Top 5 Best Sellers",
+        "isStacked": "true",
+        "fill": 20,
+        "displayExactValues": true,
+        "vAxis": {
+            "title": "Sales unit", "gridlines": {"count": 6}
+        },
+        "hAxis": {
+            "title": "Date"
+        }
+    };
+
+    chart1.formatters = {};
+
+    $scope.chart = chart1;
+}]);

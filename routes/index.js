@@ -39,7 +39,10 @@ module.exports = function(app,$dir) {
         var name = req.query.name;
         res.render('inventory.ejs');
     });
-
+    app.get('/analysis', function(req, res) {
+        var name = req.query.name;
+        res.render('analysis.ejs');
+    });
     //Assign Urls to JSON APIs
     getProductList(app, '/api/getProductList');
     getProductDetail(app, '/api/getProductDetail');

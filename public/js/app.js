@@ -21,6 +21,11 @@ var inventoryApp = angular.module('inventoryApp', [
   'inventoryController',
 ]);
 
+var analysisApp = angular.module('analysisApp',[
+  'googlechart',
+  'analysisController'
+  ]);
+
 productBrowseApp.directive('modal', function () {
     return {
       template: '<div class="modal fade">' + 

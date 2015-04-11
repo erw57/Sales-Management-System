@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html ng-app="analysisApp">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Customer Management</title>
+        <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css" href="bower_components/bootstrap-select/bootstrap-select.min.css">
+        <link rel="stylesheet" type="text/css" href="bower_components/angular-google-chart/style.css"/>     
+        <link rel="stylesheet" type="text/css" href="css/style.css"/>     
+    </head>
+    <body>
+        <div class="usrLog">
+            Welcome, <span>007</span>
+            <a href="entry" class="">Main Entry</a>              
+            <a href="#" class="">Sign Out</a>
+        </div>
+
+        <div class="main" ng-controller="analysisContrl">
+            <h1 class="text-center">Sales Analysis</h1>
+            <div class="optPanel clearfix">
+                
+            </div>
+            <hr />
+           <div google-chart chart="chart" style="{{chart.cssStyle}}"/>
+        </div>
+        
+        <script type="text/javascript" src = "bower_components/jquery/dist/jquery.min.js"></script>
+        <script type="text/javascript" src = "bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script type="text/javascript"src="bower_components/bootstrap-select/bootstrap-select.min.js"></script>
+        <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
+        <script type="text/javascript" src="bower_components/angular-route/angular-route.min.js"></script>
+        <script type="text/javascript" src="bower_components/angular-google-chart/ng-google-chart.js"></script>
+        <script type="text/javascript" src="js/app.js"></script>
+        <script type="text/javascript" src="js/controllers.js"></script>
+        <script type="text/javascript" src = "js/script.js"></script>
+    </body>
+</html>
