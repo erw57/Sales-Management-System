@@ -19,9 +19,12 @@ module.exports.topProduct= function(app, url) {
                     data[i]={
                         c:[
                             {v:rows[i].name},
-                            {v:rows[i].sales}
                         ]
                     }
+                    for(var t = 1; t<rows.length+1;t++){
+                        data[i].c[t] = {v:0};
+                    }
+                    data[i].c[i+1] = {v:rows[i].sales};
                 }
                 res.json({data:data});
             }
@@ -99,9 +102,12 @@ module.exports.topCategory = function(app,url){
                     result.data[i]={
                         c:[
                             {v:rows[i].pname},
-                            {v:rows[i].sales}
                         ]
                     }
+                    for(var t = 1; t<rows.length+1;t++){
+                        result.data[i].c[t] = {v:0};
+                    }
+                        result.data[i].c[i+1] = {v:rows[i].sales};
                 }
                 res.json({data:result.data});
             }
