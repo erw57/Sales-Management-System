@@ -319,42 +319,60 @@ inventoryControllers.controller('inventoryNewController', ['$scope', 'FileUpload
 
 
 analysisControllers.controller('analysisContrl',['$scope','$http',function($scope,$http){
-	var chart1 = {};
-	var data = [
-        {c: [
-            {v: "Product aaasdaasasadsfasdfasdfasdfName"},
-            {v: 23, f: "23 items"},
-        ]},
-        {c: [
-            {v: "February"},
-            {v: 13},
-        ]},
-        {c: [
-            {v: "March"},
-            {v: 100},
-        ]}
-    ];
-    chart1.type = "ColumnChart";
-    chart1.cssStyle = "";
-    chart1.data = {"cols": [
-        {id: "month", label: "Month", type: "string"},
-        {id: "cost-id", label: "Shipping", type: "number"}
-    ], "rows": data};
-
-    chart1.options = {
-        "title": "Top 5 Best Sellers",
-        "isStacked": "true",
-        "fill": 20,
-        "displayExactValues": true,
-        "vAxis": {
-            "title": "Sales unit", "gridlines": {"count": 6}
-        },
-        "hAxis": {
-            "title": "Date"
-        }
-    };
-
-    chart1.formatters = {};
-
-    $scope.chart = chart1;
+	$http.get('/api/topProduct').success(function(res){
+		$scope.topProduct = res.data;
+		var chart = {};
+	    chart.type = "ColumnChart";
+	    chart.cssStyle = "width:80%; height:500px;";
+	    chart.data = {"cols": [
+	        {id: "month", label: "Product", type: "string"},
+	        {id: "1", label: $scope.topProduct[0].c[0].v, type: "number"},
+	        {id: "2", label: $scope.topProduct[1].c[0].v, type: "number"},
+	        {id: "3", label: $scope.topProduct[2].c[0].v, type: "number"},
+	        {id: "4", label: $scope.topProduct[3].c[0].v, type: "number"},
+	        {id: "5", label: $scope.topProduct[4].c[0].v, type: "number"}
+	    ], "rows": $scope.topProduct};
+	    chart.options = {
+	        //"title": "Top 5 Best Sellers",
+	        "isStacked": "true",
+	        "fill": 20,
+	        "displayExactValues": true,
+	        // "vAxis": {
+	        //     "title": "Quantity", "gridlines": {"count": 6}
+	        // },
+	        // "hAxis": {
+	        //     "title": "Product"
+	        // }
+	    };
+	    chart.formatters = {};
+		$scope.productChart = chart;
+	});  
+	$http.get('/api/topCategory').success(function(res){
+		$scope.topCategory = res.data;
+		var chart2 = {};
+	    chart2.type = "ColumnChart";
+	    chart2.cssStyle = "width:80%; height:500px;";
+	    chart2.data = {"cols": [
+	        {id: "month", label: "Product", type: "string"},
+	        {id: "1", label: $scope.topCategory[0].c[0].v, type: "number"},
+	        {id: "2", label: $scope.topCategory[1].c[0].v, type: "number"},
+	        {id: "3", label: $scope.topCategory[2].c[0].v, type: "number"},
+	        {id: "4", label: $scope.topCategory[3].c[0].v, type: "number"},
+	        {id: "5", label: $scope.topCategory[4].c[0].v, type: "number"}
+	    ], "rows": $scope.topCategory};
+	    chart2.options = {
+	        //"title": "Top 5 Best Sellers",
+	        "isStacked": "true",
+	        "fill": 20,
+	        "displayExactValues": true,
+	        // "vAxis": {
+	        //     "title": "Quantity", "gridlines": {"count": 6}
+	        // },
+	        // "hAxis": {
+	        //     "title": "Product"
+	        // }
+	    };
+	    chart2.formatters = {};
+		$scope.categroyChart = chart2;
+	});      
 }]);

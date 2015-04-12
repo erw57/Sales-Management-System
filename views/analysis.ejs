@@ -28,12 +28,26 @@
             <hr />
             <div class="analysisHref">
                 <P>Choose Your Question</P>
-                <a href="#">What are the top 5 hot products?</a>
-                <a href="#">What are the top 5 hot products?</a>
+                <a href="#1">1. What are the top 5 hot products?</a>
+                <a href="#2">2. What are the top 5 hot categories?</a>
+                <a href="#3">3. Check Product Sales Data.</a>
             </div>
             <hr />
-            <div google-chart chart="chart" style="{{chart.cssStyle}}"/>
-        </div>
+            <div class="analysisHref" id="1">
+                <h3>Top 5 Best Sellers</h3>
+                <div google-chart chart="productChart" style="{{productChart.cssStyle}}"></div>
+            </div>
+            <hr />
+            <div class="analysisHref" id="2">
+                <h3>Top 5 Hot Categories</h3>
+                <div google-chart chart="categroyChart" style="{{categroyChart.cssStyle}}"></div>
+            </div>
+            <hr />
+            <div class="analysisHref" id="2">
+                <h3>Sales Data</h3>
+                
+            </div>
+            <hr />
         
         <script type="text/javascript" src = "bower_components/jquery/dist/jquery.min.js"></script>
         <script type="text/javascript" src = "bower_components/bootstrap/dist/js/bootstrap.min.js"></script>

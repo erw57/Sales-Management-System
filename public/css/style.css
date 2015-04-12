@@ -680,8 +680,8 @@ img.big{
     position: fixed;
     height:55px;
     width: 55px;
-    right:25px;
-    bottom: 25px;
+    right:15%;
+    bottom: 55px;
     border:1px solid #00324A;
     border-radius: 5px;
     text-align: center;
