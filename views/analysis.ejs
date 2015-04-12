@@ -53,22 +53,22 @@
                     </div>
                 </div>
                 <div>
-                    <div class="productData text-center clearfix">
+                    <div class="productData text-center clearfix" ng-show="showProductData">
                         <table>
                             <tr>
-                                <td colspan="2"><img src="Users/product/amazon.jpg" width="150"/></td>
+                                <td colspan="2"><img ng-src="{{productData.image_path}}" width="150"/></td>
                             </tr>
                             <tr>
                                 <th width="40%">Name:</th>
-                                <td width="60%">apple iphone</td>
+                                <td width="60%">{{productData.name}}</td>
                             </tr>
                             <tr>
                                 <th>Amount of Sales:</th>
-                                <td>1000</td>
+                                <td>{{productData.amount}}</td>
                             </tr>
                             <tr>
                                 <th>Sales Volumn:</th>
-                                <td>$1000</td>
+                                <td>{{productData.sales | currency}}</td>
                             </tr>
                         </table>
                     </div>

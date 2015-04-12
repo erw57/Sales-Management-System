@@ -319,6 +319,7 @@ inventoryControllers.controller('inventoryNewController', ['$scope', 'FileUpload
 
 
 analysisControllers.controller('analysisContrl',['$scope','$http',function($scope,$http){
+	$scope.showProductData = false;
 	$http.get('/api/topProduct').success(function(res){
 		$scope.topProduct = res.data;
 		var chart = {};
@@ -376,6 +377,7 @@ analysisControllers.controller('analysisContrl',['$scope','$http',function($scop
 		$scope.categroyChart = chart2;
 	});  
 	$scope.searchProduct = function(id){
+		$scope.showProductData = true;
 		$http.get('/api/getSalesData?id='+id).success(function(res){
 			console.log(res);
 			$scope.productData = res;
@@ -412,3 +414,7 @@ analysisControllers.controller('analysisContrl',['$scope','$http',function($scop
 	}
 	   
 }]);
+
+
+
+
