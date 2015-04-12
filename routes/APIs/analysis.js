@@ -14,7 +14,16 @@ module.exports.topProduct= function(app, url) {
         connection.connect();
         connection.query(query,function(err,rows){
             if(!err){
-                res.json(rows);
+                var data=[];
+                for(var i=0; i<rows.length;i++){
+                    data[i]={
+                        c:[
+                            {v:rows[i].name},
+                            {v:rows[i].sales}
+                        ]
+                    }
+                }
+                res.json({data:data});
             }
             else{
                 res.json(err);
@@ -78,12 +87,23 @@ module.exports.topCategory = function(app,url){
             database: 'test'
         });
         connection.connect();
-        query = 'select Product.kind ,sum(quantity*TOrder.price) as sales'
+        query = 'select Product.kind as pname ,sum(quantity*TOrder.price) as sales'
         +' from Product,TOrder where Product.id=product_id '
         +'group by Product.kind order by sales DESC;';
         connection.query(query,function(err,rows){
             if(!err){
-                res.json({data:rows});
+                var result = {
+                    data:[]
+                };
+                for(var i=0; i<rows.length;i++){
+                    result.data[i]={
+                        c:[
+                            {v:rows[i].pname},
+                            {v:rows[i].sales}
+                        ]
+                    }
+                }
+                res.json({data:result.data});
             }
             else{
                 res.json(err);
