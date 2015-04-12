@@ -333,7 +333,7 @@ analysisControllers.controller('analysisContrl',['$scope','$http',function($scop
 	        {id: "5", label: $scope.topProduct[4].c[0].v, type: "number"}
 	    ], "rows": $scope.topProduct};
 	    chart.options = {
-	        //"title": "Top 5 Best Sellers",
+	        "title": "Sales Volumn",
 	        "isStacked": "true",
 	        "fill": 20,
 	        "displayExactValues": true,
@@ -361,7 +361,7 @@ analysisControllers.controller('analysisContrl',['$scope','$http',function($scop
 	        {id: "5", label: $scope.topCategory[4].c[0].v, type: "number"}
 	    ], "rows": $scope.topCategory};
 	    chart2.options = {
-	        //"title": "Top 5 Best Sellers",
+	        "title": "Sales Volumn",
 	        "isStacked": "true",
 	        "fill": 20,
 	        "displayExactValues": true,
@@ -374,5 +374,41 @@ analysisControllers.controller('analysisContrl',['$scope','$http',function($scop
 	    };
 	    chart2.formatters = {};
 		$scope.categroyChart = chart2;
-	});      
+	});  
+	$scope.searchProduct = function(id){
+		$http.get('/api/getSalesData?id='+id).success(function(res){
+			console.log(res);
+			$scope.productData = res;
+			var chart3 = {};
+		    chart3.type = "PieChart";
+		    chart3.data = [
+		       ['Component', 'cost'],
+		       //['Software', 50000],
+		       //['Hardware', 80000]
+		      ];
+		    // chart3.data.push(['Services',20000]);
+		    for(var i=0;i<5;i++){
+		    	var o = [$scope.productData.topCustomer[i].name,$scope.productData.topCustomer[i].consumption];
+		    	chart3.data.push(o);
+		    }
+		    chart3.cssStyle = "width:70%; height:500px;float:right;";
+		    chart3.options = {
+		    	title: 'Top 5 Customer',
+		        displayExactValues: true,
+		        is3D: false,
+		        //chartArea: {left:10,top:10,bottom:0,height:"100%"}
+		    };
+
+		    chart3.formatters = {
+		      number : [{
+		        columnNum: 1,
+		        pattern: "$ #,##0.00"
+		      }]
+		    };
+
+		    $scope.productDataChart = chart3;
+
+		}); 
+	}
+	   
 }]);

@@ -34,18 +34,46 @@
             </div>
             <hr />
             <div class="analysisHref" id="1">
-                <h3>Top 5 Best Sellers</h3>
+                <h3>1. Top 5 Best Sellers</h3>
                 <div google-chart chart="productChart" style="{{productChart.cssStyle}}"></div>
             </div>
             <hr />
             <div class="analysisHref" id="2">
-                <h3>Top 5 Hot Categories</h3>
+                <h3>2. Top 5 Hot Categories</h3>
                 <div google-chart chart="categroyChart" style="{{categroyChart.cssStyle}}"></div>
             </div>
             <hr />
-            <div class="analysisHref" id="2">
-                <h3>Sales Data</h3>
-                
+            <div class="analysisHref" id="3">
+                <h3>3. Product Sales Detail</h3>
+                <div class="optPanel clearfix">
+                    <div class="searchBar">
+                        <input type="text" placeholder="Search for...(id)" ng-model="id" />
+                        <!-- <span class="glyphicon glyphicon-search"></span> -->
+                        <button class="button_color" ng-click="searchProduct(id)">Search</button>
+                    </div>
+                </div>
+                <div>
+                    <div class="productData text-center clearfix">
+                        <table>
+                            <tr>
+                                <td colspan="2"><img src="Users/product/amazon.jpg" width="150"/></td>
+                            </tr>
+                            <tr>
+                                <th width="40%">Name:</th>
+                                <td width="60%">apple iphone</td>
+                            </tr>
+                            <tr>
+                                <th>Amount of Sales:</th>
+                                <td>1000</td>
+                            </tr>
+                            <tr>
+                                <th>Sales Volumn:</th>
+                                <td>$1000</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div google-chart chart="productDataChart" style="{{productDataChart.cssStyle}}"></div>
+                </div>
             </div>
             <hr />
         
