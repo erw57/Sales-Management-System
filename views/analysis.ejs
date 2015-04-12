@@ -10,6 +10,10 @@
         <link rel="stylesheet" type="text/css" href="css/style.css"/>     
     </head>
     <body>
+        <a href="#" class="toTop">
+            <span class="glyphicon glyphicon-arrow-up"></span>
+            <p>Top</p>
+        </a>
         <div class="usrLog">
             Welcome, <span>007</span>
             <a href="entry" class="">Main Entry</a>              
@@ -22,7 +26,13 @@
                 
             </div>
             <hr />
-           <div google-chart chart="chart" style="{{chart.cssStyle}}"/>
+            <div class="analysisHref">
+                <P>Choose Your Question</P>
+                <a href="#">What are the top 5 hot products?</a>
+                <a href="#">What are the top 5 hot products?</a>
+            </div>
+            <hr />
+            <div google-chart chart="chart" style="{{chart.cssStyle}}"/>
         </div>
         
         <script type="text/javascript" src = "bower_components/jquery/dist/jquery.min.js"></script>

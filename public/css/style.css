@@ -661,6 +661,47 @@ img.big{
 
 /*end customer*/
 
+/*analysis*/
+.analysisHref{
+    padding-left: 10%;
+}
+
+.analysisHref p{
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.analysisHref a{
+    display: block;
+    font-size: 20px;
+}
+
+.toTop{
+    position: fixed;
+    height:55px;
+    width: 55px;
+    right:25px;
+    bottom: 25px;
+    border:1px solid #00324A;
+    border-radius: 5px;
+    text-align: center;
+    background-color: white;
+    font-size: 12px;
+    color: #00324A;
+}
+
+.toTop span{
+    margin-top: 3px;
+    font-size: 26px;
+}
+
+.toTop:hover{
+    background-color: #00324A;
+    color: white;
+}
+
+/*end analysis*/
+
 
 /*from angular-file-upload*/
 .my-drop-zone { border: dotted 3px lightgray; }

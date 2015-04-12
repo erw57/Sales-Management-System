@@ -320,15 +320,10 @@ inventoryControllers.controller('inventoryNewController', ['$scope', 'FileUpload
 
 analysisControllers.controller('analysisContrl',['$scope','$http',function($scope,$http){
 	var chart1 = {};
-    chart1.type = "ColumnChart";
-    chart1.cssStyle = "height:400px; width:400px;";
-    chart1.data = {"cols": [
-        {id: "month", label: "Month", type: "string"},
-        {id: "cost-id", label: "Shipping", type: "number"}
-    ], "rows": [
+	var data = [
         {c: [
-            {v: "January"},
-            {v: 39, f: "42 items"},
+            {v: "Product aaasdaasasadsfasdfasdfasdfName"},
+            {v: 23, f: "23 items"},
         ]},
         {c: [
             {v: "February"},
@@ -336,9 +331,15 @@ analysisControllers.controller('analysisContrl',['$scope','$http',function($scop
         ]},
         {c: [
             {v: "March"},
-            {v: 24},
+            {v: 100},
         ]}
-    ]};
+    ];
+    chart1.type = "ColumnChart";
+    chart1.cssStyle = "";
+    chart1.data = {"cols": [
+        {id: "month", label: "Month", type: "string"},
+        {id: "cost-id", label: "Shipping", type: "number"}
+    ], "rows": data};
 
     chart1.options = {
         "title": "Top 5 Best Sellers",
