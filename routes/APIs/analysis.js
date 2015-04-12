@@ -49,13 +49,15 @@ module.exports.getSalesData = function(app,url){
             database: 'test'
         });
         connection.connect();
-        var query = 'select sum(quantity)as amount,sum(quantity*price)as sales'+
-            ' from TOrder where Product_id='+id;
+        var query = 'select name,image_path,sum(quantity)as amount,sum(quantity*TOrder.price)as sales'+
+            ' from TOrder,Product where Product.id = product_id and product_id='+id;
         connection.query(query,function(err,rows){
             if(!err){
                 var result = {
                     amount : rows[0].amount,
-                    sales : rows[0].sales
+                    sales : rows[0].sales,
+                    name : rows[0].name,
+                    image_path :rows[0].image_path.slice(0,rows[0].image_path.length-1).split(',')[0]
                 };
                 query ='select Customer.name,sum(quantity*price)as consumption,sum(quantity) as amount from TTransaction,TOrder,Customer '
                 + 'where TOrder.transaction_id=TTransaction.id and TTransaction.customer_id=Customer.id and product_id ='
