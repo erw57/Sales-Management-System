@@ -20,7 +20,8 @@ module.exports = function(app, url) {
         });
         connection.connect();
         var query;
-        if (args.store_id === 'all') {
+        if (args
+.store_id === 'all') {
             query = 'SELECT * FROM Inventory ;';
         } else {
             query = 'SELECT * FROM Inventory WHERE store_id=' + quo(args.store_id);
@@ -41,7 +42,7 @@ module.exports = function(app, url) {
                 //console.log(list.data);
 
 
-                for (var i = 0; i < list.data.length; i++) {
+                for (i = 0; i < list.data.length; i++) {
                     var num = list.data[i].id;
                     it[num]  = i;
                     //console.log(it);

@@ -7,13 +7,7 @@ module.exports = function(app, url) {
         var id = req.query.id;
         var store = req.query.store;
         var mysql = require('mysql');
-        var connection = mysql.createConnection({
-            host: '127.0.0.1',
-            port: '8889',
-            user: 'root',
-            password: 'root',
-            database: 'test'
-        });
+        var connection = require('../util/db.js');
         connection.connect();
         var query;
         if (store == 'all') {
@@ -31,7 +25,7 @@ module.exports = function(app, url) {
             } else
                 console.log('Error: can not get information');
 
-        })
+        });
         connection.end();
     });
 };
