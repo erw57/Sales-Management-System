@@ -22,7 +22,6 @@ module.exports = function(app, url,$dir) {
                 var db = require('../util/db');
                 var connection = db(mysql);
                 connection.connect();
-                connection.connect();
                 var query = 'SELECT MAX(id) AS nextID FROM Product';
                 connection.query(query, function(err, rows) {
                     if (!err) {
