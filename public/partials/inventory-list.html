@@ -46,7 +46,7 @@
 	</tr>
 	<tr ng-repeat="product in products | filter:query | orderBy: orderProp">
 		<td>
-			<img ng-src="{{product.image_path}}" alt="Product Img" />
+			<img ng-src="{{product.image_path[0]}}" alt="Product Img" />
 		</td>
 		<td>{{product.id}}</td>
 		<td>{{product.name}}</td>

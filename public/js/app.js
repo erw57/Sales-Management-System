@@ -26,6 +26,10 @@ var analysisApp = angular.module('analysisApp',[
   'analysisController'
   ]);
 
+var loginApp = angular.module('loginApp',[
+  'loginControllers'
+  ]);
+
 productBrowseApp.directive('modal', function () {
     return {
       template: '<div class="modal fade">' + 

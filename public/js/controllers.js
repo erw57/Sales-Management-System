@@ -4,6 +4,7 @@ var productBrowseControllers = angular.module('productBrowseController',[]);
 var customerControllers = angular.module('customerController', []);
 var inventoryControllers = angular.module('inventoryController', []);
 var analysisControllers = angular.module('analysisController', []);
+var loginControllers = angular.module('loginControllers',[]);
 
 productBrowseControllers.controller('cartController', ['$scope', '$http',  function($scope, $http){
 	$scope.cart = {};
@@ -414,6 +415,18 @@ analysisControllers.controller('analysisContrl',['$scope','$http',function($scop
 	}
 	   
 }]);
+
+loginControllers.controller('loginContrl',['$scope','$http',function($scope,$http){
+	$scope.login = function(){
+		$http.post('/api/saveSession',{id:$scope.id}).success(function(data){
+			console.log(data);
+			if(data.message == true){
+				window.location.href="/entry"
+			}
+		});
+	}
+}]);
+
 
 
 
