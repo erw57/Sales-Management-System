@@ -14,14 +14,7 @@ module.exports = function(app, url) {
 
 
         //console.log( "args:",args);
-        var mysql = require('mysql');
-        var connection = mysql.createConnection({
-            host: 'localhost',
-            port: '8889',
-            user: 'root',
-            password: 'root',
-            database: 'test'
-        });
+        var connection = require('../util/db');
         var transaction_id;
         connection.connect();
         connection.query('SELECT MAX(id) AS nextID FROM TTransaction', function (err, rows) {

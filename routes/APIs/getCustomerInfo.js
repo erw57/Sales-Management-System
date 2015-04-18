@@ -9,15 +9,8 @@ module.exports = function(app, url) {
     app.get(url, function(req, res) {
         // when receive a GET HTTP request, send query to database.
         //step - 1 connect to mysql
-        var mysql = require('mysql');
         var info = {};
-        var connection = mysql.createConnection({
-            host: 'localhost',
-            port: '8889',
-            user: 'root',
-            password: 'root',
-            database: 'test'
-        });
+        var connection = require('../util/db');
         connection.connect();
 
         // step - 2 construct query and send it to database
@@ -40,13 +33,7 @@ module.exports = function(app, url) {
                 if (info.kind === 'home') {
                     query.getDetailInfo = 'select * from HCustomer where customer_id=' + id;
                     console.log(query.getDetailInfo);
-                    connection = mysql.createConnection({
-                        host: 'localhost',
-                        port: '8889',
-                        user: 'root',
-                        password: 'root',
-                        database: 'test'
-                    });
+                    var connection = require('../util/db');
                     connection.connect();
 
                     connection.query(query.getDetailInfo, function (err, rows) {

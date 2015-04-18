@@ -9,7 +9,6 @@ module.exports = function(app, url) {
     app.post(url, function(req, res) {
         var args = req.body;
         console.log(args);
-        var mysql = require('mysql');
         var connection = require('../util/db');
         connection.connect();
         var query = {};

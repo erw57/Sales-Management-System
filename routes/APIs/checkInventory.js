@@ -6,7 +6,6 @@ module.exports = function(app, url) {
     app.get(url, function(req, res) {
         var id = req.query.id;
         var store = req.query.store;
-        var mysql = require('mysql');
         var connection = require('../util/db.js');
         connection.connect();
         var query;

@@ -18,14 +18,7 @@ module.exports = function(app, url,$dir) {
             args[key] = value;
             if(key === 'description'){
                 console.log('into');
-                var mysql = require('mysql');
-                var connection = mysql.createConnection({
-                    host: 'localhost',
-                    port: '8889',
-                    user: 'root',
-                    password: 'root',
-                    database: 'test'
-                });
+                var connection = require('../util/db');
                 connection.connect();
                 var query = 'SELECT MAX(id) AS nextID FROM Product';
                 connection.query(query, function(err, rows) {

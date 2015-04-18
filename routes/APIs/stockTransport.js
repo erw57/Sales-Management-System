@@ -12,14 +12,7 @@ module.exports = function(app,url){
             absQuantity: req.body.quantity.substr(1),
         };
 
-        var mysql = require('mysql');
-        var connection = mysql.createConnection({
-            host: 'localhost',
-            port: '8889',
-            user: 'root',
-            password: 'root',
-            database: 'test'
-        });
+        var connection = require('../util/db');
         connection.connect();
         var query = {
             in:'update Inventory set quantity = quantity+'+

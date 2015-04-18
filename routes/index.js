@@ -64,5 +64,6 @@ module.exports = function(app,$dir) {
     analysis.topProduct(app,'/api/topProduct');
     analysis.getSalesData(app,'/api/getSalesData');
     analysis.topCategory(app,'/api/topCategory');
+    analysis.regionComparison(app,'/api/regionComparison');
     saveSesion(app,'/api/saveSession');
 };

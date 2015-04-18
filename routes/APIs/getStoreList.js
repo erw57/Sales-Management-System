@@ -3,14 +3,7 @@
  */
 module.exports = function(app,url){
   app.get(url,function(req,res){
-      var mysql = require('mysql');
-      var connection = mysql.createConnection({
-          host: 'localhost',
-          port: '8889',
-          user: 'root',
-          password: 'root',
-          database: 'test'
-      });
+      var connection = require('../util/db');
       connection.connect();
       var query = 'select * from Store';
       connection.query(query,function(err,rows){

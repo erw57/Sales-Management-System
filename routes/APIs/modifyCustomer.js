@@ -5,14 +5,7 @@ var quo = require('../util/quotation');
 module.exports = function(app, url) {
     app.post(url, function(req, res) {
         var args = req.body;
-        var mysql = require('mysql');
-        var connection = mysql.createConnection({
-            host: 'localhost',
-            port: '8889',
-            user: 'root',
-            password: 'root',
-            database: 'test'
-        });
+        var connection = require('../util/db');
         connection.connect();
         var query = {};
         query.customer = 'UPDATE Customer SET' +
