@@ -17,7 +17,9 @@ module.exports = function(app, url) {
                 var imagePath = rows[0].image_path;
                 imagePath = imagePath.slice(0,imagePath.length-1);
                 result.image_path = imagePath.split(',');
-                connection = require('../util/db');
+                mysql = require('mysql');
+                db = require('../util/db');
+                connection = db(mysql);
                 connection.connect();
                 query = 'SELECT * FROM Inventory WHERE ' + 'product_id= ' + args.id + ' AND ' + 'store_id=' + args.store;
                 console.log(query);

@@ -104,7 +104,7 @@ module.exports = function(app, url,$dir) {
                         //console.log('success;');
                     }
                     else{
-                        //console.log(query);
+                        console.log(query);
                     }
                 })
 
