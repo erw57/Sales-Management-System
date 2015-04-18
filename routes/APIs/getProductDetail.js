@@ -4,7 +4,9 @@
 module.exports = function(app, url) {
     app.get(url, function(req, res) {
         var args = req.query;
-        var connection = require('../util/db');
+        var mysql = require('mysql');
+        var db = require('../util/db');
+        var connection = db(mysql);
         connection.connect();
         var result = {};
         var query = 'SELECT * FROM Product WHERE id=' + args.id;

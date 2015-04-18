@@ -12,7 +12,9 @@ module.exports = function(app, url) {
             transaction:'',
             product:''
         }
-        var connection = require('../util/db');
+        var mysql = require('mysql');
+        var db = require('../util/db');
+        var connection = db(mysql);
         connection.connect();
         connection.query(query.order,function(err,rows){
             if(!err){

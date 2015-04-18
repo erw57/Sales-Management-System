@@ -12,7 +12,9 @@ module.exports = function(app,url){
             absQuantity: req.body.quantity.substr(1),
         };
 
-        var connection = require('../util/db');
+        var mysql = require('mysql');
+        var db = require('../util/db');
+        var connection = db(mysql);
         connection.connect();
         var query = {
             in:'update Inventory set quantity = quantity+'+

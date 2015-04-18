@@ -3,7 +3,9 @@ module.exports.topProduct= function(app, url) {
         var query = 'select name,SUM(quantity*Product.price) as sales,'+
             'Sum(`quantity`) as amount from TOrder,Product where TOrder.product_id = Product.id '+
             'group by name order by sales DESC Limit 5;';
-        var connection = require('../util/db');
+        var mysql = require('mysql');
+        var db = require('../util/db');
+        var connection = db(mysql);
         connection.connect();
         connection.query(query,function(err,rows){
             if(!err){
@@ -32,7 +34,6 @@ module.exports.topProduct= function(app, url) {
 module.exports.getSalesData = function(app,url){
     app.get(url,function(req,res){
         var id = req.query.id;
-
         var connection = require('../util/db');
         connection.connect();
         var query = 'select name,image_path,sum(quantity)as amount,sum(quantity*TOrder.price)as sales'+
@@ -69,7 +70,9 @@ module.exports.getSalesData = function(app,url){
 
 module.exports.topCategory = function(app,url){
     app.get(url,function(req,res){
-        var connection = require('../util/db');
+        var mysql = require('mysql');
+        var db = require('../util/db');
+        var connection = db(mysql);
         connection.connect();
         query = 'select Product.kind as pname ,sum(quantity*TOrder.price) as sales'
         +' from Product,TOrder where Product.id=product_id '
@@ -103,7 +106,9 @@ module.exports.topCategory = function(app,url){
 
 module.exports.regionComparison = function(app,url){
     app.get(url,function(req,res){
-        var connection = require('../util/db');
+        var mysql = require('mysql');
+        var db = require('../util/db');
+        var connection = db(mysql);
         connection.connect();
         var query = 'select Region.name as RegionName ,SUM(quantity*price) ' +
             'as sales From TOrder,TTransaction,Store,Region ' +
@@ -115,10 +120,36 @@ module.exports.regionComparison = function(app,url){
         connection.query(query,function(err,rows){
             if(!err){
                 res.json({data:rows});
+                connection.end();
+            }
+            else{
+                res.json({err:err});
+                connection.end();
+            }
+        });
+        });
+};
+
+module.exports.topSalesperson = function(app,url){
+    app.get(url,function(req,res){
+        var mysql = require('mysql');
+        var db = require('../util/db');
+        var connection = db(mysql);
+        connection.connect();
+        var query = 'select Salesperson.name as Name ,SUM(quantity*price) as Sales' +
+            ' From TOrder,TTransaction,Salesperson' +
+            ' where TOrder.transaction_id = TTransaction.id and TTransaction.sales_id= Salesperson.id' +
+            ' group by Salesperson.id ' +
+            ' order by Sales DESC limit 10; ';
+        console.log(query);
+        connection.query(query,function(err,rows){
+            if(!err){
+                res.json({data:rows});
             }
             else{
                 res.json({err:err});
             }
         });
-        });
+    });
 };
+

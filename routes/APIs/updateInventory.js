@@ -10,7 +10,9 @@ module.exports = function(app, url) {
             quantity:req.body.quantity
         };
         console.log(req.body);
-        var connection = require('../util/db');
+        var mysql = require('mysql');
+        var db = require('../util/db');
+        var connection = db(mysql);
         connection.connect();
         var query = 'SELECT * FROM Inventory WHERE product_id=' + args.product_id + ' AND store_id=' +args.store_id;
         console.log(query);

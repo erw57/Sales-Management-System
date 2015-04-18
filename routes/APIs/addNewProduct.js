@@ -18,7 +18,10 @@ module.exports = function(app, url,$dir) {
             args[key] = value;
             if(key === 'description'){
                 console.log('into');
-                var connection = require('../util/db');
+                var mysql = require('mysql');
+                var db = require('../util/db');
+                var connection = db(mysql);
+                connection.connect();
                 connection.connect();
                 var query = 'SELECT MAX(id) AS nextID FROM Product';
                 connection.query(query, function(err, rows) {
@@ -91,13 +94,8 @@ module.exports = function(app, url,$dir) {
             fstream.on('close', function () {
                 //console.log("Upload Finished of " + filename);
                 var mysql = require('mysql');
-                var connection = mysql.createConnection({
-                    host: 'localhost',
-                    port: '8889',
-                    user: 'root',
-                    password: 'root',
-                    database: 'test'
-                });
+                var db = require('../util/db');
+                var connection = db(mysql);
                 connection.connect();
                 //console.log(args);
                 query = 'update Product set image_path='+args.path+' where id='+args.id+';';

@@ -8,7 +8,9 @@ var quo = require('../util/quotation');
 module.exports = function(app, url) {
     app.post(url, function(req, res) {
         var args = req.body;
-        var connection = require('../util/db');
+        var mysql = require('mysql');
+        var db = require('../util/db');
+        var connection = db(mysql);
         connection.connect();
         var query;
         query = 'UPDATE Product SET' +

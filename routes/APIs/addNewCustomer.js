@@ -9,7 +9,9 @@ module.exports = function(app, url) {
     app.post(url, function(req, res) {
         var args = req.body;
         console.log(args);
-        var connection = require('../util/db');
+        var mysql = require('mysql');
+        var db = require('../util/db');
+        var connection = db(mysql);
         connection.connect();
         var query = {};
         query.getCusId = "select max(id) as nextID from Customer;";

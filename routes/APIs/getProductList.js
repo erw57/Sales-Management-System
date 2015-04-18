@@ -10,7 +10,9 @@ module.exports = function(app, url) {
         var list = {};
         list.data = [];
         var args = req.query;
-        var connection = require('../util/db');
+        var mysql = require('mysql');
+        var db = require('../util/db');
+        var connection = db(mysql);
         connection.connect();
         var query;
         if (args

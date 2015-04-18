@@ -10,7 +10,9 @@ module.exports = function(app, url) {
         // when receive a GET HTTP request, send query to database.
         //step - 1 connect to mysql
         var info = {};
-        var connection = require('../util/db');
+        var mysql = require('mysql');
+        var db = require('../util/db');
+        var connection = db(mysql);
         connection.connect();
 
         // step - 2 construct query and send it to database
