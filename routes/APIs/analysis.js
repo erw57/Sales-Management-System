@@ -34,7 +34,9 @@ module.exports.topProduct= function(app, url) {
 module.exports.getSalesData = function(app,url){
     app.get(url,function(req,res){
         var id = req.query.id;
-        var connection = require('../util/db');
+        var mysql = require('mysql');
+        var db = require('../util/db');
+        var connection = db(mysql);
         connection.connect();
         var query = 'select name,image_path,sum(quantity)as amount,sum(quantity*TOrder.price)as sales'+
             ' from TOrder,Product where Product.id = product_id and product_id='+id;
