@@ -53,7 +53,7 @@
 		<td>{{product.quantity}}</td>
 		<td><a href="javascript:void(0);" product-id="{{product.id}}" ng-click="inStock($event)">Stock</a>
 		|
-		 <a href="javascript:void(0);" product-id="{{product.id}}" ng-click="outStock($event)">Destock</a></td>
+		 <a href="javascript:void(0);" product-qty="{{product.quantity}}" product-id="{{product.id}}" ng-click="outStock($event)">Destock</a></td>
 	</tr>
 </table>
 

@@ -229,23 +229,29 @@ inventoryControllers.controller('inventoryListController',['$scope','$routeParam
 		$scope.outStock = function($event){
 			$scope.destock = !$scope.destock;
 			$scope.outStockId = $event.target.getAttribute('product-id');
+			$scope.currQty = $event.target.getAttribute('product-qty');
 		}
 		$scope.confirmOutStock = function(outStockTo,outStockQty){
-			var data = {};
-			data.from = $scope.store.id;
-			data.to = outStockTo;
-			data.quantity = outStockQty;
-			data.id = $scope.outStockId;
-			console.log(data);
-			$http.post('/api/stockTransport', data).success(function(res){
-				console.log(res);
-				//stock transport successfully!!!!!!!!
-				$scope.destock = !$scope.destock;
-				if(res.message == 'success'){
-					$scope.products[data.id-1].quantity -= data.quantity;
-				}
-				alert(res.message);
-			});
+			if($scope.currQty < outStockQty){
+				alert('Not enough inventory!');
+			}
+			else{
+				var data = {};
+				data.from = $scope.store.id;
+				data.to = outStockTo;
+				data.quantity = outStockQty;
+				data.id = $scope.outStockId;
+				console.log(data);
+				$http.post('/api/stockTransport', data).success(function(res){
+					console.log(res);
+					//stock transport successfully!!!!!!!!
+					$scope.destock = !$scope.destock;
+					if(res.message == 'success'){
+						$scope.products[data.id-1].quantity -= data.quantity;
+					}
+					alert(res.message);
+				});
+			}
 		}
 
 		$scope.goToNew = function(){
@@ -290,8 +296,8 @@ inventoryControllers.controller('inventoryNewController', ['$scope', 'FileUpload
         // };
         uploader.onBeforeUploadItem = function(item) {
         	item.formData.push({name: $scope.newProduct.name, price:$scope.newProduct.price, kind: $scope.newProduct.category, description:$scope.newProduct.description});
-        	alert('success!');
-            window.location.href='/inventory';
+        	// alert('success!');
+         //    window.location.href='/inventory';
         };
         // uploader.onProgressItem = function(fileItem, progress) {
         //     console.info('onProgressItem', fileItem, progress);
@@ -312,7 +318,8 @@ inventoryControllers.controller('inventoryNewController', ['$scope', 'FileUpload
         //     console.info('onCompleteItem', fileItem, response, status, headers);
         // };
         uploader.onCompleteAll = function() {
-        	console.log('onCompleteAll');
+        	alert('success!');
+            window.location.href='/inventory';
         };
 
         // console.info('uploader', uploader);
