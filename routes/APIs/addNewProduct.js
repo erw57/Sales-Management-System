@@ -17,7 +17,6 @@ module.exports = function(app, url,$dir) {
         req.busboy.on('field',function(key,value){
             args[key] = value;
             if(key === 'description'){
-                console.log('into');
                 var mysql = require('mysql');
                 var db = require('../util/db');
                 var connection = db(mysql);
@@ -25,7 +24,9 @@ module.exports = function(app, url,$dir) {
                 var query = 'SELECT MAX(id) AS nextID FROM Product';
                 connection.query(query, function(err, rows) {
                     if (!err) {
-                        args.id = (parseInt(rows[0].nextID) + 1).toString();
+                        args.id = ((parseInt(rows[0].nextID)) + 1).toString();
+                        console.log(rows);
+                        console.log(args.id,'in field');
                         query = 'INSERT INTO Product VALUE(' +
                         args.id + ',' +
                         quo(args.name) + ',' +
@@ -47,14 +48,14 @@ module.exports = function(app, url,$dir) {
                                                 query = '';
                                                 for(var i = 0;i<set.length;i++){
                                                     query = 'insert into Inventory values(';
-                                                    console.log(query);
+                                                    //console.log(query);
                                                     query += startId+','+set[i]+','+args.id+','+0+');';
-                                                    console.log(query);
+                                                    //console.log(query);
                                                     startId ++;
 
                                                     connection.query(query,function(err){
                                                         if(!err){
-                                                            console.log('suc');
+                                                            //console.log('suc');
                                                         }
                                                         else{
 
@@ -97,6 +98,7 @@ module.exports = function(app, url,$dir) {
                 var connection = db(mysql);
                 connection.connect();
                 //console.log(args);
+                console.log(args.id,'in file');
                 query = 'update Product set image_path='+args.path+' where id='+args.id+';';
 
                 connection.query(query,function(err,rows){
