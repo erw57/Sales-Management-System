@@ -84,7 +84,7 @@ a:hover{
 input[type="text"]{
     border-radius: 5px;
     border:1px solid #BCBCBC;
-    height: 40px;
+    /*height: 40px;*/
     width: 100%;
     padding: 0 10px;
     color:#00324A;
@@ -99,6 +99,16 @@ input[type="text"]{
 .login h1{
     margin-top: 50px;
     font-size: 40px;
+}
+
+.login input{
+    border-radius: 5px;
+    border:1px solid #BCBCBC;
+    /*height: 40px;*/
+    width: 100%;
+    padding: 0 10px;
+    color:#00324A;
+    height:30px;
 }
 
 .panel{
@@ -486,6 +496,13 @@ input[type="text"]{
     margin:0;
 }
 
+.searchBar button{
+    width:90px;
+    font-size:14px;
+    padding:8px;
+    border-radius: 8px;
+}
+
 form.pop button{
     margin-top: 20px;
 }
@@ -526,6 +543,7 @@ img.big{
 .thumbs li{
     list-style: none;
     display: inline;
+    cursor: pointer;
 }
 
 .thumbs img{
@@ -659,6 +677,63 @@ img.big{
 }
 
 /*end customer*/
+
+/*analysis*/
+.analysisHref{
+    padding-left: 10%;
+        margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.analysisHref p{
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.analysisHref a{
+    display: block;
+    font-size: 20px;    
+    padding:10px;
+}
+
+.toTop{
+    position: fixed;
+    height:55px;
+    width: 55px;
+    right:15%;
+    bottom: 55px;
+    border:1px solid #00324A;
+    border-radius: 5px;
+    text-align: center;
+    background-color: white;
+    font-size: 12px;
+    color: #00324A;
+}
+
+.toTop span{
+    margin-top: 3px;
+    font-size: 26px;
+}
+
+.toTop:hover{
+    background-color: #00324A;
+    color: white;
+}
+
+.productData{
+    width:30%;
+    float: left;
+    margin-bottom: 40px;
+    margin-top: 70px;
+}
+
+.productData table th{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+
+/*end analysis*/
 
 
 /*from angular-file-upload*/

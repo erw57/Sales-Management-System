@@ -11,16 +11,12 @@ module.exports = function(app, url) {
         list.data = [];
         var args = req.query;
         var mysql = require('mysql');
-        var connection = mysql.createConnection({
-            host: 'localhost',
-            port: '8889',
-            user: 'root',
-            password: 'root',
-            database: 'test'
-        });
+        var db = require('../util/db');
+        var connection = db(mysql);
         connection.connect();
         var query;
-        if (args.store_id === 'all') {
+        if (args
+.store_id === 'all') {
             query = 'SELECT * FROM Inventory ;';
         } else {
             query = 'SELECT * FROM Inventory WHERE store_id=' + quo(args.store_id);
@@ -38,10 +34,10 @@ module.exports = function(app, url) {
                 }
                 var it= {};
 
-                console.log(list.data);
+                //console.log(list.data);
 
 
-                for (var i = 0; i < list.data.length; i++) {
+                for (i = 0; i < list.data.length; i++) {
                     var num = list.data[i].id;
                     it[num]  = i;
                     //console.log(it);
@@ -56,9 +52,11 @@ module.exports = function(app, url) {
                             list.data[it[id]].name = rows[0].name;
                             list.data[it[id]].price = rows[0].price;
                             list.data[it[id]].kind = rows[0].kind;
-                            list.data[it[id]].image_path = rows[0].image_path;
+                            var imagePath = rows[0].image_path;
+                            imagePath = imagePath.slice(0,imagePath.length-1);
+                            list.data[it[id]].image_path = imagePath.split(',');
                             list.data[it[id]].description = rows[0].description;
-                            //console.log(list);
+                            console.log(list);
                             if (it[id] === list.data.length-1){
                                 connection.end();
                                 res.json(list);

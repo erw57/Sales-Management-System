@@ -81,7 +81,7 @@
 		<td>{{h.product_id}}</td>
 		<td>{{h.quantity}}</td>
 		<td>{{h.price | currency}}</td>
-		<td><a href="#">View Order</a></td>
+		<td><a href="javascript:void(0);" ng-click="viewOrder(h.id)">View Order</a></td>
 	</tr>
 </table>
 <!--End History-->
@@ -105,7 +105,7 @@
 	</tr>
 	<tr ng-show="customer.age">
 		<td class="tableTitle">Age:</td>
-		<td class="tableText"><input type="age" ng-model="customer.age"/></td>
+		<td class="tableText"><input type="text" ng-model="customer.age"/></td>
 	</tr>
 	<tr>
 		<td class="tableTitle">Customer Type:</td>
@@ -132,7 +132,7 @@
 	</tr>
 	<tr>
 		<td class="tableTitle">Street:</td>
-		<td class="tableText"><input text="text" ng-model="customer.street"/></td>
+		<td class="tableText"><input type="text" ng-model="customer.street"/></td>
 	</tr>
 	<tr>
 		<td class="tableTitle">City:</td>
@@ -159,3 +159,43 @@
 	</tr>
 </table>
 <!--End Detail-->
+
+<!--Order Detail-->
+<modal title="OrderDetail" visible="detailVisible">
+    <div>
+    	<table align="center" class="customerTable">
+    		<tr>
+    			<td><label for="cid">Time:</label></td>
+    			<td>{{detail.time | date: shortDate}}</td>
+    		</tr>
+
+    		<tr>
+    			<td><label for="cid">Product Name:</label></td>
+    			<td>{{detail.name}}</td>
+    		</tr>
+    		<tr>
+    			<td><label for="cid">Price:</label></td>
+    			<td>{{detail.price}}</td>
+    		</tr>
+    		<tr>
+    			<td><label for="cid">Category:</label></td>
+    			<td>{{detail.kind}}</td>
+    		</tr>
+
+    		<tr>
+    			<td><label for="cid">Quantity:</label></td>
+    			<td>{{detail.quantity}}</td>
+    		</tr>
+    		<tr>
+    			<td><label for="cid">Sales Person:</label></td>
+    			<td>{{detail.salesPersonName}}</td>
+    		</tr>
+    		<tr>
+    			<td><label for="cid">Store:</label></td>
+    			<td>{{detail.store}}</td>
+    		</tr>
+    	</table>          
+    </div>
+        <!-- <button class="button_color" ng-click="confirmOutStock(outStockTo.id,outStockQty)">Confirm</button> -->
+</modal>
+

@@ -13,13 +13,8 @@ module.exports = function(app,url){
         };
 
         var mysql = require('mysql');
-        var connection = mysql.createConnection({
-            host: 'localhost',
-            port: '8889',
-            user: 'root',
-            password: 'root',
-            database: 'test'
-        });
+        var db = require('../util/db');
+        var connection = db(mysql);
         connection.connect();
         var query = {
             in:'update Inventory set quantity = quantity+'+

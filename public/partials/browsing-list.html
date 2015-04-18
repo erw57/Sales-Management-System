@@ -17,7 +17,7 @@
 <!--card-->
 <div class="Card clearfix" ng-repeat="product in products | filter:query | orderBy: orderProp">
     <div class="left">
-        <img ng-src="{{product.image_path}}" />
+        <img ng-src="{{product.image_path[0]}}" />
     </div>
     <div class="middle">
         <div class="middleUp">

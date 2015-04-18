@@ -17,20 +17,16 @@ module.exports = function(app, url,$dir) {
         req.busboy.on('field',function(key,value){
             args[key] = value;
             if(key === 'description'){
-                console.log('into');
                 var mysql = require('mysql');
-                var connection = mysql.createConnection({
-                    host: 'localhost',
-                    port: '8889',
-                    user: 'root',
-                    password: 'root',
-                    database: 'test'
-                });
+                var db = require('../util/db');
+                var connection = db(mysql);
                 connection.connect();
                 var query = 'SELECT MAX(id) AS nextID FROM Product';
                 connection.query(query, function(err, rows) {
                     if (!err) {
-                        args.id = (parseInt(rows[0].nextID) + 1).toString();
+                        args.id = ((parseInt(rows[0].nextID)) + 1).toString();
+                        console.log(rows);
+                        console.log(args.id,'in field');
                         query = 'INSERT INTO Product VALUE(' +
                         args.id + ',' +
                         quo(args.name) + ',' +
@@ -38,15 +34,52 @@ module.exports = function(app, url,$dir) {
                         ','+quo(args.path)+','+quo(args.description)+');';
                         connection.query(query, function(err) {
                             if (!err) {
-                                connection.end();
+                                var query = 'SELECT MAX(id) AS nextID FROM Inventory';
+                                connection.query(query,function(err,rows){
+                                    if(!err){
+                                        var startId = rows[0].nextID + 1;
+                                        query = 'select id from Store';
+                                        connection.query(query,function(err,rows){
+                                            if(!err){
+                                                var set = [];
+                                                for (var i = 0;i<rows.length;i++){
+                                                    set.push(rows[i].id);
+                                                }
+                                                query = '';
+                                                for(var i = 0;i<set.length;i++){
+                                                    query = 'insert into Inventory values(';
+                                                    //console.log(query);
+                                                    query += startId+','+set[i]+','+args.id+','+0+');';
+                                                    //console.log(query);
+                                                    startId ++;
 
+                                                    connection.query(query,function(err){
+                                                        if(!err){
+                                                            //console.log('suc');
+                                                        }
+                                                        else{
+
+                                                            console.log(err);
+                                                        }
+                                                    });
+                                                }
+                                                connection.end();
+                                            }
+                                            else{
+                                                console.log(err);
+                                            }
+                                        });
+                                    }
+
+                                });
                             }else {
+                                console.log(err);
                                 connection.end();
                             }
                         });
 
                     } else {
-                        console.log('ERROR2');
+                        console.log(err);
                     }
                 });// end SQL insert
             }
@@ -61,15 +94,11 @@ module.exports = function(app, url,$dir) {
             fstream.on('close', function () {
                 //console.log("Upload Finished of " + filename);
                 var mysql = require('mysql');
-                var connection = mysql.createConnection({
-                    host: 'localhost',
-                    port: '8889',
-                    user: 'root',
-                    password: 'root',
-                    database: 'test'
-                });
+                var db = require('../util/db');
+                var connection = db(mysql);
                 connection.connect();
                 //console.log(args);
+                console.log(args.id,'in file');
                 query = 'update Product set image_path='+args.path+' where id='+args.id+';';
 
                 connection.query(query,function(err,rows){
@@ -77,7 +106,7 @@ module.exports = function(app, url,$dir) {
                         //console.log('success;');
                     }
                     else{
-                        //console.log(query);
+                        console.log(query);
                     }
                 })
 

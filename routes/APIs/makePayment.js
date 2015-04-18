@@ -10,19 +10,15 @@ module.exports = function(app, url) {
             cart : req.body.cart,
             sales_id :(req.session.id?req.session.id:42)
         };
+        console.log('session.id=',args.sales_id);
 
 
         //console.log( "args:",args);
-        var mysql = require('mysql');
-        var connection = mysql.createConnection({
-            host: 'localhost',
-            port: '8889',
-            user: 'root',
-            password: 'root',
-            database: 'test'
-        });
+        var connection = require('../util/db');
         var transaction_id;
-        connection.connect();
+        var mysql = require('mysql');
+        var db = require('../util/db');
+        var connection = db(mysql);
         connection.query('SELECT MAX(id) AS nextID FROM TTransaction', function (err, rows) {
             if (!err) {
                 transaction_id = (parseInt(rows[0].nextID) + 1).toString();

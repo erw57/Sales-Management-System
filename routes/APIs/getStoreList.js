@@ -4,18 +4,13 @@
 module.exports = function(app,url){
   app.get(url,function(req,res){
       var mysql = require('mysql');
-      var connection = mysql.createConnection({
-          host: 'localhost',
-          port: '8889',
-          user: 'root',
-          password: 'root',
-          database: 'test'
-      });
+      var db = require('../util/db');
+      var connection = db(mysql);
       connection.connect();
       var query = 'select * from Store';
       connection.query(query,function(err,rows){
           if(!err){
-              res.json({data:rows});
+              res.json({data:rows,id:req.session.id});
           }
           else{
               console.log(err);

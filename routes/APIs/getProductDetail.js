@@ -5,13 +5,8 @@ module.exports = function(app, url) {
     app.get(url, function(req, res) {
         var args = req.query;
         var mysql = require('mysql');
-        var connection = mysql.createConnection({
-            host: 'localhost',
-            port: '8889',
-            user: 'root',
-            password: 'root',
-            database: 'test'
-        });
+        var db = require('../util/db');
+        var connection = db(mysql);
         connection.connect();
         var result = {};
         var query = 'SELECT * FROM Product WHERE id=' + args.id;
@@ -19,13 +14,12 @@ module.exports = function(app, url) {
         connection.query(query, function(err, rows) {
             if (!err) {
                 result = rows[0];
-                connection = mysql.createConnection({
-                    host: 'localhost',
-                    port: '8889',
-                    user: 'root',
-                    password: 'root',
-                    database: 'test'
-                });
+                var imagePath = rows[0].image_path;
+                imagePath = imagePath.slice(0,imagePath.length-1);
+                result.image_path = imagePath.split(',');
+                mysql = require('mysql');
+                db = require('../util/db');
+                connection = db(mysql);
                 connection.connect();
                 query = 'SELECT * FROM Inventory WHERE ' + 'product_id= ' + args.id + ' AND ' + 'store_id=' + args.store;
                 console.log(query);

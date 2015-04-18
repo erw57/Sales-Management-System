@@ -9,20 +9,15 @@ module.exports = function(app, url) {
     app.post(url, function(req, res) {
         var args = req.body;
         var mysql = require('mysql');
-        var connection = mysql.createConnection({
-            host: '127.0.0.1',
-            port: '8889',
-            user: 'root',
-            password: 'root',
-            database: 'test'
-        });
+        var db = require('../util/db');
+        var connection = db(mysql);
         connection.connect();
         var query;
         query = 'UPDATE Product SET' +
-            ' prod_name=' + quo(args['name']) +
+            ' prod_name=' + quo(args.name) +
             ' ,price=' + args['price'] +
             ' ,product_kind=' + quo(args['kind']) +
-            ',description='+quo(args.description)+
+            ',description=' + quo(args.description) +
             ' WHERE prod_id =' + args.id;
 
         console.log('Qurry:\n', query);

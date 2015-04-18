@@ -6,13 +6,8 @@ module.exports = function(app, url) {
         var list = new Object();
         list.data = [];
         var mysql = require('mysql');
-        var connection = mysql.createConnection({
-            host: 'localhost',
-            port: '8889',
-            user: 'root',
-            password: 'root',
-            database: 'test'
-        });
+        var db = require('../util/db');
+        var connection = db(mysql);
         connection.connect();
         var query = 'SELECT id,kind,name FROM Customer';
         connection.query(query, function(err, rows) {

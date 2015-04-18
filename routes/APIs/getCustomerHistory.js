@@ -6,13 +6,8 @@ module.exports = function(app, url) {
     app.get(url, function(req, res) {
         var id = req.query.id;
         var mysql = require('mysql');
-        var connection = mysql.createConnection({
-            host: 'localhost',
-            port: '8889',
-            user: 'root',
-            password: 'root',
-            database: 'test'
-        });
+        var db = require('../util/db');
+        var connection = db(mysql);
         connection.connect();
         var query = 'SELECT * FROM Transaction WHERE cus_id=' + id;
         console.log(query);

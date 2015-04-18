@@ -11,13 +11,8 @@ module.exports = function(app, url) {
         };
         console.log(req.body);
         var mysql = require('mysql');
-        var connection = mysql.createConnection({
-            host: 'localhost',
-            port: '8889',
-            user: 'root',
-            password: 'root',
-            database: 'test'
-        });
+        var db = require('../util/db');
+        var connection = db(mysql);
         connection.connect();
         var query = 'SELECT * FROM Inventory WHERE product_id=' + args.product_id + ' AND store_id=' +args.store_id;
         console.log(query);

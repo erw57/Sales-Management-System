@@ -3,6 +3,8 @@
 var productBrowseControllers = angular.module('productBrowseController',[]);
 var customerControllers = angular.module('customerController', []);
 var inventoryControllers = angular.module('inventoryController', []);
+var analysisControllers = angular.module('analysisController', []);
+var loginControllers = angular.module('loginControllers',[]);
 
 productBrowseControllers.controller('cartController', ['$scope', '$http',  function($scope, $http){
 	$scope.cart = {};
@@ -106,6 +108,7 @@ productBrowseControllers.controller('productDetailController', ['$scope', '$rout
 	function($scope, $routeParams, $http){
 		$http.get('api/getProductDetail?id='+$routeParams.productId+'&&store='+$scope.store.id).success(function(data){
 			$scope.product = data;
+			$scope.mainImg = $scope.product.image_path[0]
 		});
 
 		$scope.increase = function(){
@@ -116,6 +119,10 @@ productBrowseControllers.controller('productDetailController', ['$scope', '$rout
 			if($scope.qty > 0){
 				$scope.qty--;
 			}		
+		}
+
+		$scope.setImg = function(img){
+			$scope.mainImg = img;
 		}
 }]);
 
@@ -131,6 +138,7 @@ customerControllers.controller('customerListController', ['$scope', '$http', fun
 }]);
 
 customerControllers.controller('customerDetailController', ['$scope', '$http', '$routeParams', function($scope, $http, $routeParams){
+	$scope.detailVisible = false;
 	$http.get('api/getCustomerInfo?id='+$routeParams.customerId).success(function(res){
 		console.log(res);
 		$scope.customer = res;
@@ -147,6 +155,13 @@ customerControllers.controller('customerDetailController', ['$scope', '$http', '
 		$http.post('api/modifyCustomer', $scope.customer).success(function(data){
 			alert(data.message);
 			window.location.href='#/customer-detail/'+$routeParams.customerId+'/view';
+		});
+	}
+	$scope.viewOrder = function(id){
+		$scope.detailVisible = !$scope.detailVisible;
+		$http.get('/api/getOrderDetail?id='+id).success(function(data){
+			console.log(data);
+			$scope.detail = data;
 		});
 	}
 }]);
@@ -214,23 +229,29 @@ inventoryControllers.controller('inventoryListController',['$scope','$routeParam
 		$scope.outStock = function($event){
 			$scope.destock = !$scope.destock;
 			$scope.outStockId = $event.target.getAttribute('product-id');
+			$scope.currQty = $event.target.getAttribute('product-qty');
 		}
 		$scope.confirmOutStock = function(outStockTo,outStockQty){
-			var data = {};
-			data.from = $scope.store.id;
-			data.to = outStockTo;
-			data.quantity = outStockQty;
-			data.id = $scope.outStockId;
-			console.log(data);
-			$http.post('/api/stockTransport', data).success(function(res){
-				console.log(res);
-				//stock transport successfully!!!!!!!!
-				$scope.destock = !$scope.destock;
-				if(res.message == 'success'){
-					$scope.products[data.id-1].quantity -= data.quantity;
-				}
-				alert(res.message);
-			});
+			if($scope.currQty < outStockQty){
+				alert('Not enough inventory!');
+			}
+			else{
+				var data = {};
+				data.from = $scope.store.id;
+				data.to = outStockTo;
+				data.quantity = outStockQty;
+				data.id = $scope.outStockId;
+				console.log(data);
+				$http.post('/api/stockTransport', data).success(function(res){
+					console.log(res);
+					//stock transport successfully!!!!!!!!
+					$scope.destock = !$scope.destock;
+					if(res.message == 'success'){
+						$scope.products[data.id-1].quantity -= data.quantity;
+					}
+					alert(res.message);
+				});
+			}
 		}
 
 		$scope.goToNew = function(){
@@ -275,6 +296,8 @@ inventoryControllers.controller('inventoryNewController', ['$scope', 'FileUpload
         // };
         uploader.onBeforeUploadItem = function(item) {
         	item.formData.push({name: $scope.newProduct.name, price:$scope.newProduct.price, kind: $scope.newProduct.category, description:$scope.newProduct.description});
+        	// alert('success!');
+         //    window.location.href='/inventory';
         };
         // uploader.onProgressItem = function(fileItem, progress) {
         //     console.info('onProgressItem', fileItem, progress);
@@ -282,9 +305,9 @@ inventoryControllers.controller('inventoryNewController', ['$scope', 'FileUpload
         // uploader.onProgressAll = function(progress) {
         //     console.info('onProgressAll', progress);
         // };
-        // uploader.onSuccessItem = function(fileItem, response, status, headers) {
-        //     console.info('onSuccessItem', fileItem, response, status, headers);
-        // };
+         // uploader.onSuccessItem = function(fileItem, response, status, headers) {
+         //     console.info('onSuccessItem', fileItem, response, status, headers);
+         // };
         // uploader.onErrorItem = function(fileItem, response, status, headers) {
         //     console.info('onErrorItem', fileItem, response, status, headers);
         // };
@@ -294,9 +317,152 @@ inventoryControllers.controller('inventoryNewController', ['$scope', 'FileUpload
         // uploader.onCompleteItem = function(fileItem, response, status, headers) {
         //     console.info('onCompleteItem', fileItem, response, status, headers);
         // };
-        // uploader.onCompleteAll = function() {
-        //     console.info('onCompleteAll');
-        // };
+        uploader.onCompleteAll = function() {
+        	alert('success!');
+            window.location.href='/inventory';
+        };
 
         // console.info('uploader', uploader);
     }]);
+
+
+analysisControllers.controller('analysisContrl',['$scope','$http',function($scope,$http){
+	$scope.showProductData = false;
+	$http.get('/api/topProduct').success(function(res){
+		$scope.topProduct = res.data;
+		var chart = {};
+	    chart.type = "ColumnChart";
+	    chart.cssStyle = "width:80%; height:500px;";
+	    chart.data = {"cols": [
+	        {id: "month", label: "Product", type: "string"},
+	        {id: "1", label: $scope.topProduct[0].c[0].v, type: "number"},
+	        {id: "2", label: $scope.topProduct[1].c[0].v, type: "number"},
+	        {id: "3", label: $scope.topProduct[2].c[0].v, type: "number"},
+	        {id: "4", label: $scope.topProduct[3].c[0].v, type: "number"},
+	        {id: "5", label: $scope.topProduct[4].c[0].v, type: "number"}
+	    ], "rows": $scope.topProduct};
+	    chart.options = {
+	        "title": "Sales Volumn",
+	        "isStacked": "true",
+	        "fill": 20,
+	        "displayExactValues": true,
+	        // "vAxis": {
+	        //     "title": "Quantity", "gridlines": {"count": 6}
+	        // },
+	        // "hAxis": {
+	        //     "title": "Product"
+	        // }
+	    };
+	    chart.formatters = {};
+		$scope.productChart = chart;
+	});  
+	$http.get('/api/topCategory').success(function(res){
+		$scope.topCategory = res.data;
+		var chart2 = {};
+	    chart2.type = "ColumnChart";
+	    chart2.cssStyle = "width:80%; height:500px;";
+	    chart2.data = {"cols": [
+	        {id: "month", label: "Product", type: "string"},
+	        {id: "1", label: $scope.topCategory[0].c[0].v, type: "number"},
+	        {id: "2", label: $scope.topCategory[1].c[0].v, type: "number"},
+	        {id: "3", label: $scope.topCategory[2].c[0].v, type: "number"},
+	        {id: "4", label: $scope.topCategory[3].c[0].v, type: "number"},
+	        {id: "5", label: $scope.topCategory[4].c[0].v, type: "number"}
+	    ], "rows": $scope.topCategory};
+	    chart2.options = {
+	        "title": "Sales Volumn",
+	        "isStacked": "true",
+	        "fill": 20,
+	        "displayExactValues": true,
+	        // "vAxis": {
+	        //     "title": "Quantity", "gridlines": {"count": 6}
+	        // },
+	        // "hAxis": {
+	        //     "title": "Product"
+	        // }
+	    };
+	    chart2.formatters = {};
+		$scope.categroyChart = chart2;
+	});  
+	$scope.searchProduct = function(id){
+		$scope.showProductData = true;
+		$http.get('/api/getSalesData?id='+id).success(function(res){
+			//console.log(res);
+			$scope.productData = res;
+			var chart3 = {};
+		    chart3.type = "PieChart";
+		    chart3.data = [
+		       ['Component', 'cost'],
+		       //['Software', 50000],
+		       //['Hardware', 80000]
+		      ];
+		    // chart3.data.push(['Services',20000]);
+		    for(var i=0;i<5;i++){
+		    	var o = [$scope.productData.topCustomer[i].name,$scope.productData.topCustomer[i].consumption];
+		    	chart3.data.push(o);
+		    }
+		    chart3.cssStyle = "width:70%; height:500px;float:right;";
+		    chart3.options = {
+		    	title: 'Top 5 Customer',
+		        displayExactValues: true,
+		        is3D: false,
+		        //chartArea: {left:10,top:10,bottom:0,height:"100%"}
+		    };
+
+		    chart3.formatters = {
+		      number : [{
+		        columnNum: 1,
+		        pattern: "$ #,##0.00"
+		      }]
+		    };
+		    $scope.productDataChart = chart3;
+		}); 
+	}
+	$http.get('/api/regionComparison').success(function(res){
+		console.log(res);
+		var regions = res.data;
+		// $scope.productData = res;
+		var chart4 = {};
+	    chart4.type = "PieChart";
+	    chart4.data = [
+	       ['Region', 'Sales'],
+	      ];
+	    for(var i=0;i<regions.length;i++){
+	    	var o = [regions[i].RegionName,regions[i].sales];
+	    	chart4.data.push(o);
+	    }
+	    chart4.cssStyle = "width:80%; height:500px;";
+	    chart4.options = {
+	    	title: 'Region Sales Compare',
+	        displayExactValues: true,
+	        is3D: false,
+	        //chartArea: {left:10,top:10,bottom:0,height:"100%"}
+	    };
+
+	    chart4.formatters = {
+	      number : [{
+	        columnNum: 1,
+	        pattern: "$ #,##0.00"
+	      }]
+	    };
+	    $scope.regionChart = chart4;
+	}); 
+	   
+}]);
+
+//Log in app
+loginControllers.controller('loginContrl',['$scope','$http',function($scope,$http){
+	$scope.login = function(){
+		$http.post('/api/saveSession',{id:$scope.id}).success(function(data){
+			console.log(data);
+			if(data.message == true){
+				window.location.href="/entry"
+			}
+		});
+	}
+}]);
+
+
+
+
+
