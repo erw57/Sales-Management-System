@@ -14,6 +14,7 @@ var stockTransport = require('./APIs/stockTransport.js');
 var getStoreList = require('./APIs/getStoreList.js');
 var getOrderDetail = require('./APIs/getOrderDetail.js');
 var analysis = require('./APIs/analysis.js');
+var saveSesion  = require('./APIs/saveSession.js');
 /**
  *  set req.session.id = 'req.body.id'
  *  then use it every time when the query we send
@@ -24,7 +25,6 @@ module.exports = function(app,$dir) {
     app.get('/', function(req, res) {
         // var name = req.query.name;
         //set session.id = [url?id=]
-        req.session.id = '';
         res.render('index.ejs');
     });
     app.get('/entry', function(req, res) {
@@ -64,4 +64,5 @@ module.exports = function(app,$dir) {
     analysis.topProduct(app,'/api/topProduct');
     analysis.getSalesData(app,'/api/getSalesData');
     analysis.topCategory(app,'/api/topCategory');
+    saveSesion(app,'/api/saveSession');
 };

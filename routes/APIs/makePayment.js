@@ -10,6 +10,7 @@ module.exports = function(app, url) {
             cart : req.body.cart,
             sales_id :(req.session.id?req.session.id:42)
         };
+        console.log('session.id=',args.sales_id);
 
 
         //console.log( "args:",args);

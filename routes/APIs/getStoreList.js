@@ -15,7 +15,7 @@ module.exports = function(app,url){
       var query = 'select * from Store';
       connection.query(query,function(err,rows){
           if(!err){
-              res.json({data:rows});
+              res.json({data:rows,id:req.session.id});
           }
           else{
               console.log(err);
