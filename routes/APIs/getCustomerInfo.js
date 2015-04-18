@@ -35,7 +35,9 @@ module.exports = function(app, url) {
                 if (info.kind === 'home') {
                     query.getDetailInfo = 'select * from HCustomer where customer_id=' + id;
                     console.log(query.getDetailInfo);
-                    var connection = require('../util/db');
+                    mysql = require('mysql');
+                    db = require('../util/db');
+                    connection = db(mysql);
                     connection.connect();
 
                     connection.query(query.getDetailInfo, function (err, rows) {
@@ -87,13 +89,10 @@ module.exports = function(app, url) {
                 else {
                     query.getDetailInfo = 'select * from BCustomer where customer_id=' + id;
                     console.log(query.getDetailInfo);
-                    connection = mysql.createConnection({
-                        host: 'localhost',
-                        port: '8889',
-                        user: 'root',
-                        password: 'root',
-                        database: 'test'
-                    });
+                    var mysql = require('mysql');
+                   var db = require('../util/db');
+                   var connection = db(mysql);
+                        connection.connect();
                     connection.connect();
                     connection.query(query.getDetailInfo, function (err, rows) {
                         if (!err) {
