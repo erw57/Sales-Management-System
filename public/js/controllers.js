@@ -413,17 +413,18 @@ analysisControllers.controller('analysisContrl',['$scope','$http',function($scop
 	}
 	$http.get('/api/regionComparison').success(function(res){
 		console.log(res);
+		var regions = res.data;
 		// $scope.productData = res;
 		var chart4 = {};
 	    chart4.type = "PieChart";
 	    chart4.data = [
 	       ['Region', 'Sales'],
 	      ];
-	    for(var i=0;i<5;i++){
-	    	var o = [$scope.productData.topCustomer[i].name,$scope.productData.topCustomer[i].consumption];
+	    for(var i=0;i<regions.length;i++){
+	    	var o = [regions[i].RegionName,regions[i].sales];
 	    	chart4.data.push(o);
 	    }
-	    chart4.cssStyle = "width:70%; height:500px;float:right;";
+	    chart4.cssStyle = "width:80%; height:500px;";
 	    chart4.options = {
 	    	title: 'Region Sales Compare',
 	        displayExactValues: true,
@@ -437,7 +438,7 @@ analysisControllers.controller('analysisContrl',['$scope','$http',function($scop
 	        pattern: "$ #,##0.00"
 	      }]
 	    };
-	    $scope.productDataChart = chart4;
+	    $scope.regionChart = chart4;
 	}); 
 	   
 }]);
