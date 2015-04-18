@@ -30,7 +30,9 @@
                 <P>Choose Your Question</P>
                 <a href="#1">1. What are the top 5 hot products?</a>
                 <a href="#2">2. What are the top 5 hot categories?</a>
-                <a href="#3">3. Check Product Sales Data.</a>
+                <a href="#3">3. Compare Regions Sales.</a>
+                <a href="#4">4. Check Product Sales Data.</a>
+
             </div>
             <hr />
             <div class="analysisHref" id="1">
@@ -44,6 +46,11 @@
             </div>
             <hr />
             <div class="analysisHref" id="3">
+                <h3>4. Regions Sales Compare</h3>
+                <div google-chart chart="regionChart" style="{{regionChart.cssStyle}}"></div>
+            </div>
+            <hr />
+            <div class="analysisHref" id="4">
                 <h3>3. Product Sales Detail</h3>
                 <div class="optPanel clearfix">
                     <div class="searchBar">
@@ -76,7 +83,7 @@
                 </div>
             </div>
             <hr />
-        
+            
         <script type="text/javascript" src = "bower_components/jquery/dist/jquery.min.js"></script>
         <script type="text/javascript" src = "bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
         <script type="text/javascript"src="bower_components/bootstrap-select/bootstrap-select.min.js"></script>

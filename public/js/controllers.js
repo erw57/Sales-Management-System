@@ -291,7 +291,7 @@ inventoryControllers.controller('inventoryNewController', ['$scope', 'FileUpload
         uploader.onBeforeUploadItem = function(item) {
         	item.formData.push({name: $scope.newProduct.name, price:$scope.newProduct.price, kind: $scope.newProduct.category, description:$scope.newProduct.description});
         	alert('success!');
-            window.location.href='#/inventory-list';
+            window.location.href='/inventory';
         };
         // uploader.onProgressItem = function(fileItem, progress) {
         //     console.info('onProgressItem', fileItem, progress);
@@ -380,7 +380,7 @@ analysisControllers.controller('analysisContrl',['$scope','$http',function($scop
 	$scope.searchProduct = function(id){
 		$scope.showProductData = true;
 		$http.get('/api/getSalesData?id='+id).success(function(res){
-			console.log(res);
+			//console.log(res);
 			$scope.productData = res;
 			var chart3 = {};
 		    chart3.type = "PieChart";
@@ -408,14 +408,41 @@ analysisControllers.controller('analysisContrl',['$scope','$http',function($scop
 		        pattern: "$ #,##0.00"
 		      }]
 		    };
-
 		    $scope.productDataChart = chart3;
-
 		}); 
 	}
+	$http.get('/api/regionComparison').success(function(res){
+		console.log(res);
+		// $scope.productData = res;
+		var chart4 = {};
+	    chart4.type = "PieChart";
+	    chart4.data = [
+	       ['Region', 'Sales'],
+	      ];
+	    for(var i=0;i<5;i++){
+	    	var o = [$scope.productData.topCustomer[i].name,$scope.productData.topCustomer[i].consumption];
+	    	chart4.data.push(o);
+	    }
+	    chart4.cssStyle = "width:70%; height:500px;float:right;";
+	    chart4.options = {
+	    	title: 'Region Sales Compare',
+	        displayExactValues: true,
+	        is3D: false,
+	        //chartArea: {left:10,top:10,bottom:0,height:"100%"}
+	    };
+
+	    chart4.formatters = {
+	      number : [{
+	        columnNum: 1,
+	        pattern: "$ #,##0.00"
+	      }]
+	    };
+	    $scope.productDataChart = chart4;
+	}); 
 	   
 }]);
 
+//Log in app
 loginControllers.controller('loginContrl',['$scope','$http',function($scope,$http){
 	$scope.login = function(){
 		$http.post('/api/saveSession',{id:$scope.id}).success(function(data){
